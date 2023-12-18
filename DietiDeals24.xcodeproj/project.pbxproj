@@ -14,6 +14,8 @@
 		944D6F2C2B13B301008C97F2 /* DietiDeals24Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F2B2B13B301008C97F2 /* DietiDeals24Tests.swift */; };
 		944D6F362B13B301008C97F2 /* DietiDeals24UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F352B13B301008C97F2 /* DietiDeals24UITests.swift */; };
 		944D6F382B13B301008C97F2 /* DietiDeals24UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F372B13B301008C97F2 /* DietiDeals24UITestsLaunchTests.swift */; };
+		944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F442B13B3A3008C97F2 /* LoginView.swift */; };
+		944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		944D6F312B13B301008C97F2 /* DietiDeals24UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietiDeals24UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		944D6F352B13B301008C97F2 /* DietiDeals24UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietiDeals24UITests.swift; sourceTree = "<group>"; };
 		944D6F372B13B301008C97F2 /* DietiDeals24UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietiDeals24UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		944D6F442B13B3A3008C97F2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 			children = (
 				944D6F1A2B13B2FD008C97F2 /* DietiDeals24App.swift */,
 				944D6F1C2B13B2FD008C97F2 /* ContentView.swift */,
+				944D6F442B13B3A3008C97F2 /* LoginView.swift */,
+				944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */,
 				944D6F1E2B13B300008C97F2 /* Assets.xcassets */,
 				944D6F202B13B300008C97F2 /* Preview Content */,
 			);
@@ -257,6 +263,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */,
+				944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */,
 				944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */,
 				944D6F1B2B13B2FD008C97F2 /* DietiDeals24App.swift in Sources */,
 			);
