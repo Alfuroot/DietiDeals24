@@ -15,6 +15,7 @@ class LoginViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var passwordConfirm: String = ""
     @Published var showRegistrationErrorAlert: Bool = false
+    var tmpuser: User?
     
     var isLoginDisabled: Bool {
             return username.isEmpty || password.isEmpty
@@ -32,5 +33,11 @@ class LoginViewModel: ObservableObject {
     func toggleVendor() {
         isBuyer = false
         isVendor.toggle()
+    }
+    
+    func creatUser() {
+        tmpuser?.username = username
+        tmpuser?.email = email
+        tmpuser?.password = password
     }
 }
