@@ -17,6 +17,10 @@
 		944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F442B13B3A3008C97F2 /* LoginView.swift */; };
 		944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */; };
 		A47DF6DB2BA24767000AFD15 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47DF6DA2BA24767000AFD15 /* UserModel.swift */; };
+		A4F956C92BA60CBE00F013ED /* BuyerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956C82BA60CBE00F013ED /* BuyerModel.swift */; };
+		A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CA2BA60E8200F013ED /* AuctionModel.swift */; };
+		A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */; };
+		A4F956CF2BA610E300F013ED /* AstaATempoFissoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CE2BA610E300F013ED /* AstaATempoFissoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +54,10 @@
 		944D6F442B13B3A3008C97F2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A47DF6DA2BA24767000AFD15 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		A4F956C82BA60CBE00F013ED /* BuyerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerModel.swift; sourceTree = "<group>"; };
+		A4F956CA2BA60E8200F013ED /* AuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionModel.swift; sourceTree = "<group>"; };
+		A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
+		A4F956CE2BA610E300F013ED /* AstaATempoFissoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstaATempoFissoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +113,10 @@
 				944D6F442B13B3A3008C97F2 /* LoginView.swift */,
 				944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */,
 				A47DF6DA2BA24767000AFD15 /* UserModel.swift */,
+				A4F956C82BA60CBE00F013ED /* BuyerModel.swift */,
+				A4F956CA2BA60E8200F013ED /* AuctionModel.swift */,
+				A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */,
+				A4F956CE2BA610E300F013ED /* AstaATempoFissoModel.swift */,
 				944D6F1E2B13B300008C97F2 /* Assets.xcassets */,
 				944D6F202B13B300008C97F2 /* Preview Content */,
 			);
@@ -266,9 +278,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */,
 				944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */,
+				A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */,
+				A4F956C92BA60CBE00F013ED /* BuyerModel.swift in Sources */,
 				944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */,
 				944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */,
+				A4F956CF2BA610E300F013ED /* AstaATempoFissoModel.swift in Sources */,
 				A47DF6DB2BA24767000AFD15 /* UserModel.swift in Sources */,
 				944D6F1B2B13B2FD008C97F2 /* DietiDeals24App.swift in Sources */,
 			);
