@@ -21,5 +21,4 @@ class User: Codable {
         email = user.email
         address = user.address
     }
-    
 }

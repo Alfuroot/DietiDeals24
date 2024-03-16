@@ -15,6 +15,7 @@ class LoginViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var passwordConfirm: String = ""
     @Published var showRegistrationErrorAlert: Bool = false
+    
     var tmpuser: User?
     
     var isLoginDisabled: Bool {
