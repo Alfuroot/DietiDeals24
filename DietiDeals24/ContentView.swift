@@ -8,46 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isVendor: Bool = false
-    @State var isBuyer: Bool = false
+    @State var loggedIn: Bool = true
     var body: some View {
-        NavigationStack{
-            
-            VStack {
-                HStack{
-                    Button(action: {
-                        isVendor.toggle()
-                        if isBuyer {
-                            isBuyer.toggle()
-                        }
-                    }, label: {
-                        Image("seller")
-                            .resizable()
-                            .scaledToFit()
-                            .grayscale(isVendor ? 0 : 1)
-                            
-                    })
-                    Button(action: {
-                        isBuyer.toggle()
-                        if isVendor {
-                            isVendor.toggle()
-                        }
-                    }, label: {
-                        Image("buyer")
-                            .resizable()
-                            .scaledToFit()
-                            .grayscale(isBuyer ? 0 : 1)
-                    })
+        if loggedIn {
+            TabView{
+                BuyerView().tabItem {
+                    Image(systemName: "1.circle")
+                    Text("Tutte")
                 }
-                NavigationLink(destination: {
-                    LoginView()
-                } , label: {
-                    Text("Login")
-                })
+                Text("Mie").tabItem {
+                    Image(systemName: "1.circle")
+                    Text("Mie")
+                }
+                Text("Personale").tabItem {
+                    Image(systemName: "1.circle")
+                    Text("Personale")
+                }
             }
-            .padding()
+        }
+        else {
+            LoginView()
         }
     }
 }
-
-

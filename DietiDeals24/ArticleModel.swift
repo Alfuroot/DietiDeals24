@@ -7,10 +7,17 @@
 
 import Foundation
 
-class Article {
+class Article: Codable, Identifiable {
     
     var category: String?
     var info: String?
-    var id: String?
+    var id: String
+    var image: String?
     
+    init(category: String?, info: String?, id: String, image: String?) {
+            self.category = category
+            self.info = info
+            self.id = id
+            self.image = image
+        }
 }

@@ -19,6 +19,8 @@
 		947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6772BA6123D003F9015 /* VendorModel.swift */; };
 		947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */; };
 		A47DF6DB2BA24767000AFD15 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47DF6DA2BA24767000AFD15 /* UserModel.swift */; };
+		A4E46BDC2BA74879007140E6 /* BuyerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E46BDB2BA74879007140E6 /* BuyerView.swift */; };
+		A4E46BE02BA75868007140E6 /* ArticlePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E46BDF2BA75868007140E6 /* ArticlePreview.swift */; };
 		A4F956C92BA60CBE00F013ED /* BuyerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956C82BA60CBE00F013ED /* BuyerModel.swift */; };
 		A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CA2BA60E8200F013ED /* AuctionModel.swift */; };
 		A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */; };
@@ -58,6 +60,8 @@
 		947AD6772BA6123D003F9015 /* VendorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendorModel.swift; sourceTree = "<group>"; };
 		947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseAuctionModel.swift; sourceTree = "<group>"; };
 		A47DF6DA2BA24767000AFD15 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		A4E46BDB2BA74879007140E6 /* BuyerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerView.swift; sourceTree = "<group>"; };
+		A4E46BDF2BA75868007140E6 /* ArticlePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePreview.swift; sourceTree = "<group>"; };
 		A4F956C82BA60CBE00F013ED /* BuyerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerModel.swift; sourceTree = "<group>"; };
 		A4F956CA2BA60E8200F013ED /* AuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionModel.swift; sourceTree = "<group>"; };
 		A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
@@ -118,9 +122,11 @@
 				944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */,
 				A47DF6DA2BA24767000AFD15 /* UserModel.swift */,
 				A4F956C82BA60CBE00F013ED /* BuyerModel.swift */,
+				A4E46BDB2BA74879007140E6 /* BuyerView.swift */,
 				947AD6772BA6123D003F9015 /* VendorModel.swift */,
 				A4F956CA2BA60E8200F013ED /* AuctionModel.swift */,
 				A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */,
+				A4E46BDF2BA75868007140E6 /* ArticlePreview.swift */,
 				947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */,
 				A4F956CE2BA610E300F013ED /* AstaATempoFissoModel.swift */,
 				944D6F1E2B13B300008C97F2 /* Assets.xcassets */,
@@ -287,7 +293,9 @@
 				A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */,
 				944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */,
 				A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */,
+				A4E46BE02BA75868007140E6 /* ArticlePreview.swift in Sources */,
 				A4F956C92BA60CBE00F013ED /* BuyerModel.swift in Sources */,
+				A4E46BDC2BA74879007140E6 /* BuyerView.swift in Sources */,
 				944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */,
 				947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */,
 				944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */,
