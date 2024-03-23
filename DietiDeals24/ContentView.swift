@@ -12,7 +12,7 @@ struct ContentView: View {
     var body: some View {
         if loggedIn {
             TabView{
-                BuyerView().tabItem {
+                BuyerDashboardView().tabItem {
                     Image(systemName: "1.circle")
                     Text("Tutte")
                 }
@@ -20,7 +20,7 @@ struct ContentView: View {
                     Image(systemName: "1.circle")
                     Text("Mie")
                 }
-                Text("Personale").tabItem {
+                PersonalAreaView().tabItem {
                     Image(systemName: "1.circle")
                     Text("Personale")
                 }
@@ -29,5 +29,11 @@ struct ContentView: View {
         else {
             LoginView()
         }
+    }
+}
+
+struct ContentView_Preview: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }

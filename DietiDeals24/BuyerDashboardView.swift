@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BuyerView: View {
+struct BuyerDashboardView: View {
     @State var search:String = ""
     var articles: [Article] = [
         Article(category: "Technology", info: "Latest gadgets and tech news", id: "1", image: nil),
@@ -19,7 +19,9 @@ struct BuyerView: View {
         NavigationStack{
             List{
                 ForEach(articles){articolo in
-                    ArticlePreview()
+                    NavigationLink(destination: ReverseAuctionDetailView()) {
+                        ArticlePreview()
+                    }
                     //todo
                 }
             }.navigationTitle("Aste")
@@ -27,8 +29,8 @@ struct BuyerView: View {
     }
 }
 
-struct BuyerView_Previews: PreviewProvider {
+struct BuyerDashboardView_Previews: PreviewProvider {
     static var previews: some View {
-        BuyerView()
+        BuyerDashboardView()
     }
 }
