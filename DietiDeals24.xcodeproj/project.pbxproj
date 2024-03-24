@@ -18,6 +18,7 @@
 		944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */; };
 		947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6772BA6123D003F9015 /* VendorModel.swift */; };
 		947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */; };
+		A43BB4312BB0A95A00A650D0 /* ConfirmAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */; };
 		A47DF6DB2BA24767000AFD15 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47DF6DA2BA24767000AFD15 /* UserModel.swift */; };
 		A4914A7F2BA8E1D9000C2532 /* PersonalAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */; };
 		A4B50B4D2BAF357500968455 /* ReverseAuctionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B50B4C2BAF357500968455 /* ReverseAuctionDetailView.swift */; };
@@ -62,6 +63,7 @@
 		944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		947AD6772BA6123D003F9015 /* VendorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendorModel.swift; sourceTree = "<group>"; };
 		947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseAuctionModel.swift; sourceTree = "<group>"; };
+		A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAuctionView.swift; sourceTree = "<group>"; };
 		A47DF6DA2BA24767000AFD15 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAreaView.swift; sourceTree = "<group>"; };
 		A4B50B4C2BAF357500968455 /* ReverseAuctionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseAuctionDetailView.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				A4B50B4C2BAF357500968455 /* ReverseAuctionDetailView.swift */,
 				A4F956CE2BA610E300F013ED /* AstaATempoFissoModel.swift */,
 				A4B50B4E2BAF46C200968455 /* FixedTimeAuctionView.swift */,
+				A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */,
 				944D6F1E2B13B300008C97F2 /* Assets.xcassets */,
 				944D6F202B13B300008C97F2 /* Preview Content */,
 			);
@@ -306,6 +309,7 @@
 				A4E46BE02BA75868007140E6 /* ArticlePreview.swift in Sources */,
 				A4F956C92BA60CBE00F013ED /* BuyerModel.swift in Sources */,
 				A4E46BDC2BA74879007140E6 /* BuyerDashboardView.swift in Sources */,
+				A43BB4312BB0A95A00A650D0 /* ConfirmAuctionView.swift in Sources */,
 				944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */,
 				A4B50B4F2BAF46C200968455 /* FixedTimeAuctionView.swift in Sources */,
 				947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */,

@@ -31,6 +31,7 @@ struct FixedTimeAuctionView: View {
                     .background( Color.blue)
                     .cornerRadius(10)
                     .foregroundColor(.white)
+                /*NavigationLink("", destination: ConfirmAuctionView())*/ //come si collega zio pera?
             })
         }
     }
