@@ -16,7 +16,7 @@ struct ContentView: View {
                     Image(systemName: "1.circle")
                     Text("Tutte")
                 }
-                Text("Mie").tabItem {
+                FixedTimeAuctionView().tabItem{//Text("Mie").tabItem {
                     Image(systemName: "1.circle")
                     Text("Mie")
                 }

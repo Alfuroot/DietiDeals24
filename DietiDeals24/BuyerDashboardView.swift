@@ -25,8 +25,9 @@ struct BuyerDashboardView: View {
                     //todo
                 }
             }.navigationTitle("Aste")
-        }.searchable(text: $search, prompt: "Cerca")
-    }
+                .searchable(text: $search, prompt: "Cerca")
+            
+        }    }
 }
 
 struct BuyerDashboardView_Previews: PreviewProvider {
