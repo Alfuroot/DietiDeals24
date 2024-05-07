@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		942E68AA2BE9D493007D0046 /* VendorDashbordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68A92BE9D493007D0046 /* VendorDashbordView.swift */; };
+		942E68AC2BE9D7C0007D0046 /* AuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AB2BE9D7C0007D0046 /* AuctionView.swift */; };
+		942E68AE2BE9D9D5007D0046 /* AuctionItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */; };
+		942E68B02BE9DED5007D0046 /* AddAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */; };
 		944D6F1B2B13B2FD008C97F2 /* DietiDeals24App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F1A2B13B2FD008C97F2 /* DietiDeals24App.swift */; };
 		944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F1C2B13B2FD008C97F2 /* ContentView.swift */; };
 		944D6F1F2B13B300008C97F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 944D6F1E2B13B300008C97F2 /* Assets.xcassets */; };
@@ -49,6 +53,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		942E68A92BE9D493007D0046 /* VendorDashbordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorDashbordView.swift; sourceTree = "<group>"; };
+		942E68AB2BE9D7C0007D0046 /* AuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionView.swift; sourceTree = "<group>"; };
+		942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionItemModel.swift; sourceTree = "<group>"; };
+		942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAuctionView.swift; sourceTree = "<group>"; };
 		944D6F172B13B2FD008C97F2 /* DietiDeals24.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietiDeals24.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		944D6F1A2B13B2FD008C97F2 /* DietiDeals24App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietiDeals24App.swift; sourceTree = "<group>"; };
 		944D6F1C2B13B2FD008C97F2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -131,11 +139,15 @@
 				A47DF6DA2BA24767000AFD15 /* UserModel.swift */,
 				A4F956C82BA60CBE00F013ED /* BuyerModel.swift */,
 				A4E46BDB2BA74879007140E6 /* BuyerDashboardView.swift */,
+				942E68A92BE9D493007D0046 /* VendorDashbordView.swift */,
+				942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */,
 				A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */,
 				947AD6772BA6123D003F9015 /* VendorModel.swift */,
+				942E68AB2BE9D7C0007D0046 /* AuctionView.swift */,
 				A4F956CA2BA60E8200F013ED /* AuctionModel.swift */,
 				A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */,
 				A4E46BDF2BA75868007140E6 /* ArticlePreview.swift */,
+				942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */,
 				947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */,
 				A4B50B4C2BAF357500968455 /* ReverseAuctionDetailView.swift */,
 				A4F956CE2BA610E300F013ED /* AstaATempoFissoModel.swift */,
@@ -304,7 +316,9 @@
 			files = (
 				A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */,
 				944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */,
+				942E68B02BE9DED5007D0046 /* AddAuctionView.swift in Sources */,
 				A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */,
+				942E68AA2BE9D493007D0046 /* VendorDashbordView.swift in Sources */,
 				A4914A7F2BA8E1D9000C2532 /* PersonalAreaView.swift in Sources */,
 				A4E46BE02BA75868007140E6 /* ArticlePreview.swift in Sources */,
 				A4F956C92BA60CBE00F013ED /* BuyerModel.swift in Sources */,
@@ -313,10 +327,12 @@
 				944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */,
 				A4B50B4F2BAF46C200968455 /* FixedTimeAuctionView.swift in Sources */,
 				947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */,
+				942E68AE2BE9D9D5007D0046 /* AuctionItemModel.swift in Sources */,
 				944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */,
 				947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */,
 				A4B50B4D2BAF357500968455 /* ReverseAuctionDetailView.swift in Sources */,
 				A4F956CF2BA610E300F013ED /* AstaATempoFissoModel.swift in Sources */,
+				942E68AC2BE9D7C0007D0046 /* AuctionView.swift in Sources */,
 				A47DF6DB2BA24767000AFD15 /* UserModel.swift in Sources */,
 				944D6F1B2B13B2FD008C97F2 /* DietiDeals24App.swift in Sources */,
 			);

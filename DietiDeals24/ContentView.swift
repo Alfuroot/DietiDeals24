@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var loggedIn: Bool = true
+    @State var loggedIn: Bool = false
     var body: some View {
         if loggedIn {
             TabView{
@@ -27,7 +27,20 @@ struct ContentView: View {
             }
         }
         else {
-            LoginView()
+            TabView{
+                VendorDashboardView().tabItem {
+                    Image(systemName: "1.circle")
+                    Text("Active")
+                }
+                AddAuctionView().tabItem{//Text("Mie").tabItem {
+                    Image(systemName: "1.circle")
+                    Text("Add")
+                }
+                PersonalAreaView().tabItem {
+                    Image(systemName: "1.circle")
+                    Text("Personale")
+                }
+            }
         }
     }
 }
