@@ -9,7 +9,7 @@ import Foundation
 
 class Auction {
     
-    var prezzoIniziale: Float?
+    var initialprize: Float?
     var ID: String?
     
 }

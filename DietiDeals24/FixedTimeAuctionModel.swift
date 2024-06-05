@@ -7,9 +7,9 @@
 
 import Foundation
 
-class AstaATempoFisso: Auction {
+class FixedTimeAuction: Auction {
     
-    var scadenza: Date?
-    var offertaMax: Float?
+    var expirationDate: Date?
+    var maxOffer: Float?
     
 }

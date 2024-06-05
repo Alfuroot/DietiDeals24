@@ -34,7 +34,7 @@
 		A4F956C92BA60CBE00F013ED /* BuyerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956C82BA60CBE00F013ED /* BuyerModel.swift */; };
 		A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CA2BA60E8200F013ED /* AuctionModel.swift */; };
 		A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */; };
-		A4F956CF2BA610E300F013ED /* AstaATempoFissoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CE2BA610E300F013ED /* AstaATempoFissoModel.swift */; };
+		A4F956CF2BA610E300F013ED /* FixedTimeAuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CE2BA610E300F013ED /* FixedTimeAuctionModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,7 +85,7 @@
 		A4F956C82BA60CBE00F013ED /* BuyerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerModel.swift; sourceTree = "<group>"; };
 		A4F956CA2BA60E8200F013ED /* AuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionModel.swift; sourceTree = "<group>"; };
 		A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
-		A4F956CE2BA610E300F013ED /* AstaATempoFissoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstaATempoFissoModel.swift; sourceTree = "<group>"; };
+		A4F956CE2BA610E300F013ED /* FixedTimeAuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTimeAuctionModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,7 +156,7 @@
 				942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */,
 				947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */,
 				A4B50B4C2BAF357500968455 /* ReverseAuctionDetailView.swift */,
-				A4F956CE2BA610E300F013ED /* AstaATempoFissoModel.swift */,
+				A4F956CE2BA610E300F013ED /* FixedTimeAuctionModel.swift */,
 				A4B50B4E2BAF46C200968455 /* FixedTimeAuctionView.swift */,
 				A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */,
 				944D6F1E2B13B300008C97F2 /* Assets.xcassets */,
@@ -339,7 +339,7 @@
 				944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */,
 				947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */,
 				A4B50B4D2BAF357500968455 /* ReverseAuctionDetailView.swift in Sources */,
-				A4F956CF2BA610E300F013ED /* AstaATempoFissoModel.swift in Sources */,
+				A4F956CF2BA610E300F013ED /* FixedTimeAuctionModel.swift in Sources */,
 				942E68AC2BE9D7C0007D0046 /* AuctionView.swift in Sources */,
 				A47DF6DB2BA24767000AFD15 /* User.swift in Sources */,
 				944D6F1B2B13B2FD008C97F2 /* DietiDeals24App.swift in Sources */,
