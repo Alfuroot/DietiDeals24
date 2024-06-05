@@ -7,9 +7,17 @@
 
 import Foundation
 
-class FixedTimeAuction: Auction {
+class FixedTimeAuction: Auction, Codable, Identifiable {
+    var expirationDate: String?
+    var maxOffer: String?
     
-    var expirationDate: Date?
-    var maxOffer: Float?
+    init(expirationDate: String?, maxOffer: String?) {
+        self.expirationDate = expirationDate
+        self.maxOffer = maxOffer
+    }
     
+    init(remoteFixedTimeAuction: RemoteFixedTimeAuction) {
+        self.expirationDate = remoteFixedTimeAuction.expirationDate
+        self.maxOffer = remoteFixedTimeAuction.maxOffer
+    }
 }
