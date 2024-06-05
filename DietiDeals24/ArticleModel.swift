@@ -10,7 +10,7 @@ import Foundation
 class Article: Codable, Identifiable {
     var category: String?
     var info: String?
-    var id: String
+    var id: String?
     var imageData: Data?
     
     init(category: String?, info: String?, id: String, imageData: Data?) {
