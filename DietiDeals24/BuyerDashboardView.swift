@@ -8,25 +8,39 @@
 import SwiftUI
 
 struct BuyerDashboardView: View {
-    @State var search:String = ""
-    var articles: [Article] = [
-        Article(category: "Technology", info: "Latest gadgets and tech news", id: "1", image: nil),
-        Article(category: "Sports", info: "Updates on sports events", id: "2", image: nil),
-        Article(category: "Travel", info: "Travel destinations and tips", id: "3", image: nil),
-        Article(category: "Food", info: "Cuisine and cooking tips", id: "4", image: nil)
-    ]
+    @StateObject private var viewModel = ArticleViewModel()
+    @State private var search: String = ""
+
+    var filteredArticles: [Article] {
+        if search.isEmpty {
+            return viewModel.articles
+        } else {
+            return viewModel.articles.filter { $0.category?.localizedCaseInsensitiveContains(search) == true }
+        }
+    }
+
     var body: some View {
-        NavigationStack{
-            List{
-                ForEach(articles){articolo in
-                    NavigationLink(destination: ReverseAuctionDetailView()) {
-                        ArticlePreview()
+        NavigationStack {
+            if viewModel.isLoading {
+                ProgressView("Loading articles...")
+                    .navigationTitle("Aste")
+            } else if let error = viewModel.error {
+                Text("Error: \(error)")
+                    .navigationTitle("Aste")
+            } else {
+                List {
+                    ForEach(filteredArticles) { articolo in
+                        NavigationLink(destination: ReverseAuctionDetailView()) {
+                            ArticlePreview(article: articolo)
+                        }
                     }
-                    //todo
                 }
-            }.navigationTitle("Aste")
+                .navigationTitle("Aste")
                 .searchable(text: $search, prompt: "Cerca")
-            
+                .onAppear {
+                    viewModel.fetchArticles()
+                }
+            }
         }
     }
 }

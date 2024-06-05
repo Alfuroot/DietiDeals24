@@ -8,16 +8,26 @@
 import Foundation
 
 class Article: Codable, Identifiable {
-    
     var category: String?
     var info: String?
     var id: String
-    var image: String?
+    var imageData: Data?
     
-    init(category: String?, info: String?, id: String, image: String?) {
-            self.category = category
-            self.info = info
-            self.id = id
-            self.image = image
+    init(category: String?, info: String?, id: String, imageData: Data?) {
+        self.category = category
+        self.info = info
+        self.id = id
+        self.imageData = imageData
+    }
+    
+    init(remoteArticle: RemoteArticle) {
+        self.category = remoteArticle.category
+        self.info = remoteArticle.info
+        self.id = remoteArticle.id
+        if let imageUrl = remoteArticle.imageUrl {
+            self.imageData = try? Data(contentsOf: URL(string: imageUrl)!)
+        } else {
+            self.imageData = nil
         }
+    }
 }

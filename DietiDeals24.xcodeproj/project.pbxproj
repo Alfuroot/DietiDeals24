@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9424EAAA2C0CBCB100429CDE /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAA92C0CBCB100429CDE /* APIController.swift */; };
 		9424EAAC2C0CC16400429CDE /* RemoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAB2C0CC16400429CDE /* RemoteUser.swift */; };
+		9424EAAE2C10F31900429CDE /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAD2C10F31900429CDE /* ArticleViewModel.swift */; };
 		942E68AA2BE9D493007D0046 /* VendorDashbordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68A92BE9D493007D0046 /* VendorDashbordView.swift */; };
 		942E68AC2BE9D7C0007D0046 /* AuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AB2BE9D7C0007D0046 /* AuctionView.swift */; };
 		942E68AE2BE9D9D5007D0046 /* AuctionItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */; };
@@ -55,8 +55,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9424EAA92C0CBCB100429CDE /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		9424EAAB2C0CC16400429CDE /* RemoteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUser.swift; sourceTree = "<group>"; };
+		9424EAAD2C10F31900429CDE /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		942E68A92BE9D493007D0046 /* VendorDashbordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorDashbordView.swift; sourceTree = "<group>"; };
 		942E68AB2BE9D7C0007D0046 /* AuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionView.swift; sourceTree = "<group>"; };
 		942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionItemModel.swift; sourceTree = "<group>"; };
@@ -144,6 +144,7 @@
 				9424EAAB2C0CC16400429CDE /* RemoteUser.swift */,
 				A4F956C82BA60CBE00F013ED /* BuyerModel.swift */,
 				A4E46BDB2BA74879007140E6 /* BuyerDashboardView.swift */,
+				9424EAAD2C10F31900429CDE /* ArticleViewModel.swift */,
 				942E68A92BE9D493007D0046 /* VendorDashbordView.swift */,
 				942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */,
 				A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */,
@@ -160,7 +161,6 @@
 				A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */,
 				944D6F1E2B13B300008C97F2 /* Assets.xcassets */,
 				944D6F202B13B300008C97F2 /* Preview Content */,
-				9424EAA92C0CBCB100429CDE /* APIController.swift */,
 			);
 			path = DietiDeals24;
 			sourceTree = "<group>";
@@ -320,7 +320,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9424EAAA2C0CBCB100429CDE /* APIController.swift in Sources */,
 				A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */,
 				9424EAAC2C0CC16400429CDE /* RemoteUser.swift in Sources */,
 				944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */,
@@ -329,6 +328,7 @@
 				942E68AA2BE9D493007D0046 /* VendorDashbordView.swift in Sources */,
 				A4914A7F2BA8E1D9000C2532 /* PersonalAreaView.swift in Sources */,
 				A4E46BE02BA75868007140E6 /* ArticlePreview.swift in Sources */,
+				9424EAAE2C10F31900429CDE /* ArticleViewModel.swift in Sources */,
 				A4F956C92BA60CBE00F013ED /* BuyerModel.swift in Sources */,
 				A4E46BDC2BA74879007140E6 /* BuyerDashboardView.swift in Sources */,
 				A43BB4312BB0A95A00A650D0 /* ConfirmAuctionView.swift in Sources */,

@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State var loggedIn: Bool = false
     var body: some View {
-        if loggedIn {
+        if !loggedIn {
             TabView{
                 BuyerDashboardView().tabItem {
                     Image(systemName: "1.circle")
