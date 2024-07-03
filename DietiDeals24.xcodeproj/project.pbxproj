@@ -24,6 +24,9 @@
 		944D6F382B13B301008C97F2 /* DietiDeals24UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F372B13B301008C97F2 /* DietiDeals24UITestsLaunchTests.swift */; };
 		944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F442B13B3A3008C97F2 /* LoginView.swift */; };
 		944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */; };
+		944E16162C35982E00C8E4E8 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E16152C35982E00C8E4E8 /* RegisterView.swift */; };
+		944E16182C3599E000C8E4E8 /* RegisterVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E16172C3599E000C8E4E8 /* RegisterVM.swift */; };
+		944E161A2C359AD200C8E4E8 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E16192C359AD200C8E4E8 /* LoginRouter.swift */; };
 		947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6772BA6123D003F9015 /* VendorModel.swift */; };
 		947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */; };
 		94C4E4DA2C35534100DD4ABC /* Offer+Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */; };
@@ -81,6 +84,9 @@
 		944D6F372B13B301008C97F2 /* DietiDeals24UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietiDeals24UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		944D6F442B13B3A3008C97F2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		944E16152C35982E00C8E4E8 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		944E16172C3599E000C8E4E8 /* RegisterVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVM.swift; sourceTree = "<group>"; };
+		944E16192C359AD200C8E4E8 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		947AD6772BA6123D003F9015 /* VendorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendorModel.swift; sourceTree = "<group>"; };
 		947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseAuctionModel.swift; sourceTree = "<group>"; };
 		94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offer+Payment.swift"; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 			children = (
 				9406E4ED2C3560AE00B8DB77 /* RouterProtocol.swift */,
 				9406E4EF2C3560B600B8DB77 /* VendorRouter.swift */,
+				944E16192C359AD200C8E4E8 /* LoginRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -161,7 +168,9 @@
 				944D6F1A2B13B2FD008C97F2 /* DietiDeals24App.swift */,
 				944D6F1C2B13B2FD008C97F2 /* ContentView.swift */,
 				944D6F442B13B3A3008C97F2 /* LoginView.swift */,
+				944E16152C35982E00C8E4E8 /* RegisterView.swift */,
 				944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */,
+				944E16172C3599E000C8E4E8 /* RegisterVM.swift */,
 				A47DF6DA2BA24767000AFD15 /* User.swift */,
 				94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */,
 				9424EAAB2C0CC16400429CDE /* RemoteUser.swift */,
@@ -352,6 +361,7 @@
 				944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */,
 				942E68B02BE9DED5007D0046 /* AddAuctionView.swift in Sources */,
 				A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */,
+				944E161A2C359AD200C8E4E8 /* LoginRouter.swift in Sources */,
 				942E68AA2BE9D493007D0046 /* VendorDashbordView.swift in Sources */,
 				A4914A7F2BA8E1D9000C2532 /* PersonalAreaView.swift in Sources */,
 				A4E46BE02BA75868007140E6 /* ArticlePreview.swift in Sources */,
@@ -367,6 +377,8 @@
 				947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */,
 				942E68AE2BE9D9D5007D0046 /* AuctionItemModel.swift in Sources */,
 				944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */,
+				944E16162C35982E00C8E4E8 /* RegisterView.swift in Sources */,
+				944E16182C3599E000C8E4E8 /* RegisterVM.swift in Sources */,
 				947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */,
 				A4B50B4D2BAF357500968455 /* ReverseAuctionDetailView.swift in Sources */,
 				9406E4EE2C3560AE00B8DB77 /* RouterProtocol.swift in Sources */,

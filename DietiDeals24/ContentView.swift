@@ -12,18 +12,8 @@ struct ContentView: View {
     var body: some View {
         if !loggedIn {
             TabView{
-                BuyerDashboardView().tabItem {
-                    Image(systemName: "1.circle")
-                    Text("Tutte")
-                }
-                FixedTimeAuctionView().tabItem{//Text("Mie").tabItem {
-                    Image(systemName: "1.circle")
-                    Text("Mie")
-                }
-                PersonalAreaView().tabItem {
-                    Image(systemName: "1.circle")
-                    Text("Personale")
-                }
+                LoginView()
+                    
             }
         }
         else {
