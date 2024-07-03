@@ -24,6 +24,7 @@
 		944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */; };
 		947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6772BA6123D003F9015 /* VendorModel.swift */; };
 		947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */; };
+		94C4E4DA2C35534100DD4ABC /* Offer+Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */; };
 		A43BB4312BB0A95A00A650D0 /* ConfirmAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */; };
 		A47DF6DB2BA24767000AFD15 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47DF6DA2BA24767000AFD15 /* User.swift */; };
 		A4914A7F2BA8E1D9000C2532 /* PersonalAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */; };
@@ -78,6 +79,7 @@
 		944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		947AD6772BA6123D003F9015 /* VendorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendorModel.swift; sourceTree = "<group>"; };
 		947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseAuctionModel.swift; sourceTree = "<group>"; };
+		94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offer+Payment.swift"; sourceTree = "<group>"; };
 		A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAuctionView.swift; sourceTree = "<group>"; };
 		A47DF6DA2BA24767000AFD15 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAreaView.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				944D6F442B13B3A3008C97F2 /* LoginView.swift */,
 				944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */,
 				A47DF6DA2BA24767000AFD15 /* User.swift */,
+				94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */,
 				9424EAAB2C0CC16400429CDE /* RemoteUser.swift */,
 				A4F956C82BA60CBE00F013ED /* BuyerModel.swift */,
 				A4E46BDB2BA74879007140E6 /* BuyerDashboardView.swift */,
@@ -355,6 +358,7 @@
 				942E68AC2BE9D7C0007D0046 /* AuctionView.swift in Sources */,
 				A47DF6DB2BA24767000AFD15 /* User.swift in Sources */,
 				944D6F1B2B13B2FD008C97F2 /* DietiDeals24App.swift in Sources */,
+				94C4E4DA2C35534100DD4ABC /* Offer+Payment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

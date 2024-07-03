@@ -11,4 +11,6 @@ struct RemoteReverseAuction: Codable {
     var decrease: String?
     var decreaseTimer: String?
     var minimumPrice: String?
+    var initialPrize: Float?
+    var ID: String?
 }

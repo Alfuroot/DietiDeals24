@@ -7,9 +7,13 @@
 
 import Foundation
 
-class Auction {
+class Auction: Codable {
     
-    var initialprize: Float?
+    var initialPrize: Float?
     var ID: String?
     
+    init(initialPrize: Float? = nil, ID: String? = nil) {
+            self.initialPrize = initialPrize
+            self.ID = ID
+        }
 }
