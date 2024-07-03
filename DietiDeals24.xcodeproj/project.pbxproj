@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9406E4EE2C3560AE00B8DB77 /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9406E4ED2C3560AE00B8DB77 /* RouterProtocol.swift */; };
+		9406E4F02C3560B600B8DB77 /* VendorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9406E4EF2C3560B600B8DB77 /* VendorRouter.swift */; };
 		9424EAAC2C0CC16400429CDE /* RemoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAB2C0CC16400429CDE /* RemoteUser.swift */; };
 		9424EAAE2C10F31900429CDE /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAD2C10F31900429CDE /* ArticleViewModel.swift */; };
 		942E68AA2BE9D493007D0046 /* VendorDashbordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68A92BE9D493007D0046 /* VendorDashbordView.swift */; };
@@ -59,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9406E4ED2C3560AE00B8DB77 /* RouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
+		9406E4EF2C3560B600B8DB77 /* VendorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorRouter.swift; sourceTree = "<group>"; };
 		9424EAAB2C0CC16400429CDE /* RemoteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUser.swift; sourceTree = "<group>"; };
 		9424EAAD2C10F31900429CDE /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		942E68A92BE9D493007D0046 /* VendorDashbordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorDashbordView.swift; sourceTree = "<group>"; };
@@ -121,6 +125,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9406E4EC2C3560A200B8DB77 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				9406E4ED2C3560AE00B8DB77 /* RouterProtocol.swift */,
+				9406E4EF2C3560B600B8DB77 /* VendorRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		944D6F0E2B13B2FD008C97F2 = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +157,7 @@
 		944D6F192B13B2FD008C97F2 /* DietiDeals24 */ = {
 			isa = PBXGroup;
 			children = (
+				9406E4EC2C3560A200B8DB77 /* Router */,
 				944D6F1A2B13B2FD008C97F2 /* DietiDeals24App.swift */,
 				944D6F1C2B13B2FD008C97F2 /* ContentView.swift */,
 				944D6F442B13B3A3008C97F2 /* LoginView.swift */,
@@ -343,6 +357,7 @@
 				A4E46BE02BA75868007140E6 /* ArticlePreview.swift in Sources */,
 				9424EAAE2C10F31900429CDE /* ArticleViewModel.swift in Sources */,
 				A4F956C92BA60CBE00F013ED /* BuyerModel.swift in Sources */,
+				9406E4F02C3560B600B8DB77 /* VendorRouter.swift in Sources */,
 				A4A8738B2C110CD200691606 /* RemoteFixedTimeAuction.swift in Sources */,
 				A4E46BDC2BA74879007140E6 /* BuyerDashboardView.swift in Sources */,
 				A43BB4312BB0A95A00A650D0 /* ConfirmAuctionView.swift in Sources */,
@@ -354,6 +369,7 @@
 				944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */,
 				947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */,
 				A4B50B4D2BAF357500968455 /* ReverseAuctionDetailView.swift in Sources */,
+				9406E4EE2C3560AE00B8DB77 /* RouterProtocol.swift in Sources */,
 				A4F956CF2BA610E300F013ED /* FixedTimeAuctionModel.swift in Sources */,
 				942E68AC2BE9D7C0007D0046 /* AuctionView.swift in Sources */,
 				A47DF6DB2BA24767000AFD15 /* User.swift in Sources */,
