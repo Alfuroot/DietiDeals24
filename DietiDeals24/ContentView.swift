@@ -7,10 +7,11 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     @State var loggedIn: Bool = false
     var body: some View {
-        if !loggedIn {
+        if loggedIn {
             TabView{
                 LoginView()
                     
@@ -18,17 +19,21 @@ struct ContentView: View {
         }
         else {
             TabView{
-                VendorDashboardView().tabItem {
+                DashBoard().tabItem {
                     Image(systemName: "1.circle")
                     Text("Active")
                 }
-                AddAuctionView().tabItem{//Text("Mie").tabItem {
+                MyAuctionsView().tabItem{
                     Image(systemName: "1.circle")
-                    Text("Add")
+                    Text("My purchases")
+                }
+                MySalesView().tabItem{
+                    Image(systemName: "1.circle")
+                    Text("My sales")
                 }
                 PersonalAreaView().tabItem {
                     Image(systemName: "1.circle")
-                    Text("Personale")
+                    Text("Profile")
                 }
             }
         }

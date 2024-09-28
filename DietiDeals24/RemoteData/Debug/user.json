@@ -1,0 +1,15 @@
+{
+    "id": "12345",
+    "username": "john_doe",
+    "password": "hashed_password",
+    "codicefisc": "ABCD12345E",
+    "email": "john.doe@example.com",
+    "address": "123 Main St, Anytown, USA",
+    "bio": "Just a regular guy.",
+    "iban": "IT60X0542811101000000123456",
+    "facebookLink": "https://facebook.com/john.doe",
+    "twitterLink": "https://twitter.com/john_doe",
+    "instagramLink": "https://instagram.com/john.doe",
+    "linkedinLink": "https://linkedin.com/in/johndoe",
+    "notificationsEnabled": true
+}

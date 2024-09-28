@@ -50,7 +50,7 @@ struct LoginView: View {
                                     Text("Login")
                                 })
                                 .padding(.bottom)
-                                .disabled(!viewModel.isRegistrationValid)
+                                .disabled(!viewModel.isLoginDisabled)
                                 Text("Don't have an account?")
                                 Button( action: {
                                     router.navigate(to: .register)

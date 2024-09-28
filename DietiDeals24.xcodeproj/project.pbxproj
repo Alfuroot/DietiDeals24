@@ -10,9 +10,9 @@
 		9406E4EE2C3560AE00B8DB77 /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9406E4ED2C3560AE00B8DB77 /* RouterProtocol.swift */; };
 		9406E4F02C3560B600B8DB77 /* VendorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9406E4EF2C3560B600B8DB77 /* VendorRouter.swift */; };
 		9424EAAC2C0CC16400429CDE /* RemoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAB2C0CC16400429CDE /* RemoteUser.swift */; };
-		9424EAAE2C10F31900429CDE /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAD2C10F31900429CDE /* ArticleViewModel.swift */; };
-		942E68AA2BE9D493007D0046 /* VendorDashbordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68A92BE9D493007D0046 /* VendorDashbordView.swift */; };
-		942E68AC2BE9D7C0007D0046 /* AuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AB2BE9D7C0007D0046 /* AuctionView.swift */; };
+		9424EAAE2C10F31900429CDE /* DashBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAD2C10F31900429CDE /* DashBoardViewModel.swift */; };
+		942E68AA2BE9D493007D0046 /* MyAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68A92BE9D493007D0046 /* MyAuctionsView.swift */; };
+		942E68AC2BE9D7C0007D0046 /* AuctionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AB2BE9D7C0007D0046 /* AuctionDetailView.swift */; };
 		942E68AE2BE9D9D5007D0046 /* AuctionItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */; };
 		942E68B02BE9DED5007D0046 /* AddAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */; };
 		944D6F1B2B13B2FD008C97F2 /* DietiDeals24App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F1A2B13B2FD008C97F2 /* DietiDeals24App.swift */; };
@@ -30,6 +30,15 @@
 		947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6772BA6123D003F9015 /* VendorModel.swift */; };
 		947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */; };
 		94C4E4DA2C35534100DD4ABC /* Offer+Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */; };
+		94EE5FF32C79E9C80029DB96 /* MySalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE5FF22C79E9C80029DB96 /* MySalesView.swift */; };
+		94EE5FF52C7D13BD0029DB96 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE5FF42C7D13BD0029DB96 /* FilterView.swift */; };
+		94EE5FFC2CA84EE60029DB96 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE5FFB2CA84EE60029DB96 /* DataLoader.swift */; };
+		94EE5FFE2CA84F8A0029DB96 /* AuctionItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE5FFD2CA84F8A0029DB96 /* AuctionItemCard.swift */; };
+		94EE60012CA856250029DB96 /* auction_items.json in Resources */ = {isa = PBXBuildFile; fileRef = 94EE60002CA856250029DB96 /* auction_items.json */; };
+		94EE60032CA862150029DB96 /* BuyingItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE60022CA862150029DB96 /* BuyingItemsView.swift */; };
+		94EE60052CA8623F0029DB96 /* SellingItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE60042CA8623E0029DB96 /* SellingItemsView.swift */; };
+		94EE60072CA86DFB0029DB96 /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 94EE60062CA86DFB0029DB96 /* user.json */; };
+		94EE600A2CA86F940029DB96 /* NotificationPermisson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE60092CA86F940029DB96 /* NotificationPermisson.swift */; };
 		A43BB4312BB0A95A00A650D0 /* ConfirmAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */; };
 		A47DF6DB2BA24767000AFD15 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47DF6DA2BA24767000AFD15 /* User.swift */; };
 		A4914A7F2BA8E1D9000C2532 /* PersonalAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */; };
@@ -38,9 +47,8 @@
 		A4A8738B2C110CD200691606 /* RemoteFixedTimeAuction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A8738A2C110CD200691606 /* RemoteFixedTimeAuction.swift */; };
 		A4B50B4D2BAF357500968455 /* ReverseAuctionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B50B4C2BAF357500968455 /* ReverseAuctionDetailView.swift */; };
 		A4B50B4F2BAF46C200968455 /* FixedTimeAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B50B4E2BAF46C200968455 /* FixedTimeAuctionView.swift */; };
-		A4E46BDC2BA74879007140E6 /* BuyerDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E46BDB2BA74879007140E6 /* BuyerDashboardView.swift */; };
+		A4E46BDC2BA74879007140E6 /* DashBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E46BDB2BA74879007140E6 /* DashBoard.swift */; };
 		A4E46BE02BA75868007140E6 /* ArticlePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E46BDF2BA75868007140E6 /* ArticlePreview.swift */; };
-		A4F956C92BA60CBE00F013ED /* BuyerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956C82BA60CBE00F013ED /* BuyerModel.swift */; };
 		A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CA2BA60E8200F013ED /* AuctionModel.swift */; };
 		A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */; };
 		A4F956CF2BA610E300F013ED /* FixedTimeAuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CE2BA610E300F013ED /* FixedTimeAuctionModel.swift */; };
@@ -67,9 +75,9 @@
 		9406E4ED2C3560AE00B8DB77 /* RouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
 		9406E4EF2C3560B600B8DB77 /* VendorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorRouter.swift; sourceTree = "<group>"; };
 		9424EAAB2C0CC16400429CDE /* RemoteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUser.swift; sourceTree = "<group>"; };
-		9424EAAD2C10F31900429CDE /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
-		942E68A92BE9D493007D0046 /* VendorDashbordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorDashbordView.swift; sourceTree = "<group>"; };
-		942E68AB2BE9D7C0007D0046 /* AuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionView.swift; sourceTree = "<group>"; };
+		9424EAAD2C10F31900429CDE /* DashBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardViewModel.swift; sourceTree = "<group>"; };
+		942E68A92BE9D493007D0046 /* MyAuctionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuctionsView.swift; sourceTree = "<group>"; };
+		942E68AB2BE9D7C0007D0046 /* AuctionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailView.swift; sourceTree = "<group>"; };
 		942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionItemModel.swift; sourceTree = "<group>"; };
 		942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAuctionView.swift; sourceTree = "<group>"; };
 		944D6F172B13B2FD008C97F2 /* DietiDeals24.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietiDeals24.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +98,15 @@
 		947AD6772BA6123D003F9015 /* VendorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendorModel.swift; sourceTree = "<group>"; };
 		947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseAuctionModel.swift; sourceTree = "<group>"; };
 		94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offer+Payment.swift"; sourceTree = "<group>"; };
+		94EE5FF22C79E9C80029DB96 /* MySalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySalesView.swift; sourceTree = "<group>"; };
+		94EE5FF42C7D13BD0029DB96 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		94EE5FFB2CA84EE60029DB96 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
+		94EE5FFD2CA84F8A0029DB96 /* AuctionItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionItemCard.swift; sourceTree = "<group>"; };
+		94EE60002CA856250029DB96 /* auction_items.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = auction_items.json; sourceTree = "<group>"; };
+		94EE60022CA862150029DB96 /* BuyingItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyingItemsView.swift; sourceTree = "<group>"; };
+		94EE60042CA8623E0029DB96 /* SellingItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellingItemsView.swift; sourceTree = "<group>"; };
+		94EE60062CA86DFB0029DB96 /* user.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
+		94EE60092CA86F940029DB96 /* NotificationPermisson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermisson.swift; sourceTree = "<group>"; };
 		A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAuctionView.swift; sourceTree = "<group>"; };
 		A47DF6DA2BA24767000AFD15 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAreaView.swift; sourceTree = "<group>"; };
@@ -98,9 +115,8 @@
 		A4A8738A2C110CD200691606 /* RemoteFixedTimeAuction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFixedTimeAuction.swift; sourceTree = "<group>"; };
 		A4B50B4C2BAF357500968455 /* ReverseAuctionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseAuctionDetailView.swift; sourceTree = "<group>"; };
 		A4B50B4E2BAF46C200968455 /* FixedTimeAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTimeAuctionView.swift; sourceTree = "<group>"; };
-		A4E46BDB2BA74879007140E6 /* BuyerDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerDashboardView.swift; sourceTree = "<group>"; };
+		A4E46BDB2BA74879007140E6 /* DashBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoard.swift; sourceTree = "<group>"; };
 		A4E46BDF2BA75868007140E6 /* ArticlePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePreview.swift; sourceTree = "<group>"; };
-		A4F956C82BA60CBE00F013ED /* BuyerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerModel.swift; sourceTree = "<group>"; };
 		A4F956CA2BA60E8200F013ED /* AuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionModel.swift; sourceTree = "<group>"; };
 		A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		A4F956CE2BA610E300F013ED /* FixedTimeAuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTimeAuctionModel.swift; sourceTree = "<group>"; };
@@ -164,34 +180,26 @@
 		944D6F192B13B2FD008C97F2 /* DietiDeals24 */ = {
 			isa = PBXGroup;
 			children = (
-				9406E4EC2C3560A200B8DB77 /* Router */,
 				944D6F1A2B13B2FD008C97F2 /* DietiDeals24App.swift */,
 				944D6F1C2B13B2FD008C97F2 /* ContentView.swift */,
-				944D6F442B13B3A3008C97F2 /* LoginView.swift */,
-				944E16152C35982E00C8E4E8 /* RegisterView.swift */,
-				944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */,
-				944E16172C3599E000C8E4E8 /* RegisterVM.swift */,
+				94EE60082CA86F7E0029DB96 /* Notification */,
+				94EE5FFA2CA84CCA0029DB96 /* RemoteData */,
+				94EE5FF92CA84CAD0029DB96 /* Login+Registration */,
+				94EE5FF82CA84C3A0029DB96 /* Auctions */,
+				94EE5FF72CA84C210029DB96 /* Sales */,
+				9406E4EC2C3560A200B8DB77 /* Router */,
+				94EE5FF62CA84BDA0029DB96 /* DashBoard */,
 				A47DF6DA2BA24767000AFD15 /* User.swift */,
 				94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */,
 				9424EAAB2C0CC16400429CDE /* RemoteUser.swift */,
-				A4F956C82BA60CBE00F013ED /* BuyerModel.swift */,
-				A4E46BDB2BA74879007140E6 /* BuyerDashboardView.swift */,
-				9424EAAD2C10F31900429CDE /* ArticleViewModel.swift */,
-				942E68A92BE9D493007D0046 /* VendorDashbordView.swift */,
-				942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */,
+				94EE5FF42C7D13BD0029DB96 /* FilterView.swift */,
 				A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */,
 				947AD6772BA6123D003F9015 /* VendorModel.swift */,
-				942E68AB2BE9D7C0007D0046 /* AuctionView.swift */,
-				A4F956CA2BA60E8200F013ED /* AuctionModel.swift */,
 				A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */,
 				A4E46BDF2BA75868007140E6 /* ArticlePreview.swift */,
-				942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */,
-				A4A873862C10FBE700691606 /* RemoteAuctionItem.swift */,
 				947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */,
-				A4A873882C110AFE00691606 /* RemoteReverseAuction.swift */,
 				A4B50B4C2BAF357500968455 /* ReverseAuctionDetailView.swift */,
 				A4F956CE2BA610E300F013ED /* FixedTimeAuctionModel.swift */,
-				A4A8738A2C110CD200691606 /* RemoteFixedTimeAuction.swift */,
 				A4B50B4E2BAF46C200968455 /* FixedTimeAuctionView.swift */,
 				A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */,
 				944D6F1E2B13B300008C97F2 /* Assets.xcassets */,
@@ -223,6 +231,78 @@
 				944D6F372B13B301008C97F2 /* DietiDeals24UITestsLaunchTests.swift */,
 			);
 			path = DietiDeals24UITests;
+			sourceTree = "<group>";
+		};
+		94EE5FF62CA84BDA0029DB96 /* DashBoard */ = {
+			isa = PBXGroup;
+			children = (
+				A4E46BDB2BA74879007140E6 /* DashBoard.swift */,
+				9424EAAD2C10F31900429CDE /* DashBoardViewModel.swift */,
+				94EE5FFD2CA84F8A0029DB96 /* AuctionItemCard.swift */,
+			);
+			path = DashBoard;
+			sourceTree = "<group>";
+		};
+		94EE5FF72CA84C210029DB96 /* Sales */ = {
+			isa = PBXGroup;
+			children = (
+				94EE5FF22C79E9C80029DB96 /* MySalesView.swift */,
+				94EE60042CA8623E0029DB96 /* SellingItemsView.swift */,
+			);
+			path = Sales;
+			sourceTree = "<group>";
+		};
+		94EE5FF82CA84C3A0029DB96 /* Auctions */ = {
+			isa = PBXGroup;
+			children = (
+				942E68A92BE9D493007D0046 /* MyAuctionsView.swift */,
+				94EE60022CA862150029DB96 /* BuyingItemsView.swift */,
+				942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */,
+				942E68AB2BE9D7C0007D0046 /* AuctionDetailView.swift */,
+				A4F956CA2BA60E8200F013ED /* AuctionModel.swift */,
+				942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */,
+			);
+			path = Auctions;
+			sourceTree = "<group>";
+		};
+		94EE5FF92CA84CAD0029DB96 /* Login+Registration */ = {
+			isa = PBXGroup;
+			children = (
+				944D6F442B13B3A3008C97F2 /* LoginView.swift */,
+				944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */,
+				944E16152C35982E00C8E4E8 /* RegisterView.swift */,
+				944E16172C3599E000C8E4E8 /* RegisterVM.swift */,
+			);
+			path = "Login+Registration";
+			sourceTree = "<group>";
+		};
+		94EE5FFA2CA84CCA0029DB96 /* RemoteData */ = {
+			isa = PBXGroup;
+			children = (
+				A4A873862C10FBE700691606 /* RemoteAuctionItem.swift */,
+				A4A873882C110AFE00691606 /* RemoteReverseAuction.swift */,
+				A4A8738A2C110CD200691606 /* RemoteFixedTimeAuction.swift */,
+				94EE5FFB2CA84EE60029DB96 /* DataLoader.swift */,
+				94EE5FFF2CA852830029DB96 /* Debug */,
+			);
+			path = RemoteData;
+			sourceTree = "<group>";
+		};
+		94EE5FFF2CA852830029DB96 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				94EE60002CA856250029DB96 /* auction_items.json */,
+				94EE60062CA86DFB0029DB96 /* user.json */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		94EE60082CA86F7E0029DB96 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				94EE60092CA86F940029DB96 /* NotificationPermisson.swift */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,6 +409,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94EE60072CA86DFB0029DB96 /* user.json in Resources */,
+				94EE60012CA856250029DB96 /* auction_items.json in Resources */,
 				944D6F222B13B300008C97F2 /* Preview Assets.xcassets in Resources */,
 				944D6F1F2B13B300008C97F2 /* Assets.xcassets in Resources */,
 			);
@@ -357,33 +439,39 @@
 			files = (
 				A4A873872C10FBE700691606 /* RemoteAuctionItem.swift in Sources */,
 				A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */,
+				94EE60052CA8623F0029DB96 /* SellingItemsView.swift in Sources */,
 				9424EAAC2C0CC16400429CDE /* RemoteUser.swift in Sources */,
 				944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */,
 				942E68B02BE9DED5007D0046 /* AddAuctionView.swift in Sources */,
 				A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */,
 				944E161A2C359AD200C8E4E8 /* LoginRouter.swift in Sources */,
-				942E68AA2BE9D493007D0046 /* VendorDashbordView.swift in Sources */,
+				94EE60032CA862150029DB96 /* BuyingItemsView.swift in Sources */,
+				942E68AA2BE9D493007D0046 /* MyAuctionsView.swift in Sources */,
 				A4914A7F2BA8E1D9000C2532 /* PersonalAreaView.swift in Sources */,
 				A4E46BE02BA75868007140E6 /* ArticlePreview.swift in Sources */,
-				9424EAAE2C10F31900429CDE /* ArticleViewModel.swift in Sources */,
-				A4F956C92BA60CBE00F013ED /* BuyerModel.swift in Sources */,
+				94EE5FF52C7D13BD0029DB96 /* FilterView.swift in Sources */,
+				9424EAAE2C10F31900429CDE /* DashBoardViewModel.swift in Sources */,
 				9406E4F02C3560B600B8DB77 /* VendorRouter.swift in Sources */,
 				A4A8738B2C110CD200691606 /* RemoteFixedTimeAuction.swift in Sources */,
-				A4E46BDC2BA74879007140E6 /* BuyerDashboardView.swift in Sources */,
+				A4E46BDC2BA74879007140E6 /* DashBoard.swift in Sources */,
 				A43BB4312BB0A95A00A650D0 /* ConfirmAuctionView.swift in Sources */,
 				A4A873892C110AFE00691606 /* RemoteReverseAuction.swift in Sources */,
 				944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */,
+				94EE5FF32C79E9C80029DB96 /* MySalesView.swift in Sources */,
 				A4B50B4F2BAF46C200968455 /* FixedTimeAuctionView.swift in Sources */,
 				947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */,
 				942E68AE2BE9D9D5007D0046 /* AuctionItemModel.swift in Sources */,
+				94EE5FFE2CA84F8A0029DB96 /* AuctionItemCard.swift in Sources */,
+				94EE5FFC2CA84EE60029DB96 /* DataLoader.swift in Sources */,
 				944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */,
+				94EE600A2CA86F940029DB96 /* NotificationPermisson.swift in Sources */,
 				944E16162C35982E00C8E4E8 /* RegisterView.swift in Sources */,
 				944E16182C3599E000C8E4E8 /* RegisterVM.swift in Sources */,
 				947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */,
 				A4B50B4D2BAF357500968455 /* ReverseAuctionDetailView.swift in Sources */,
 				9406E4EE2C3560AE00B8DB77 /* RouterProtocol.swift in Sources */,
 				A4F956CF2BA610E300F013ED /* FixedTimeAuctionModel.swift in Sources */,
-				942E68AC2BE9D7C0007D0046 /* AuctionView.swift in Sources */,
+				942E68AC2BE9D7C0007D0046 /* AuctionDetailView.swift in Sources */,
 				A47DF6DB2BA24767000AFD15 /* User.swift in Sources */,
 				944D6F1B2B13B2FD008C97F2 /* DietiDeals24App.swift in Sources */,
 				94C4E4DA2C35534100DD4ABC /* Offer+Payment.swift in Sources */,

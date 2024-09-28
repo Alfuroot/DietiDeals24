@@ -9,6 +9,9 @@ import SwiftUI
 
 @main
 struct DietiDeals24App: App {
+    init() {
+            requestNotificationPermission()
+        }
     var body: some Scene {
         WindowGroup {
             ContentView()
