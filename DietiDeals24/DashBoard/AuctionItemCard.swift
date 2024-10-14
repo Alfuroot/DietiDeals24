@@ -10,7 +10,7 @@ struct AuctionItemCard: View {
     var auctionItem: AuctionItem
 
     var body: some View {
-        NavigationLink(destination: AuctionDetailView(auctionItem: auctionItem)) {
+        NavigationLink(destination: AuctionDetailView(viewModel: AuctionDetailViewModel(auctionItem: auctionItem))) {
             HStack {
                 if let imageUrl = auctionItem.imageUrl, let url = URL(string: imageUrl) {
                     AsyncImage(url: url) { image in
@@ -21,7 +21,7 @@ struct AuctionItemCard: View {
                             .background(Color.gray.opacity(0.3))
                             .cornerRadius(8)
                     } placeholder: {
-                        ProgressView() // Display a progress indicator while loading
+                        ProgressView()
                             .frame(width: 50, height: 50)
                     }
                 } else {
@@ -33,11 +33,11 @@ struct AuctionItemCard: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(auctionItem.title ?? "No Title")
+                    Text(auctionItem.title)
                         .font(.headline)
                         .lineLimit(1)
                     
-                    Text(auctionItem.description ?? "No Description")
+                    Text(auctionItem.description)
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .lineLimit(2)
@@ -61,13 +61,13 @@ struct AuctionItemCard: View {
             .shadow(radius: 3)
             .padding(.horizontal)
         }
-        .buttonStyle(PlainButtonStyle()) // Removes the default button styling
+        .buttonStyle(PlainButtonStyle())
     }
 }
 
 // Preview provider
 struct AuctionItemCard_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionItemCard(auctionItem: AuctionItem(id: "1", title: "Sample Item", description: "A description of the auction item.", imageUrl: "https://example.com/sample.jpg", currentBid: "$100", bidEndDate: "2024-10-01T12:00:00Z"))
+        AuctionItemCard(auctionItem: AuctionItem(id: "1", title: "Sample Item", description: "A description of the auction item.", imageUrl: "https://example.com/sample.jpg", currentBid: "$100", bidEndDate: "2024-10-01T12:00:00Z", auctionType: .classic))
     }
 }

@@ -1,119 +1,130 @@
 import SwiftUI
 
 struct AddAuctionView: View {
-    @State private var auctionTitle: String = ""
-    @State private var auctionDescription: String = ""
-    @State private var auctionType: AuctionType = .classic
-    @State private var auctionImageURL: String = ""
-    @State private var auctionCurrentBid: String = ""
+    @StateObject private var viewModel = AddAuctionViewModel()
     
-    @State private var buyoutPrice: String = ""
-    @State private var decrementAmount: String = ""
-    @State private var decrementInterval: String = ""
-    @State private var floorPrice: String = ""
-
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Auction Details")) {
-                    TextField("Title", text: $auctionTitle)
-                    TextField("Description", text: $auctionDescription)
-                    TextField("Image URL", text: $auctionImageURL)
-                    TextField("Current Bid", text: $auctionCurrentBid)
-                        .keyboardType(.decimalPad)
+                Section {
+                    HStack {
+                        Text("Nome:")
+                            .bold()
+                        Spacer()
+                        TextField("Inserisci il nome", text: $viewModel.auctionTitle)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .frame(width: 200)
+                    }
                 }
-
-                Section(header: Text("Auction Type")) {
-                    Picker("Auction Type", selection: $auctionType) {
+                
+                Section {
+                    HStack {
+                        Text("Categoria:")
+                            .bold()
+                        Spacer()
+                        Picker("", selection: $viewModel.auctionItemType) {
+                            ForEach(AuctionItemType.allCases, id: \.self) { itemType in
+                                Text(itemType.rawValue.capitalized).tag(itemType)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                        .frame(width: 200)
+                    }
+                }
+                
+                Section {
+                    HStack {
+                        Text("Informazioni:")
+                            .bold()
+                        Spacer()
+                        TextField("Aggiungi ulteriori dettagli", text: $viewModel.auctionDescription)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .frame(width: 200)
+                    }
+                }
+                
+                Section(header: Text("Tipo di Asta")) {
+                    Picker("Tipo di Asta", selection: $viewModel.auctionType) {
                         ForEach(AuctionType.allCases, id: \.self) { type in
                             Text(type.rawValue.capitalized).tag(type)
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
                 }
-
-                if auctionType == .reverse {
-                    Section(header: Text("Reverse Auction Details")) {
-                        TextField("Buyout Price", text: $buyoutPrice)
-                            .keyboardType(.decimalPad)
-                        TextField("Decrement Amount", text: $decrementAmount)
-                            .keyboardType(.decimalPad)
-                        TextField("Decrement Interval (minutes)", text: $decrementInterval)
-                            .keyboardType(.decimalPad)
-                        TextField("Floor Price", text: $floorPrice)
-                            .keyboardType(.decimalPad)
+                
+                if viewModel.auctionType == .reverse {
+                    Section(header: Text("Dettagli Asta Inversa")) {
+                        HStack {
+                            Text("Prezzo Iniziale:")
+                                .bold()
+                            Spacer()
+                            TextField("€ 0,0", text: $viewModel.buyoutPrice)
+                                .keyboardType(.decimalPad)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 200)
+                        }
+                        HStack {
+                            Text("Decremento:")
+                                .bold()
+                            Spacer()
+                            TextField("€ 0,0", text: $viewModel.decrementAmount)
+                                .keyboardType(.decimalPad)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 200)
+                        }
+                        HStack {
+                            Text("Timer (minuti):")
+                                .bold()
+                            Spacer()
+                            TextField("minuti", text: $viewModel.decrementInterval)
+                                .keyboardType(.decimalPad)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 200)
+                        }
+                        HStack {
+                            Text("Prezzo minimo:")
+                                .bold()
+                            Spacer()
+                            TextField("€ 0,0", text: $viewModel.floorPrice)
+                                .keyboardType(.decimalPad)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 200)
+                        }
+                    }
+                } else {
+                    Section {
+                        HStack {
+                            Text("Prezzo min:")
+                                .bold()
+                            Spacer()
+                            TextField("€ 0,0", text: $viewModel.auctionMinPrice)
+                                .keyboardType(.decimalPad)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 200)
+                        }
+                    }
+                    
+                    Section {
+                        HStack {
+                            Text("Scadenza:")
+                                .bold()
+                            Spacer()
+                            DatePicker("", selection: $viewModel.auctionEndDate, in: Date.now..., displayedComponents: .date)
+                                .datePickerStyle(CompactDatePickerStyle())
+                                .frame(width: 200)
+                        }
                     }
                 }
-
-                Button("Add Auction") {
-                    addAuction()
-                }
-            }
-            .navigationTitle("Add Auction")
-        }
-    }
-
-    private func addAuction() {
-        guard let currentBidValue = Float(auctionCurrentBid),
-              let buyoutPriceValue = auctionType == .reverse ? Float(buyoutPrice) : nil,
-              let decrementAmountValue = auctionType == .reverse ? Float(decrementAmount) : nil,
-              let decrementIntervalValue = auctionType == .reverse ? TimeInterval(decrementInterval) : nil,
-              let floorPriceValue = auctionType == .reverse ? Float(floorPrice) : nil else {
-            print("Invalid input values.")
-            return
-        }
-
-        let auction: Auction
-        
-        if auctionType == .reverse {
-            auction = Auction(id: UUID().uuidString,
-                              title: auctionTitle,
-                              description: auctionDescription,
-                              initialPrice: buyoutPriceValue,
-                              currentPrice: buyoutPriceValue,
-                              startDate: Date(),
-                              endDate: Date().addingTimeInterval(3600), // Example: 1 hour from now
-                              auctionType: auctionType,
-                              buyoutPrice: buyoutPriceValue,
-                              decrementAmount: decrementAmountValue,
-                              decrementInterval: decrementIntervalValue * 60, // Convert minutes to seconds
-                              floorPrice: floorPriceValue)
-        } else {
-            auction = Auction(id: UUID().uuidString,
-                              title: auctionTitle,
-                              description: auctionDescription,
-                              initialPrice: currentBidValue,
-                              currentPrice: currentBidValue,
-                              startDate: Date(),
-                              endDate: Date().addingTimeInterval(3600), // Example: 1 hour from now
-                              auctionType: auctionType)
-        }
-
-        do {
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-            
-            let jsonData = try encoder.encode(auction)
-            let jsonString = String(data: jsonData, encoding: .utf8) ?? ""
-            print("Encoded JSON: \(jsonString)")
-            
-            if let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-                let fileURL = documentDirectory.appendingPathComponent("auctions.json")
-
-                if FileManager.default.fileExists(atPath: fileURL.path) {
-                    var existingData = try Data(contentsOf: fileURL)
-                    existingData.append(",\n".data(using: .utf8)!)
-                    existingData.append(jsonData)
-                    try existingData.write(to: fileURL)
-                } else {
-                    let jsonArray = "[\n" + jsonString + "\n]"
-                    try jsonArray.write(to: fileURL, atomically: true, encoding: .utf8)
-                }
                 
-                print("Auction added to JSON file successfully!")
+                Button(action: {
+                    viewModel.addAuction()
+                }) {
+                    Text("Aggiungi l'asta")
+                        .bold()
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
             }
-        } catch {
-            print("Error encoding auction: \(error.localizedDescription)")
+            .navigationTitle("Aggiungi Asta")
         }
     }
 }

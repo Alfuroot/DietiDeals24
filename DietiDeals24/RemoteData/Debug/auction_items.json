@@ -4,165 +4,179 @@
         "title": "Apple iPhone 15 (128GB)",
         "description": "Brand new Apple iPhone 15 with 128GB storage, never opened.",
         "imageUrl": "https://source.unsplash.com/300x300/?iphone,smartphone",
-        "currentBid": "700,00€",
-        "userBid": "650,00€",
+        "currentBid": "700.00",
+        "userBid": "650.00",
         "auctionStatus": "Outbid",
         "bidEndDate": "2024-11-25T20:30:00Z",
-        "isSeller": false
+        "isSeller": false,
+        "category": "Tecnologia"
     },
     {
         "id": "2",
         "title": "Samsung Galaxy S23",
         "description": "New Samsung Galaxy S23, 128GB, Phantom Black, latest model.",
         "imageUrl": "https://source.unsplash.com/300x300/?samsung,smartphone",
-        "currentBid": "500,00€",
+        "currentBid": "500.00",
         "userBid": null,
         "auctionStatus": "Active",
         "bidEndDate": "2024-09-30T15:45:00Z",
-        "isSeller": true
+        "isSeller": true,
+        "category": "Tecnologia"
     },
     {
         "id": "3",
         "title": "PlayStation 5 Console",
         "description": "PlayStation 5 Disc Edition, excellent condition, includes extra controller.",
         "imageUrl": "https://source.unsplash.com/300x300/?playstation,console",
-        "currentBid": "300,00€",
-        "userBid": "280,00€",
+        "currentBid": "300.00",
+        "userBid": "280.00",
         "auctionStatus": "Leading",
         "bidEndDate": "2024-10-05T18:00:00Z",
-        "isSeller": false
+        "isSeller": false,
+        "category": "Tecnologia"
     },
     {
         "id": "4",
         "title": "MacBook Air (M2, 256GB SSD)",
         "description": "Apple MacBook Air with M2 chip, space gray, 256GB SSD, barely used.",
         "imageUrl": "https://source.unsplash.com/300x300/?macbook,laptop",
-        "currentBid": "1.200,00€",
+        "currentBid": "1200.00",
         "userBid": null,
         "auctionStatus": "Active",
         "bidEndDate": "2024-11-15T21:15:00Z",
-        "isSeller": true
+        "isSeller": true,
+        "category": "Tecnologia"
     },
     {
         "id": "5",
         "title": "Canon EOS R5 Camera",
         "description": "Canon EOS R5 45MP Full-Frame Mirrorless Camera, in excellent condition.",
         "imageUrl": "https://source.unsplash.com/300x300/?camera,photography",
-        "currentBid": "2.500,00€",
-        "userBid": "2.450,00€",
+        "currentBid": "2500.00",
+        "userBid": "2450.00",
         "auctionStatus": "Leading",
         "bidEndDate": "2024-10-10T17:00:00Z",
-        "isSeller": false
+        "isSeller": false,
+        "category": "Tecnologia"
     },
     {
         "id": "6",
         "title": "Apple Watch Series 9 (GPS, 45mm)",
         "description": "Brand new Apple Watch Series 9, GPS model, 45mm case size, includes warranty.",
         "imageUrl": "https://source.unsplash.com/300x300/?applewatch,watch",
-        "currentBid": "450,00€",
+        "currentBid": "450.00",
         "userBid": null,
         "auctionStatus": "Active",
         "bidEndDate": "2024-10-20T12:00:00Z",
-        "isSeller": true
+        "isSeller": true,
+        "category": "Tecnologia"
     },
     {
         "id": "7",
         "title": "Dell XPS 13 (2023)",
         "description": "Latest Dell XPS 13 laptop, 512GB SSD, 16GB RAM, Platinum Silver, great for students.",
         "imageUrl": "https://source.unsplash.com/300x300/?dell,laptop",
-        "currentBid": "1.100,00€",
-        "userBid": "1.050,00€",
+        "currentBid": "1100.00",
+        "userBid": "1050.00",
         "auctionStatus": "Outbid",
         "bidEndDate": "2024-10-15T20:45:00Z",
-        "isSeller": false
+        "isSeller": false,
+        "category": "Tecnologia"
     },
     {
         "id": "8",
         "title": "Nintendo Switch OLED",
         "description": "Nintendo Switch OLED model with white Joy-Cons, in excellent condition.",
         "imageUrl": "https://source.unsplash.com/300x300/?nintendo,switch",
-        "currentBid": "250,00€",
-        "userBid": "230,00€",
+        "currentBid": "250.00",
+        "userBid": "230.00",
         "auctionStatus": "Outbid",
         "bidEndDate": "2024-09-29T14:30:00Z",
-        "isSeller": false
+        "isSeller": false,
+        "category": "Tecnologia"
     },
     {
         "id": "9",
         "title": "LG 65-Inch OLED TV",
         "description": "LG C1 Series 65-Inch OLED TV, perfect for gaming and movies, like new.",
         "imageUrl": "https://source.unsplash.com/300x300/?tv,oled",
-        "currentBid": "1.400,00€",
+        "currentBid": "1400.00",
         "userBid": null,
         "auctionStatus": "Active",
         "bidEndDate": "2024-12-01T19:30:00Z",
-        "isSeller": true
+        "isSeller": true,
+        "category": "Casa"
     },
     {
         "id": "10",
         "title": "Bose QuietComfort 45 Headphones",
         "description": "Bose QuietComfort 45 Noise Cancelling Wireless Headphones, Black, excellent sound quality.",
         "imageUrl": "https://source.unsplash.com/300x300/?headphones,audio",
-        "currentBid": "200,00€",
-        "userBid": "190,00€",
+        "currentBid": "200.00",
+        "userBid": "190.00",
         "auctionStatus": "Leading",
         "bidEndDate": "2024-10-05T22:00:00Z",
-        "isSeller": false
+        "isSeller": false,
+        "category": "Tecnologia"
     },
     {
         "id": "11",
         "title": "GoPro HERO10 Camera",
         "description": "GoPro HERO10 Black, waterproof, perfect for adventure seekers.",
         "imageUrl": "https://source.unsplash.com/300x300/?gopro,actioncamera",
-        "currentBid": "350,00€",
+        "currentBid": "350.00",
         "userBid": null,
         "auctionStatus": "Active",
         "bidEndDate": "2024-11-10T09:00:00Z",
-        "isSeller": true
+        "isSeller": true,
+        "category": "Tecnologia"
     },
     {
         "id": "12",
         "title": "Sony WH-1000XM5 Headphones",
         "description": "Sony WH-1000XM5 Noise Cancelling Headphones, industry-leading sound quality.",
         "imageUrl": "https://source.unsplash.com/300x300/?sony,audio",
-        "currentBid": "300,00€",
-        "userBid": "290,00€",
+        "currentBid": "300.00",
+        "userBid": "290.00",
         "auctionStatus": "Outbid",
         "bidEndDate": "2024-10-30T16:00:00Z",
-        "isSeller": false
+        "isSeller": false,
+        "category": "Tecnologia"
     },
     {
         "id": "13",
         "title": "ASUS ROG Zephyrus G14",
         "description": "Powerful ASUS gaming laptop, Ryzen 9, RTX 3060, 32GB RAM, excellent for gaming.",
         "imageUrl": "https://source.unsplash.com/300x300/?gaminglaptop,asus",
-        "currentBid": "1.800,00€",
+        "currentBid": "1800.00",
         "userBid": null,
         "auctionStatus": "Active",
         "bidEndDate": "2024-11-22T20:00:00Z",
-        "isSeller": true
+        "isSeller": true,
+        "category": "Tecnologia"
     },
     {
         "id": "14",
         "title": "Fujifilm X-T4 Camera",
         "description": "Fujifilm X-T4, 26MP mirrorless camera, in pristine condition.",
         "imageUrl": "https://source.unsplash.com/300x300/?fujifilm,camera",
-        "currentBid": "1.200,00€",
-        "userBid": "1.150,00€",
+        "currentBid": "1200.00",
+        "userBid": "1150.00",
         "auctionStatus": "Leading",
         "bidEndDate": "2024-10-12T18:30:00Z",
-        "isSeller": false
+        "isSeller": false,
+        "category": "Tecnologia"
     },
     {
         "id": "15",
         "title": "HP Spectre x360 (2023)",
         "description": "HP Spectre x360 convertible laptop, 512GB SSD, 16GB RAM, great for productivity.",
         "imageUrl": "https://source.unsplash.com/300x300/?hplaptop,laptop",
-        "currentBid": "1.200,00€",
+        "currentBid": "1200.00",
         "userBid": null,
         "auctionStatus": "Active",
         "bidEndDate": "2024-11-30T11:00:00Z",
-        "isSeller": true
+        "isSeller": true,
+        "category": "Tecnologia"
     }
 ]
-

@@ -1,22 +1,19 @@
 import SwiftUI
 
 struct DashBoard: View {
-    @StateObject private var dataLoader = DataLoader()
-    @State private var searchText: String = ""
+    @StateObject private var viewModel = DashBoardViewModel()
+    
+    @State private var isFiltersPresented: Bool = false
 
     var body: some View {
         NavigationView {
             ScrollView {
-                let filteredItems = dataLoader.allItems.filter { item in
-                    searchText.isEmpty || (item.title.localizedCaseInsensitiveContains(searchText) || item.description.localizedCaseInsensitiveContains(searchText))
-                }
-
-                if filteredItems.isEmpty {
+                if viewModel.filteredItems.isEmpty {
                     Text("No items available")
                         .foregroundColor(.gray)
                 } else {
                     VStack(spacing: 20) {
-                        ForEach(filteredItems) { item in
+                        ForEach(viewModel.filteredItems) { item in
                             AuctionItemCard(auctionItem: item)
                         }
                     }
@@ -24,7 +21,20 @@ struct DashBoard: View {
                 }
             }
             .navigationTitle("HOME")
-            .searchable(text: $searchText, prompt: "Search items")
+            .searchable(text: $viewModel.search, prompt: "Search items")
+            .toolbar {
+                Button(action: {
+                    isFiltersPresented.toggle()
+                }) {
+                    Text("Filters")
+                }
+            }
+            .sheet(isPresented: $isFiltersPresented) {
+                FilterView(selectedCategories: $viewModel.selectedCategories)
+            }
+        }
+        .onAppear {
+            viewModel.fetchAuctionItems()
         }
     }
 }

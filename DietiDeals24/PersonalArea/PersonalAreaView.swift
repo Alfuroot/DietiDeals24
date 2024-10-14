@@ -92,7 +92,7 @@ struct PersonalAreaView: View {
                     }
                     
                     Button(action: {
-                        user.notificationsEnabled.toggle() // Toggle the notificationsEnabled property
+                        user.notificationsEnabled.toggle()
                     }) {
                         Text("Notifiche: \(user.notificationsEnabled ? "Abilitate" : "Disabilitate")")
                     }

@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct MyAuctionsView: View {
-    @StateObject private var dataLoader = DataLoader() // A data loader to fetch auctions
-    
+    @StateObject private var viewModel = MyAuctionsViewModel()
+
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    ForEach(dataLoader.buyingItems) { auctionItem in
-                        BuyingItemView(auctionItem: auctionItem)
+                    if viewModel.isLoading {
+                        ProgressView("Loading...")
+                    } else if let error = viewModel.error {
+                        Text("Error: \(error)")
+                            .foregroundColor(.red)
+                    } else {
+                        ForEach(viewModel.sortedBuyingItems) { auctionItem in
+                            BuyingItemView(viewModel: BuyingItemViewModel(auctionItem: auctionItem))
+                        }
                     }
                 }
                 .padding()
@@ -23,4 +30,8 @@ struct MyAuctionsView: View {
             .navigationTitle("My Purchases")
         }
     }
+}
+
+#Preview {
+    MyAuctionsView()
 }

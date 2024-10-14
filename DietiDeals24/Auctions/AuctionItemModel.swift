@@ -14,31 +14,31 @@ class AuctionItem: Codable, Identifiable {
     var imageUrl: String?
     var currentBid: String?
     var bidEndDate: String?
-    
-    // For the buying section
-    var userBid: String? // The bid you placed on the item
-    var auctionStatus: String? // Leading, Outbid, Won, etc.
-    
-    // New flag for ownership
-    var isSeller: Bool // true if the user is the seller, false if bidding
-    
-    init(id: String = UUID().uuidString, title: String, description: String, imageUrl: String?, currentBid: String, bidEndDate: String?, userBid: String? = nil, auctionStatus: String? = nil, isSeller: Bool = false) {
-        self.id = id
-        self.title = title
-        self.description = description
-        self.imageUrl = imageUrl
-        self.currentBid = currentBid
-        self.bidEndDate = bidEndDate
-        self.userBid = userBid
-        self.auctionStatus = auctionStatus
-        self.isSeller = isSeller
-    }
+    var category: AuctionItemType?
+    var auctionType: AuctionType?
 
-    // Optional: Helper function to convert bidEndDate to Date
+    var userBid: String?
+    var auctionStatus: String?
+    
+    var isSeller: Bool
+    
+    init(id: String = UUID().uuidString, title: String, description: String, imageUrl: String?, currentBid: String, bidEndDate: String?, auctionType: AuctionType?, userBid: String? = nil, auctionStatus: String? = nil, isSeller: Bool = false) {
+           self.id = id
+           self.title = title
+           self.description = description
+           self.imageUrl = imageUrl
+           self.currentBid = currentBid
+           self.bidEndDate = bidEndDate
+           self.auctionType = auctionType
+           self.userBid = userBid
+           self.auctionStatus = auctionStatus
+           self.isSeller = isSeller
+       }
+
     func formattedEndDate() -> String {
         guard let bidEndDate = bidEndDate else { return "No end date" }
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ" // Expected format of your bid end date
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         if let date = dateFormatter.date(from: bidEndDate) {
             let displayFormatter = DateFormatter()
             displayFormatter.dateStyle = .medium

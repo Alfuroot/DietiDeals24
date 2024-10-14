@@ -1,21 +1,36 @@
 import Foundation
 
-// Enum to define the status of an auction
 enum AuctionStatus: String, Codable {
     case active
     case ended
-    case cancelled
+    case failed
 }
 
-// Enum to define the type of auction
 enum AuctionType: String, CaseIterable, Codable {
     case classic
     case reverse
 }
 
-// Auction Model to represent an auction
+enum AuctionItemType: String, CaseIterable, Codable, Hashable, Comparable {
+    case tecnologia = "Tecnologia"
+    case casa = "Casa"
+    case moda = "Moda"
+    case auto = "Automobili"
+    case moto = "Moto"
+    case libri = "Libri"
+    case giochi = "Giochi"
+    case videogiochi = "Videogiochi"
+    case altri = "Altri"
+
+    static func < (lhs: AuctionItemType, rhs: AuctionItemType) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+    var displayName: String {
+        return self.rawValue
+    }
+}
+
 class Auction: Codable {
-    
     var id: String
     var title: String
     var description: String
@@ -26,10 +41,11 @@ class Auction: Codable {
     var status: AuctionStatus
     var bids: [Bid]
     var auctionType: AuctionType
-    var buyoutPrice: Float? // Applicable for reverse auctions
-    var decrementAmount: Float? // Amount it decreases by in reverse auctions
-    var decrementInterval: TimeInterval? // Interval in seconds for decrement in reverse auctions
-    var floorPrice: Float? // The minimum price for reverse auctions
+    var auctionItemType: AuctionItemType
+    var buyoutPrice: Float?
+    var decrementAmount: Float?
+    var decrementInterval: TimeInterval?
+    var floorPrice: Float?
     
     init(id: String,
          title: String,
@@ -41,6 +57,7 @@ class Auction: Codable {
          status: AuctionStatus = .active,
          bids: [Bid] = [],
          auctionType: AuctionType,
+         auctionItemType: AuctionItemType,
          buyoutPrice: Float? = nil,
          decrementAmount: Float? = nil,
          decrementInterval: TimeInterval? = nil,
@@ -56,6 +73,7 @@ class Auction: Codable {
         self.status = status
         self.bids = bids
         self.auctionType = auctionType
+        self.auctionItemType = auctionItemType
         self.buyoutPrice = buyoutPrice
         self.decrementAmount = decrementAmount
         self.decrementInterval = decrementInterval
@@ -87,7 +105,6 @@ class Auction: Codable {
     }
 }
 
-// Bid Model to represent a bid placed on an auction
 class Bid: Codable {
     
     var bidderID: String

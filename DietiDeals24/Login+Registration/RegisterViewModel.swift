@@ -2,50 +2,57 @@ import Foundation
 import FirebaseAuth
 import Combine
 
-class LoginViewModel: ObservableObject {
+class RegisterViewModel: ObservableObject {
+    @Published var isVendor: Bool = false
+    @Published var isBuyer: Bool = false
     @Published var username: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var passwordConfirm: String = ""
     @Published var showRegistrationErrorAlert: Bool = false
-    @Published var loginError: String? = nil
-    @Published var isUserLoggedIn: Bool = false
+    @Published var registrationError: String? = nil
+    @Published var isUserRegistered: Bool = false
     
-    var isLoginDisabled: Bool {
-        return email.isEmpty || password.isEmpty
+    var isRegistrationDisabled: Bool {
+        return username.isEmpty || email.isEmpty || password.isEmpty || passwordConfirm.isEmpty
     }
-    
+
     var isRegistrationValid: Bool {
         return !username.isEmpty && !email.isEmpty && !password.isEmpty && passwordConfirm == password
     }
-    
-    func login() {
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
-            if let error = error {
-                self?.loginError = error.localizedDescription
-                print("Login error: \(self?.loginError ?? "Unknown error")")
-                return
-            }
-            
-            self?.isUserLoggedIn = true
-            print("User signed in: \(String(describing: result?.user.email))")
-        }
+
+    func toggleBuyer() {
+        isVendor = false
+        isBuyer.toggle()
     }
-    
+
+    func toggleVendor() {
+        isBuyer = false
+        isVendor.toggle()
+    }
+
     func registerUser() {
         guard isRegistrationValid else {
             showRegistrationErrorAlert = true
+            registrationError = "Please fill all fields correctly."
             return
         }
 
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
             if let error = error {
-                self?.loginError = error.localizedDescription
+                self?.registrationError = error.localizedDescription
                 self?.showRegistrationErrorAlert = true
                 return
             }
             
+            self?.isUserRegistered = true
             print("User registered: \(String(describing: result?.user.email))")
+            self?.saveUserDetails()
         }
+    }
+
+    private func saveUserDetails() {
+        
+        print("Saving user details for \(username) with email \(email)")
     }
 }

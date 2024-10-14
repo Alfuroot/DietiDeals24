@@ -16,7 +16,7 @@ class User: Codable {
     var instagramLink: String?
     var linkedinLink: String?
     var cart: [Offer] = []
-    var notificationsEnabled: Bool // Add this property to track notifications status
+    var notificationsEnabled: Bool
     
     private init() {
         self.id = ""

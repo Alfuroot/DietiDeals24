@@ -1,22 +1,21 @@
-//
-//  MySalesView.swift
-//  DietiDeals24
-//
-//  Created by Giuseppe Carannante on 24/08/2024.
-//
-
 import SwiftUI
 
 struct MySalesView: View {
-    @StateObject private var dataLoader = DataLoader() // A data loader to fetch items being sold
-    @State private var showAddAuctionView: Bool = false // State to control showing Add Auction view
+    @StateObject private var viewModel = MySalesViewModel()
+    @State private var showAddAuctionView: Bool = false
+    @State private var showModal: Bool = false
     
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    ForEach(dataLoader.sellingItems) { auctionItem in
-                        SellingItemView(auctionItem: auctionItem)
+                    if viewModel.sellingItems.isEmpty {
+                        Text("No items available")
+                            .foregroundColor(.gray)
+                    } else {
+                        ForEach(viewModel.sellingItems) { auctionItem in
+                            SellingItemView(auctionItem: auctionItem)
+                        }
                     }
                 }
                 .padding()
@@ -25,23 +24,35 @@ struct MySalesView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        showAddAuctionView.toggle() // Show Add Auction view
+                        showAddAuctionView.toggle()
                     }) {
-                        Image(systemName: "plus") // Plus icon for adding auctions
+                        Image(systemName: "plus")
                     }
                 }
             }
             .sheet(isPresented: $showAddAuctionView) {
-                AddAuctionView() // Present the view to add a new auction
+                AddAuctionView()
             }
         }
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(
+                title: Text("Attenzione"),
+                message: Text("Aggiungi l’IBAN al tuo account per accedere a questa sezione"),
+                dismissButton: .default(Text("Aggiungi IBAN"), action: {
+                    showModal = true
+                })
+            )
+        }
+        .sheet(isPresented: $showModal) {
+            IBANModalView()
+        }
         .onAppear {
-            dataLoader.loadSellingItems() // Load the selling items when the view appears
+            viewModel.checkIBAN()
+            viewModel.loadSellingItems()
         }
     }
 }
 
-// Preview provider
 struct MySalesView_Previews: PreviewProvider {
     static var previews: some View {
         MySalesView()

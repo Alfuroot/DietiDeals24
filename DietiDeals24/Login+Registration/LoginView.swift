@@ -43,14 +43,24 @@ struct LoginView: View {
                         HStack {
                             Spacer()
                             VStack() {
-                                
-                                NavigationLink(destination: {
-                                    
-                                }, label: {
+                                Button(action: {
+                                    viewModel.login()
+                                }) {
                                     Text("Login")
-                                })
+                                        .padding()
+                                        .background(viewModel.isLoginDisabled ? Color.gray : Color.blue)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(10)
+                                }
+                                .disabled(viewModel.isLoginDisabled)
                                 .padding(.bottom)
-                                .disabled(!viewModel.isLoginDisabled)
+                                
+                                if let errorMessage = viewModel.loginError {
+                                    Text(errorMessage)
+                                        .foregroundColor(.red)
+                                        .padding(.top, 8)
+                                }
+                                
                                 Text("Don't have an account?")
                                 Button( action: {
                                     router.navigate(to: .register)

@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct DietiDeals24App: App {
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+
     init() {
             requestNotificationPermission()
+            FirebaseApp.configure()
         }
     var body: some Scene {
         WindowGroup {

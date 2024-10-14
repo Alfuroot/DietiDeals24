@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		9406E4EE2C3560AE00B8DB77 /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9406E4ED2C3560AE00B8DB77 /* RouterProtocol.swift */; };
 		9406E4F02C3560B600B8DB77 /* VendorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9406E4EF2C3560B600B8DB77 /* VendorRouter.swift */; };
+		941E7EE52CBD98BE00F260FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E7EE42CBD98BE00F260FC /* AppDelegate.swift */; };
+		941E7EE72CBD9A7000F260FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 941E7EE62CBD9A7000F260FC /* GoogleService-Info.plist */; };
+		941E7EE92CBDA62600F260FC /* MySalesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E7EE82CBDA62600F260FC /* MySalesViewModel.swift */; };
+		941E7EEB2CBDA6A800F260FC /* IBANViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E7EEA2CBDA6A800F260FC /* IBANViewModel.swift */; };
+		941E7EED2CBDA82500F260FC /* MyAuctionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E7EEC2CBDA82500F260FC /* MyAuctionsViewModel.swift */; };
+		941E7EEF2CBDA86300F260FC /* BuyingItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E7EEE2CBDA86300F260FC /* BuyingItemsViewModel.swift */; };
+		941E7EF12CBDA8AD00F260FC /* AddAuctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E7EF02CBDA8AD00F260FC /* AddAuctionViewModel.swift */; };
+		941E7EF32CBDAAA900F260FC /* AuctionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E7EF22CBDAAA900F260FC /* AuctionDetailViewModel.swift */; };
+		941E7EF52CBDAB2D00F260FC /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E7EF42CBDAB2D00F260FC /* AlertMessage.swift */; };
 		9424EAAC2C0CC16400429CDE /* RemoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAB2C0CC16400429CDE /* RemoteUser.swift */; };
 		9424EAAE2C10F31900429CDE /* DashBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAD2C10F31900429CDE /* DashBoardViewModel.swift */; };
 		942E68AA2BE9D493007D0046 /* MyAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68A92BE9D493007D0046 /* MyAuctionsView.swift */; };
@@ -25,10 +34,8 @@
 		944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F442B13B3A3008C97F2 /* LoginView.swift */; };
 		944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */; };
 		944E16162C35982E00C8E4E8 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E16152C35982E00C8E4E8 /* RegisterView.swift */; };
-		944E16182C3599E000C8E4E8 /* RegisterVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E16172C3599E000C8E4E8 /* RegisterVM.swift */; };
+		944E16182C3599E000C8E4E8 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E16172C3599E000C8E4E8 /* RegisterViewModel.swift */; };
 		944E161A2C359AD200C8E4E8 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944E16192C359AD200C8E4E8 /* LoginRouter.swift */; };
-		947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6772BA6123D003F9015 /* VendorModel.swift */; };
-		947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */; };
 		94C4E4DA2C35534100DD4ABC /* Offer+Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */; };
 		94EE5FF32C79E9C80029DB96 /* MySalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE5FF22C79E9C80029DB96 /* MySalesView.swift */; };
 		94EE5FF52C7D13BD0029DB96 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE5FF42C7D13BD0029DB96 /* FilterView.swift */; };
@@ -39,19 +46,21 @@
 		94EE60052CA8623F0029DB96 /* SellingItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE60042CA8623E0029DB96 /* SellingItemsView.swift */; };
 		94EE60072CA86DFB0029DB96 /* user.json in Resources */ = {isa = PBXBuildFile; fileRef = 94EE60062CA86DFB0029DB96 /* user.json */; };
 		94EE600A2CA86F940029DB96 /* NotificationPermisson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE60092CA86F940029DB96 /* NotificationPermisson.swift */; };
-		A43BB4312BB0A95A00A650D0 /* ConfirmAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */; };
+		94EE600C2CB705000029DB96 /* IBANModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE600B2CB705000029DB96 /* IBANModalView.swift */; };
+		94EE60112CBAE0120029DB96 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE60102CBAE0120029DB96 /* Validator.swift */; };
+		94EE60122CBAE03F0029DB96 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EE60102CBAE0120029DB96 /* Validator.swift */; };
+		94EE60152CBAE4380029DB96 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 94EE60142CBAE4380029DB96 /* FirebaseAnalytics */; };
+		94EE60172CBAE4380029DB96 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 94EE60162CBAE4380029DB96 /* FirebaseAuth */; };
+		94EE60192CBAE4380029DB96 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 94EE60182CBAE4380029DB96 /* FirebaseCore */; };
+		94EE601B2CBAE4380029DB96 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 94EE601A2CBAE4380029DB96 /* FirebaseFirestore */; };
 		A47DF6DB2BA24767000AFD15 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47DF6DA2BA24767000AFD15 /* User.swift */; };
 		A4914A7F2BA8E1D9000C2532 /* PersonalAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */; };
 		A4A873872C10FBE700691606 /* RemoteAuctionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A873862C10FBE700691606 /* RemoteAuctionItem.swift */; };
 		A4A873892C110AFE00691606 /* RemoteReverseAuction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A873882C110AFE00691606 /* RemoteReverseAuction.swift */; };
 		A4A8738B2C110CD200691606 /* RemoteFixedTimeAuction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A8738A2C110CD200691606 /* RemoteFixedTimeAuction.swift */; };
-		A4B50B4D2BAF357500968455 /* ReverseAuctionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B50B4C2BAF357500968455 /* ReverseAuctionDetailView.swift */; };
-		A4B50B4F2BAF46C200968455 /* FixedTimeAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4B50B4E2BAF46C200968455 /* FixedTimeAuctionView.swift */; };
 		A4E46BDC2BA74879007140E6 /* DashBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E46BDB2BA74879007140E6 /* DashBoard.swift */; };
-		A4E46BE02BA75868007140E6 /* ArticlePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E46BDF2BA75868007140E6 /* ArticlePreview.swift */; };
 		A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CA2BA60E8200F013ED /* AuctionModel.swift */; };
 		A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */; };
-		A4F956CF2BA610E300F013ED /* FixedTimeAuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CE2BA610E300F013ED /* FixedTimeAuctionModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +83,15 @@
 /* Begin PBXFileReference section */
 		9406E4ED2C3560AE00B8DB77 /* RouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
 		9406E4EF2C3560B600B8DB77 /* VendorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VendorRouter.swift; sourceTree = "<group>"; };
+		941E7EE42CBD98BE00F260FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		941E7EE62CBD9A7000F260FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		941E7EE82CBDA62600F260FC /* MySalesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySalesViewModel.swift; sourceTree = "<group>"; };
+		941E7EEA2CBDA6A800F260FC /* IBANViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBANViewModel.swift; sourceTree = "<group>"; };
+		941E7EEC2CBDA82500F260FC /* MyAuctionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuctionsViewModel.swift; sourceTree = "<group>"; };
+		941E7EEE2CBDA86300F260FC /* BuyingItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyingItemsViewModel.swift; sourceTree = "<group>"; };
+		941E7EF02CBDA8AD00F260FC /* AddAuctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAuctionViewModel.swift; sourceTree = "<group>"; };
+		941E7EF22CBDAAA900F260FC /* AuctionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailViewModel.swift; sourceTree = "<group>"; };
+		941E7EF42CBDAB2D00F260FC /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
 		9424EAAB2C0CC16400429CDE /* RemoteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUser.swift; sourceTree = "<group>"; };
 		9424EAAD2C10F31900429CDE /* DashBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardViewModel.swift; sourceTree = "<group>"; };
 		942E68A92BE9D493007D0046 /* MyAuctionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuctionsView.swift; sourceTree = "<group>"; };
@@ -93,10 +111,8 @@
 		944D6F442B13B3A3008C97F2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		944E16152C35982E00C8E4E8 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		944E16172C3599E000C8E4E8 /* RegisterVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVM.swift; sourceTree = "<group>"; };
+		944E16172C3599E000C8E4E8 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		944E16192C359AD200C8E4E8 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
-		947AD6772BA6123D003F9015 /* VendorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VendorModel.swift; sourceTree = "<group>"; };
-		947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseAuctionModel.swift; sourceTree = "<group>"; };
 		94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Offer+Payment.swift"; sourceTree = "<group>"; };
 		94EE5FF22C79E9C80029DB96 /* MySalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySalesView.swift; sourceTree = "<group>"; };
 		94EE5FF42C7D13BD0029DB96 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
@@ -107,19 +123,17 @@
 		94EE60042CA8623E0029DB96 /* SellingItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellingItemsView.swift; sourceTree = "<group>"; };
 		94EE60062CA86DFB0029DB96 /* user.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = user.json; sourceTree = "<group>"; };
 		94EE60092CA86F940029DB96 /* NotificationPermisson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermisson.swift; sourceTree = "<group>"; };
-		A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAuctionView.swift; sourceTree = "<group>"; };
+		94EE600B2CB705000029DB96 /* IBANModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBANModalView.swift; sourceTree = "<group>"; };
+		94EE600D2CB720310029DB96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		94EE60102CBAE0120029DB96 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		A47DF6DA2BA24767000AFD15 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAreaView.swift; sourceTree = "<group>"; };
 		A4A873862C10FBE700691606 /* RemoteAuctionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuctionItem.swift; sourceTree = "<group>"; };
 		A4A873882C110AFE00691606 /* RemoteReverseAuction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteReverseAuction.swift; sourceTree = "<group>"; };
 		A4A8738A2C110CD200691606 /* RemoteFixedTimeAuction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFixedTimeAuction.swift; sourceTree = "<group>"; };
-		A4B50B4C2BAF357500968455 /* ReverseAuctionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReverseAuctionDetailView.swift; sourceTree = "<group>"; };
-		A4B50B4E2BAF46C200968455 /* FixedTimeAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTimeAuctionView.swift; sourceTree = "<group>"; };
 		A4E46BDB2BA74879007140E6 /* DashBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoard.swift; sourceTree = "<group>"; };
-		A4E46BDF2BA75868007140E6 /* ArticlePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticlePreview.swift; sourceTree = "<group>"; };
 		A4F956CA2BA60E8200F013ED /* AuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionModel.swift; sourceTree = "<group>"; };
 		A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
-		A4F956CE2BA610E300F013ED /* FixedTimeAuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTimeAuctionModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +141,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94EE60152CBAE4380029DB96 /* FirebaseAnalytics in Frameworks */,
+				94EE601B2CBAE4380029DB96 /* FirebaseFirestore in Frameworks */,
+				94EE60192CBAE4380029DB96 /* FirebaseCore in Frameworks */,
+				94EE60172CBAE4380029DB96 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,28 +198,26 @@
 		944D6F192B13B2FD008C97F2 /* DietiDeals24 */ = {
 			isa = PBXGroup;
 			children = (
+				941E7EE62CBD9A7000F260FC /* GoogleService-Info.plist */,
+				94EE600D2CB720310029DB96 /* Info.plist */,
 				944D6F1A2B13B2FD008C97F2 /* DietiDeals24App.swift */,
+				941E7EE42CBD98BE00F260FC /* AppDelegate.swift */,
 				944D6F1C2B13B2FD008C97F2 /* ContentView.swift */,
+				94EE600F2CBADEBB0029DB96 /* PersonalArea */,
+				94EE600E2CBADEA20029DB96 /* Filters */,
+				9406E4EC2C3560A200B8DB77 /* Router */,
 				94EE60082CA86F7E0029DB96 /* Notification */,
 				94EE5FFA2CA84CCA0029DB96 /* RemoteData */,
 				94EE5FF92CA84CAD0029DB96 /* Login+Registration */,
 				94EE5FF82CA84C3A0029DB96 /* Auctions */,
 				94EE5FF72CA84C210029DB96 /* Sales */,
-				9406E4EC2C3560A200B8DB77 /* Router */,
 				94EE5FF62CA84BDA0029DB96 /* DashBoard */,
 				A47DF6DA2BA24767000AFD15 /* User.swift */,
+				941E7EF42CBDAB2D00F260FC /* AlertMessage.swift */,
+				94EE60102CBAE0120029DB96 /* Validator.swift */,
 				94C4E4D92C35534100DD4ABC /* Offer+Payment.swift */,
 				9424EAAB2C0CC16400429CDE /* RemoteUser.swift */,
-				94EE5FF42C7D13BD0029DB96 /* FilterView.swift */,
-				A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */,
-				947AD6772BA6123D003F9015 /* VendorModel.swift */,
 				A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */,
-				A4E46BDF2BA75868007140E6 /* ArticlePreview.swift */,
-				947AD6792BA61262003F9015 /* ReverseAuctionModel.swift */,
-				A4B50B4C2BAF357500968455 /* ReverseAuctionDetailView.swift */,
-				A4F956CE2BA610E300F013ED /* FixedTimeAuctionModel.swift */,
-				A4B50B4E2BAF46C200968455 /* FixedTimeAuctionView.swift */,
-				A43BB4302BB0A95A00A650D0 /* ConfirmAuctionView.swift */,
 				944D6F1E2B13B300008C97F2 /* Assets.xcassets */,
 				944D6F202B13B300008C97F2 /* Preview Content */,
 			);
@@ -247,7 +263,10 @@
 			isa = PBXGroup;
 			children = (
 				94EE5FF22C79E9C80029DB96 /* MySalesView.swift */,
+				941E7EE82CBDA62600F260FC /* MySalesViewModel.swift */,
 				94EE60042CA8623E0029DB96 /* SellingItemsView.swift */,
+				94EE600B2CB705000029DB96 /* IBANModalView.swift */,
+				941E7EEA2CBDA6A800F260FC /* IBANViewModel.swift */,
 			);
 			path = Sales;
 			sourceTree = "<group>";
@@ -256,9 +275,13 @@
 			isa = PBXGroup;
 			children = (
 				942E68A92BE9D493007D0046 /* MyAuctionsView.swift */,
+				941E7EEC2CBDA82500F260FC /* MyAuctionsViewModel.swift */,
 				94EE60022CA862150029DB96 /* BuyingItemsView.swift */,
+				941E7EEE2CBDA86300F260FC /* BuyingItemsViewModel.swift */,
 				942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */,
+				941E7EF02CBDA8AD00F260FC /* AddAuctionViewModel.swift */,
 				942E68AB2BE9D7C0007D0046 /* AuctionDetailView.swift */,
+				941E7EF22CBDAAA900F260FC /* AuctionDetailViewModel.swift */,
 				A4F956CA2BA60E8200F013ED /* AuctionModel.swift */,
 				942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */,
 			);
@@ -271,7 +294,7 @@
 				944D6F442B13B3A3008C97F2 /* LoginView.swift */,
 				944D6F462B13BA3E008C97F2 /* LoginViewModel.swift */,
 				944E16152C35982E00C8E4E8 /* RegisterView.swift */,
-				944E16172C3599E000C8E4E8 /* RegisterVM.swift */,
+				944E16172C3599E000C8E4E8 /* RegisterViewModel.swift */,
 			);
 			path = "Login+Registration";
 			sourceTree = "<group>";
@@ -305,6 +328,22 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
+		94EE600E2CBADEA20029DB96 /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				94EE5FF42C7D13BD0029DB96 /* FilterView.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
+		94EE600F2CBADEBB0029DB96 /* PersonalArea */ = {
+			isa = PBXGroup;
+			children = (
+				A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */,
+			);
+			path = PersonalArea;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -321,6 +360,12 @@
 			dependencies = (
 			);
 			name = DietiDeals24;
+			packageProductDependencies = (
+				94EE60142CBAE4380029DB96 /* FirebaseAnalytics */,
+				94EE60162CBAE4380029DB96 /* FirebaseAuth */,
+				94EE60182CBAE4380029DB96 /* FirebaseCore */,
+				94EE601A2CBAE4380029DB96 /* FirebaseFirestore */,
+			);
 			productName = DietiDeals24;
 			productReference = 944D6F172B13B2FD008C97F2 /* DietiDeals24.app */;
 			productType = "com.apple.product-type.application";
@@ -393,6 +438,9 @@
 				Base,
 			);
 			mainGroup = 944D6F0E2B13B2FD008C97F2;
+			packageReferences = (
+				94EE60132CBAE4380029DB96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 944D6F182B13B2FD008C97F2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -411,6 +459,7 @@
 			files = (
 				94EE60072CA86DFB0029DB96 /* user.json in Resources */,
 				94EE60012CA856250029DB96 /* auction_items.json in Resources */,
+				941E7EE72CBD9A7000F260FC /* GoogleService-Info.plist in Resources */,
 				944D6F222B13B300008C97F2 /* Preview Assets.xcassets in Resources */,
 				944D6F1F2B13B300008C97F2 /* Assets.xcassets in Resources */,
 			);
@@ -438,6 +487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4A873872C10FBE700691606 /* RemoteAuctionItem.swift in Sources */,
+				941E7EEB2CBDA6A800F260FC /* IBANViewModel.swift in Sources */,
 				A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */,
 				94EE60052CA8623F0029DB96 /* SellingItemsView.swift in Sources */,
 				9424EAAC2C0CC16400429CDE /* RemoteUser.swift in Sources */,
@@ -448,31 +498,33 @@
 				94EE60032CA862150029DB96 /* BuyingItemsView.swift in Sources */,
 				942E68AA2BE9D493007D0046 /* MyAuctionsView.swift in Sources */,
 				A4914A7F2BA8E1D9000C2532 /* PersonalAreaView.swift in Sources */,
-				A4E46BE02BA75868007140E6 /* ArticlePreview.swift in Sources */,
+				941E7EED2CBDA82500F260FC /* MyAuctionsViewModel.swift in Sources */,
+				941E7EF32CBDAAA900F260FC /* AuctionDetailViewModel.swift in Sources */,
 				94EE5FF52C7D13BD0029DB96 /* FilterView.swift in Sources */,
 				9424EAAE2C10F31900429CDE /* DashBoardViewModel.swift in Sources */,
+				941E7EEF2CBDA86300F260FC /* BuyingItemsViewModel.swift in Sources */,
+				941E7EE52CBD98BE00F260FC /* AppDelegate.swift in Sources */,
 				9406E4F02C3560B600B8DB77 /* VendorRouter.swift in Sources */,
 				A4A8738B2C110CD200691606 /* RemoteFixedTimeAuction.swift in Sources */,
 				A4E46BDC2BA74879007140E6 /* DashBoard.swift in Sources */,
-				A43BB4312BB0A95A00A650D0 /* ConfirmAuctionView.swift in Sources */,
 				A4A873892C110AFE00691606 /* RemoteReverseAuction.swift in Sources */,
 				944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */,
 				94EE5FF32C79E9C80029DB96 /* MySalesView.swift in Sources */,
-				A4B50B4F2BAF46C200968455 /* FixedTimeAuctionView.swift in Sources */,
-				947AD6782BA6123D003F9015 /* VendorModel.swift in Sources */,
+				941E7EF52CBDAB2D00F260FC /* AlertMessage.swift in Sources */,
 				942E68AE2BE9D9D5007D0046 /* AuctionItemModel.swift in Sources */,
 				94EE5FFE2CA84F8A0029DB96 /* AuctionItemCard.swift in Sources */,
 				94EE5FFC2CA84EE60029DB96 /* DataLoader.swift in Sources */,
 				944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */,
 				94EE600A2CA86F940029DB96 /* NotificationPermisson.swift in Sources */,
 				944E16162C35982E00C8E4E8 /* RegisterView.swift in Sources */,
-				944E16182C3599E000C8E4E8 /* RegisterVM.swift in Sources */,
-				947AD67A2BA61262003F9015 /* ReverseAuctionModel.swift in Sources */,
-				A4B50B4D2BAF357500968455 /* ReverseAuctionDetailView.swift in Sources */,
+				94EE60112CBAE0120029DB96 /* Validator.swift in Sources */,
+				94EE600C2CB705000029DB96 /* IBANModalView.swift in Sources */,
+				944E16182C3599E000C8E4E8 /* RegisterViewModel.swift in Sources */,
 				9406E4EE2C3560AE00B8DB77 /* RouterProtocol.swift in Sources */,
-				A4F956CF2BA610E300F013ED /* FixedTimeAuctionModel.swift in Sources */,
+				941E7EF12CBDA8AD00F260FC /* AddAuctionViewModel.swift in Sources */,
 				942E68AC2BE9D7C0007D0046 /* AuctionDetailView.swift in Sources */,
 				A47DF6DB2BA24767000AFD15 /* User.swift in Sources */,
+				941E7EE92CBDA62600F260FC /* MySalesViewModel.swift in Sources */,
 				944D6F1B2B13B2FD008C97F2 /* DietiDeals24App.swift in Sources */,
 				94C4E4DA2C35534100DD4ABC /* Offer+Payment.swift in Sources */,
 			);
@@ -482,6 +534,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94EE60122CBAE03F0029DB96 /* Validator.swift in Sources */,
 				944D6F2C2B13B301008C97F2 /* DietiDeals24Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -641,6 +694,8 @@
 				DEVELOPMENT_TEAM = 88BNMW429W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DietiDeals24/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -671,6 +726,8 @@
 				DEVELOPMENT_TEAM = 88BNMW429W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DietiDeals24/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -806,6 +863,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		94EE60132CBAE4380029DB96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		94EE60142CBAE4380029DB96 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94EE60132CBAE4380029DB96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		94EE60162CBAE4380029DB96 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94EE60132CBAE4380029DB96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		94EE60182CBAE4380029DB96 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94EE60132CBAE4380029DB96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		94EE601A2CBAE4380029DB96 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94EE60132CBAE4380029DB96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 944D6F0F2B13B2FD008C97F2 /* Project object */;
 }

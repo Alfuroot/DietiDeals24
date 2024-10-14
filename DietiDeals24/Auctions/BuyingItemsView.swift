@@ -1,18 +1,21 @@
-//
-//  BuyingItemsView.swift
-//  DietiDeals24
-//
-//  Created by Giuseppe Carannante on 28/09/2024.
-//
-
 import SwiftUI
 
 struct BuyingItemView: View {
-    var auctionItem: AuctionItem
-    
+    @StateObject var viewModel: BuyingItemViewModel
+
     var body: some View {
+        if viewModel.isOutbid {
+            NavigationLink(destination: AuctionDetailView(viewModel: AuctionDetailViewModel(auctionItem: viewModel.auctionItem))) {
+                content
+            }
+        } else {
+            content
+        }
+    }
+
+    private var content: some View {
         HStack {
-            if let imageUrl = auctionItem.imageUrl, let url = URL(string: imageUrl) {
+            if let url = viewModel.imageUrl {
                 AsyncImage(url: url) { image in
                     image
                         .resizable()
@@ -33,28 +36,26 @@ struct BuyingItemView: View {
             }
 
             VStack(alignment: .leading, spacing: 8) {
-                Text(auctionItem.title)
+                Text(viewModel.itemTitle)
                     .font(.headline)
                     .lineLimit(1)
 
-                Text("Your Bid: \(auctionItem.userBid ?? "N/A")")
+                Text(viewModel.userBidText)
                     .font(.subheadline)
                     .foregroundColor(.gray)
 
-                if let bidEndDate = auctionItem.bidEndDate {
-                    Text("Ends: \(auctionItem.formattedEndDate())")
+                if !viewModel.bidEndDateText.isEmpty {
+                    Text(viewModel.bidEndDateText)
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 }
 
-                if let status = auctionItem.auctionStatus {
-                    Text("Status: \(status)")
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .foregroundColor(status == "Leading" ? .green : .red)
-                }
+                Text(viewModel.auctionStatusText)
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundColor(viewModel.auctionStatusColor)
 
-                Text("Highest Bid: \(auctionItem.currentBid)")
+                Text(viewModel.highestBidText)
                     .font(.title3)
                     .fontWeight(.bold)
             }
@@ -66,5 +67,13 @@ struct BuyingItemView: View {
         .cornerRadius(12)
         .shadow(radius: 3)
         .padding(.horizontal)
+    }
+}
+
+struct BuyingItemView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            BuyingItemView(viewModel: BuyingItemViewModel(auctionItem: AuctionItem(id: "1", title: "Sample Item", description: "A description of the auction item.", imageUrl: "https://example.com/sample.jpg", currentBid: "$100", bidEndDate: "2024-10-01T12:00:00Z", auctionType: .reverse, userBid: "$90", auctionStatus: "Outbid")))
+        }
     }
 }

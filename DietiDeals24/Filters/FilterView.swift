@@ -1,25 +1,18 @@
-//
-//  FilterView.swift
-//  DietiDeals24
-//
-//  Created by Giuseppe Carannante on 26/08/2024.
-//
-
 import SwiftUI
 
 struct FilterView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var selectedCategories: [String]
-    let availableCategories: [String]
+    @Binding var selectedCategories: [AuctionItemType]
 
     var body: some View {
         NavigationView {
-            List(availableCategories, id: \.self) { category in
+            List(AuctionItemType.allCases, id: \.self) { category in
                 HStack {
-                    Text(category)
+                    Text(category.rawValue)
                     Spacer()
                     if selectedCategories.contains(category) {
                         Image(systemName: "checkmark")
+                            .foregroundColor(.blue)
                     }
                 }
                 .contentShape(Rectangle())
@@ -35,7 +28,6 @@ struct FilterView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
-                        selectedCategories = []
                         dismiss()
                     }
                 }
@@ -49,10 +41,8 @@ struct FilterView: View {
     }
 }
 
-
 #Preview {
     FilterView(
-        selectedCategories: .constant(["Fruits", "Vegetables"]),
-        availableCategories: ["Fruits", "Vegetables", "Dairy", "Meat", "Grains", "Snacks", "Beverages"]
+        selectedCategories: .constant([.tecnologia, .casa])
     )
 }

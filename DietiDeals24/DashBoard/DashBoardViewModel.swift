@@ -1,32 +1,29 @@
-//
-//  ArticleViewModel.swift
-//  DietiDeals24
-//
-//  Created by Giuseppe Carannante on 05/06/24.
-//
-
 import Foundation
+import Combine
 
 class DashBoardViewModel: ObservableObject {
-    @Published var articles: [Article] = []
+    @Published var auctionItems: [AuctionItem] = [] // All auction items
     @Published var isLoading = false
     @Published var error: String?
-    @Published var availableCategories: [String] = []
+    @Published var availableCategories: [AuctionItemType] = []
     @Published var search: String = ""
-    @Published var selectedCategories: [String] = []
+    @Published var selectedCategories: [AuctionItemType] = []
 
-    private let apiService = ApiService()
+    private let dataLoader = DataLoader()
     
-    var filteredArticles: [Article] {
-        var filtered = articles
+    var filteredItems: [AuctionItem] {
+        var filtered = auctionItems
         
         if !search.isEmpty {
-            filtered = filtered.filter { $0.category?.localizedCaseInsensitiveContains(search) == true }
+            filtered = filtered.filter { item in
+                item.title.localizedCaseInsensitiveContains(search) ||
+                item.description.localizedCaseInsensitiveContains(search)
+            }
         }
         
         if !selectedCategories.isEmpty {
-            filtered = filtered.filter { article in
-                guard let category = article.category else { return false }
+            filtered = filtered.filter { item in
+                guard let category = item.category else { return false }
                 return selectedCategories.contains(category)
             }
         }
@@ -35,16 +32,16 @@ class DashBoardViewModel: ObservableObject {
     }
     
     init() {
-        fetchArticles()
+        fetchAuctionItems()
     }
     
-    func fetchArticles() {
+    func fetchAuctionItems() {
+        isLoading = true
         Task {
             do {
-                isLoading = true
-                let fetchedArticles = try await apiService.getArticles()
+                await dataLoader.loadRemoteData()
                 DispatchQueue.main.async {
-                    self.articles = fetchedArticles
+                    self.auctionItems = self.dataLoader.allItems
                     self.isLoading = false
                     self.updateAvailableCategories()
                 }
@@ -58,7 +55,7 @@ class DashBoardViewModel: ObservableObject {
     }
     
     private func updateAvailableCategories() {
-        let categories = articles.compactMap { $0.category }
+        let categories = auctionItems.compactMap { $0.category }
         self.availableCategories = Array(Set(categories)).sorted()
     }
 }

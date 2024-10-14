@@ -41,13 +41,13 @@ struct SellingItemView: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
                 
-                if let bidEndDate = auctionItem.bidEndDate {
+                if auctionItem.bidEndDate != nil {
                     Text("Ends: \(auctionItem.formattedEndDate())")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 }
 
-                Text("Current Highest Bid: \(auctionItem.currentBid)")
+                Text("Current Highest Bid: \(auctionItem.currentBid ?? "")")
                     .font(.title3)
                     .fontWeight(.bold)
             }
