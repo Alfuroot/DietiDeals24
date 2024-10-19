@@ -22,7 +22,6 @@
 		9424EAAE2C10F31900429CDE /* DashBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAD2C10F31900429CDE /* DashBoardViewModel.swift */; };
 		942E68AA2BE9D493007D0046 /* MyAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68A92BE9D493007D0046 /* MyAuctionsView.swift */; };
 		942E68AC2BE9D7C0007D0046 /* AuctionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AB2BE9D7C0007D0046 /* AuctionDetailView.swift */; };
-		942E68AE2BE9D9D5007D0046 /* AuctionItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */; };
 		942E68B02BE9DED5007D0046 /* AddAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */; };
 		944D6F1B2B13B2FD008C97F2 /* DietiDeals24App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F1A2B13B2FD008C97F2 /* DietiDeals24App.swift */; };
 		944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F1C2B13B2FD008C97F2 /* ContentView.swift */; };
@@ -96,7 +95,6 @@
 		9424EAAD2C10F31900429CDE /* DashBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardViewModel.swift; sourceTree = "<group>"; };
 		942E68A92BE9D493007D0046 /* MyAuctionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuctionsView.swift; sourceTree = "<group>"; };
 		942E68AB2BE9D7C0007D0046 /* AuctionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailView.swift; sourceTree = "<group>"; };
-		942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionItemModel.swift; sourceTree = "<group>"; };
 		942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAuctionView.swift; sourceTree = "<group>"; };
 		944D6F172B13B2FD008C97F2 /* DietiDeals24.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietiDeals24.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		944D6F1A2B13B2FD008C97F2 /* DietiDeals24App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietiDeals24App.swift; sourceTree = "<group>"; };
@@ -282,7 +280,6 @@
 				942E68AB2BE9D7C0007D0046 /* AuctionDetailView.swift */,
 				941E7EF22CBDAAA900F260FC /* AuctionDetailViewModel.swift */,
 				A4F956CA2BA60E8200F013ED /* AuctionModel.swift */,
-				942E68AD2BE9D9D5007D0046 /* AuctionItemModel.swift */,
 			);
 			path = Auctions;
 			sourceTree = "<group>";
@@ -512,7 +509,6 @@
 				944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */,
 				94EE5FF32C79E9C80029DB96 /* MySalesView.swift in Sources */,
 				941E7EF52CBDAB2D00F260FC /* AlertMessage.swift in Sources */,
-				942E68AE2BE9D9D5007D0046 /* AuctionItemModel.swift in Sources */,
 				94EE5FFE2CA84F8A0029DB96 /* AuctionItemCard.swift in Sources */,
 				94EE5FFC2CA84EE60029DB96 /* DataLoader.swift in Sources */,
 				944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */,
