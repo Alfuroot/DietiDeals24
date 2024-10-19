@@ -9,12 +9,12 @@ struct MySalesView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    if viewModel.sellingItems.isEmpty {
+                    if viewModel.sellingAuctions.isEmpty {
                         Text("No items available")
                             .foregroundColor(.gray)
                     } else {
-                        ForEach(viewModel.sellingItems) { auctionItem in
-                            SellingItemView(auctionItem: auctionItem)
+                        ForEach(viewModel.sellingAuctions, id: \.self) { auctions in
+                            SellingItemView(auction: auctions)
                         }
                     }
                 }
@@ -48,7 +48,7 @@ struct MySalesView: View {
         }
         .onAppear {
             viewModel.checkIBAN()
-            viewModel.loadSellingItems()
+            viewModel.loadSellingAuctions()
         }
     }
 }

@@ -25,12 +25,46 @@ enum AuctionItemType: String, CaseIterable, Codable, Hashable, Comparable {
     static func < (lhs: AuctionItemType, rhs: AuctionItemType) -> Bool {
         return lhs.rawValue < rhs.rawValue
     }
+    
     var displayName: String {
         return self.rawValue
     }
 }
 
-class Auction: Codable {
+class AuctionItem: Codable, Identifiable, Hashable {
+    var id: String
+    var title: String
+    var description: String
+    var imageUrl: String?
+    var category: AuctionItemType
+    
+    init(id: String = UUID().uuidString,
+         title: String,
+         description: String,
+         imageUrl: String? = nil,
+         category: AuctionItemType) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.imageUrl = imageUrl
+        self.category = category
+    }
+
+    // Conformance to Hashable
+    static func == (lhs: AuctionItem, rhs: AuctionItem) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(title)
+        hasher.combine(description)
+        hasher.combine(imageUrl)
+        hasher.combine(category)
+    }
+}
+
+class Auction: Codable, Hashable {
     var id: String
     var title: String
     var description: String
@@ -38,31 +72,27 @@ class Auction: Codable {
     var currentPrice: Float
     var startDate: Date
     var endDate: Date
-    var status: AuctionStatus
-    var bids: [Bid]
     var auctionType: AuctionType
-    var auctionItemType: AuctionItemType
+    var auctionItem: AuctionItem
     var buyoutPrice: Float?
     var decrementAmount: Float?
     var decrementInterval: TimeInterval?
     var floorPrice: Float?
-    
-    init(id: String,
+
+    init(id: String = UUID().uuidString,
          title: String,
          description: String,
          initialPrice: Float,
          currentPrice: Float,
          startDate: Date,
          endDate: Date,
-         status: AuctionStatus = .active,
-         bids: [Bid] = [],
          auctionType: AuctionType,
-         auctionItemType: AuctionItemType,
+         auctionItem: AuctionItem,
          buyoutPrice: Float? = nil,
          decrementAmount: Float? = nil,
          decrementInterval: TimeInterval? = nil,
          floorPrice: Float? = nil) {
-        
+
         self.id = id
         self.title = title
         self.description = description
@@ -70,50 +100,85 @@ class Auction: Codable {
         self.currentPrice = currentPrice
         self.startDate = startDate
         self.endDate = endDate
-        self.status = status
-        self.bids = bids
         self.auctionType = auctionType
-        self.auctionItemType = auctionItemType
+        self.auctionItem = auctionItem
         self.buyoutPrice = buyoutPrice
         self.decrementAmount = decrementAmount
         self.decrementInterval = decrementInterval
         self.floorPrice = floorPrice
     }
-    
-    func isAuctionActive() -> Bool {
-        return status == .active && Date() < endDate
-    }
-    
-    func placeBid(bid: Bid) {
-        if isAuctionActive() {
-            bids.append(bid)
-            currentPrice = bid.amount
+
+    required init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            id = try container.decode(String.self, forKey: .id)
+            title = try container.decode(String.self, forKey: .title)
+            description = try container.decode(String.self, forKey: .description)
+            initialPrice = try container.decode(Float.self, forKey: .initialPrice)
+            currentPrice = try container.decode(Float.self, forKey: .currentPrice)
+            
+            let startDateString = try container.decode(String.self, forKey: .startDate)
+            let endDateString = try container.decode(String.self, forKey: .endDate)
+            
+            let dateFormatter = ISO8601DateFormatter()
+            startDate = dateFormatter.date(from: startDateString) ?? Date()
+            endDate = dateFormatter.date(from: endDateString) ?? Date()
+
+            auctionType = try container.decode(AuctionType.self, forKey: .auctionType)
+            auctionItem = try container.decode(AuctionItem.self, forKey: .auctionItem)
+            buyoutPrice = try container.decodeIfPresent(Float.self, forKey: .buyoutPrice)
+            decrementAmount = try container.decodeIfPresent(Float.self, forKey: .decrementAmount)
+            decrementInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .decrementInterval)
+            floorPrice = try container.decodeIfPresent(Float.self, forKey: .floorPrice)
         }
+
+    func isAuctionActive() -> Bool {
+        return Date() < endDate
     }
-    
-    func decrementCurrentPrice() {
-        guard auctionType == .reverse,
-              let decrementAmount = decrementAmount,
-              let floorPrice = floorPrice,
-              currentPrice - decrementAmount >= floorPrice else { return }
-        
-        currentPrice -= decrementAmount
-    }
-    
+
     func getRemainingTime() -> TimeInterval {
         return endDate.timeIntervalSince(Date())
     }
+
+    static func == (lhs: Auction, rhs: Auction) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(title)
+        hasher.combine(description)
+        hasher.combine(initialPrice)
+        hasher.combine(currentPrice)
+        hasher.combine(startDate)
+        hasher.combine(endDate)
+        hasher.combine(auctionType)
+        hasher.combine(auctionItem)
+        hasher.combine(buyoutPrice)
+        hasher.combine(decrementAmount)
+        hasher.combine(decrementInterval)
+        hasher.combine(floorPrice)
+    }
 }
 
-class Bid: Codable {
-    
+class Bid: Codable, Hashable {
     var bidderID: String
     var amount: Float
     var timestamp: Date
-    
+
     init(bidderID: String, amount: Float, timestamp: Date = Date()) {
         self.bidderID = bidderID
         self.amount = amount
         self.timestamp = timestamp
+    }
+
+    static func == (lhs: Bid, rhs: Bid) -> Bool {
+        return lhs.bidderID == rhs.bidderID && lhs.amount == rhs.amount && lhs.timestamp == rhs.timestamp
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(bidderID)
+        hasher.combine(amount)
+        hasher.combine(timestamp)
     }
 }

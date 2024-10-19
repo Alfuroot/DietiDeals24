@@ -1,18 +1,7 @@
 import SwiftUI
 
 struct PersonalAreaView: View {
-    @State private var user = User.shared
-    @State private var showingEditUsername = false
-    @State private var showingEditPassword = false
-    @State private var showingEditEmail = false
-    @State private var showingEditAddress = false
-    @State private var showingEditNotifications = false
-    @State private var newUsername: String = ""
-    @State private var newPassword: String = ""
-    @State private var confirmPassword: String = ""
-    @State private var passwordErrorMessage: String = ""
-    @State private var newEmail: String = ""
-    @State private var newAddress: String = ""
+    @StateObject private var viewModel = PersonalAreaViewModel()
     
     var body: some View {
         NavigationStack {
@@ -24,94 +13,77 @@ struct PersonalAreaView: View {
                 
                 List {
                     Button(action: {
-                        newUsername = user.username
-                        showingEditUsername.toggle()
+                        viewModel.newUsername = viewModel.user.username
+                        viewModel.showingEditUsername.toggle()
                     }) {
-                        Text("Nome utente: \(user.username)")
+                        Text("Nome utente: \(viewModel.user.username)")
                     }
-                    .alert("Modifica Nome Utente", isPresented: $showingEditUsername) {
-                        TextField("Nuovo nome utente", text: $newUsername)
+                    .alert("Modifica Nome Utente", isPresented: $viewModel.showingEditUsername) {
+                        TextField("Nuovo nome utente", text: $viewModel.newUsername)
                         Button("Salva") {
-                            user.username = newUsername
+                            viewModel.updateUsername()
                         }
                         Button("Annulla", role: .cancel) {}
                     }
 
                     Button(action: {
-                        showingEditPassword.toggle()
+                        viewModel.showingEditPassword.toggle()
                     }) {
                         Text("Password")
                     }
-                    .alert("Modifica Password", isPresented: $showingEditPassword) {
-                        TextField("Nuova password", text: $newPassword)
+                    .alert("Modifica Password", isPresented: $viewModel.showingEditPassword) {
+                        TextField("Nuova password", text: $viewModel.newPassword)
                             .textContentType(.password)
-                        TextField("Conferma password", text: $confirmPassword)
+                        TextField("Conferma password", text: $viewModel.confirmPassword)
                             .textContentType(.password)
-                        if !passwordErrorMessage.isEmpty {
-                            Text(passwordErrorMessage)
+                        if !viewModel.passwordErrorMessage.isEmpty {
+                            Text(viewModel.passwordErrorMessage)
                                 .foregroundStyle(Color.red)
                         }
-                        Button("Salva", role: .none) {
-                            if confirmPassword == newPassword {
-                                user.setPassword(newPassword)
-                                
-                            } else {
-                                passwordErrorMessage = "Le due password non corrispondono."
-                            }
+                        Button("Salva") {
+                            viewModel.updatePassword()
                         }
                         Button("Annulla", role: .cancel) {}
                     }
                     
                     Button(action: {
-                        newEmail = user.email
-                        showingEditEmail.toggle()
+                        viewModel.newEmail = viewModel.user.email
+                        viewModel.showingEditEmail.toggle()
                     }) {
-                        Text("Email: \(user.email)")
+                        Text("Email: \(viewModel.user.email)")
                     }
-                    .alert("Modifica Email", isPresented: $showingEditEmail) {
-                        TextField("Nuova email", text: $newEmail)
+                    .alert("Modifica Email", isPresented: $viewModel.showingEditEmail) {
+                        TextField("Nuova email", text: $viewModel.newEmail)
                             .keyboardType(.emailAddress)
                         Button("Salva") {
-                            user.email = newEmail
+                            viewModel.updateEmail()
                         }
                         Button("Annulla", role: .cancel) {}
                     }
                     
                     Button(action: {
-                        newAddress = user.address
-                        showingEditAddress.toggle()
+                        viewModel.newAddress = viewModel.user.address
+                        viewModel.showingEditAddress.toggle()
                     }) {
-                        Text("Indirizzo: \(user.address)")
+                        Text("Indirizzo: \(viewModel.user.address)")
                     }
-                    .alert("Modifica Indirizzo", isPresented: $showingEditAddress) {
-                        TextField("Nuovo indirizzo", text: $newAddress)
+                    .alert("Modifica Indirizzo", isPresented: $viewModel.showingEditAddress) {
+                        TextField("Nuovo indirizzo", text: $viewModel.newAddress)
                         Button("Salva") {
-                            user.address = newAddress
+                            viewModel.updateAddress()
                         }
                         Button("Annulla", role: .cancel) {}
                     }
                     
                     Button(action: {
-                        user.notificationsEnabled.toggle()
+                        viewModel.user.notificationsEnabled.toggle()
                     }) {
-                        Text("Notifiche: \(user.notificationsEnabled ? "Abilitate" : "Disabilitate")")
+                        Text("Notifiche: \(viewModel.user.notificationsEnabled ? "Abilitate" : "Disabilitate")")
                     }
                 }
             }
             .onAppear {
-                loadUserData()
-            }
-        }
-    }
-    
-    private func loadUserData() {
-        Task {
-            do {
-                let dataLoader = DataLoader()
-                let loadedUser = try await dataLoader.loadUserData()
-                user = loadedUser
-            } catch {
-                print("Failed to load user data: \(error.localizedDescription)")
+                viewModel.loadUserData()
             }
         }
     }

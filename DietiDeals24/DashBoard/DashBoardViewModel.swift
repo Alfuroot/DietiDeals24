@@ -2,7 +2,7 @@ import Foundation
 import Combine
 
 class DashBoardViewModel: ObservableObject {
-    @Published var auctionItems: [AuctionItem] = [] // All auction items
+    @Published var auctions: [Auction] = []
     @Published var isLoading = false
     @Published var error: String?
     @Published var availableCategories: [AuctionItemType] = []
@@ -11,24 +11,13 @@ class DashBoardViewModel: ObservableObject {
 
     private let dataLoader = DataLoader()
     
-    var filteredItems: [AuctionItem] {
-        var filtered = auctionItems
-        
-        if !search.isEmpty {
-            filtered = filtered.filter { item in
-                item.title.localizedCaseInsensitiveContains(search) ||
-                item.description.localizedCaseInsensitiveContains(search)
-            }
+    // Computed property to filter auction items based on search and selected categories
+    var filteredItems: [Auction] {
+        auctions.filter { auction in
+            (search.isEmpty || auction.title.localizedCaseInsensitiveContains(search) ||
+             auction.description.localizedCaseInsensitiveContains(search)) &&
+            (selectedCategories.isEmpty || selectedCategories.contains(auction.auctionItem.category))
         }
-        
-        if !selectedCategories.isEmpty {
-            filtered = filtered.filter { item in
-                guard let category = item.category else { return false }
-                return selectedCategories.contains(category)
-            }
-        }
-        
-        return filtered
     }
     
     init() {
@@ -37,25 +26,28 @@ class DashBoardViewModel: ObservableObject {
     
     func fetchAuctionItems() {
         isLoading = true
+        
         Task {
             do {
-                await dataLoader.loadRemoteData()
-                DispatchQueue.main.async {
-                    self.auctionItems = self.dataLoader.allItems
-                    self.isLoading = false
-                    self.updateAvailableCategories()
-                }
+                dataLoader.loadLocalData()  // Fetch data from the DataLoader
+                updateAuctionItems()  // Update the auction items array
             } catch {
-                DispatchQueue.main.async {
-                    self.error = error.localizedDescription
-                    self.isLoading = false
-                }
+                handleError(error)  // Handle errors if fetching fails
             }
         }
     }
     
-    private func updateAvailableCategories() {
-        let categories = auctionItems.compactMap { $0.category }
-        self.availableCategories = Array(Set(categories)).sorted()
+    private func updateAuctionItems() {
+        DispatchQueue.main.async {
+            self.auctions = self.dataLoader.allAuctions
+            self.isLoading = false
+        }
+    }
+
+    private func handleError(_ error: Error) {
+        DispatchQueue.main.async {
+            self.error = error.localizedDescription  // Update error message
+            self.isLoading = false  // Set loading state to false
+        }
     }
 }

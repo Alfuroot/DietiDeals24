@@ -6,7 +6,8 @@ struct AuctionDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                if let imageUrl = viewModel.auctionItem.imageUrl, let url = URL(string: imageUrl) {
+                // Display auction item image
+                if let imageUrl = viewModel.auction.auctionItem.imageUrl, let url = URL(string: imageUrl) {
                     AsyncImage(url: url) { phase in
                         switch phase {
                         case .success(let image):
@@ -26,13 +27,16 @@ struct AuctionDetailView: View {
                     .frame(height: 250)
                 }
 
-                Text(viewModel.auctionItem.title)
+                // Display auction title
+                Text(viewModel.auction.title)
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
-                Text(viewModel.auctionItem.description)
+                // Display auction description
+                Text(viewModel.auction.description)
                     .font(.body)
 
+                // Display current bid and end date
                 Text("Current Bid: \(viewModel.formattedCurrentBid)")
                     .font(.headline)
 
@@ -40,53 +44,44 @@ struct AuctionDetailView: View {
                     .font(.headline)
                     .foregroundColor(.gray)
 
+                // Input field for bid amount
                 TextField("Enter your bid amount", text: $viewModel.bidAmount)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.decimalPad)
 
+                // Conditional button display based on auction type
                 if viewModel.isReverseAuction() {
-                                   Button(action: {
-                                       print("Comprato")
-                                   }) {
-                                       Text("Buyout for \(10000)")
-                                           .fontWeight(.bold)
-                                           .frame(maxWidth: .infinity)
-                                           .padding()
-                                           .background(Color.green)
-                                           .foregroundColor(.white)
-                                           .cornerRadius(10)
-                                   }
-                               } else {
-                                   TextField("Enter your bid amount", text: $viewModel.bidAmount)
-                                       .textFieldStyle(RoundedBorderTextFieldStyle())
-                                       .keyboardType(.decimalPad)
+                    Button(action: {
+                        viewModel.buyout() // Function to handle buyout
+                    }) {
+                        Text("Buyout for \(viewModel.auction.buyoutPrice ?? 0.0, specifier: "%.2f")")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                } else {
+                    Button(action: {
+                        let bidAmount = Float(viewModel.bidAmount) ?? 0.0
+                        let bid = Bid(bidderID: "currentUserID", amount: bidAmount) // Replace with actual user ID
+                        viewModel.placeBid() // Pass the bid object to the function
+                    }) {
+                        Text("Place Bid")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                }
 
-                                   Button(action: {
-                                       let bidAmount = Float(viewModel.bidAmount) ?? 0.0
-                                       let bid = Bid(bidderID: "currentUserID", amount: bidAmount)
-                                       viewModel.placeBid()
-                                   }) {
-                                       Text("Place Bid")
-                                           .fontWeight(.bold)
-                                           .frame(maxWidth: .infinity)
-                                           .padding()
-                                           .background(Color.blue)
-                                           .foregroundColor(.white)
-                                           .cornerRadius(10)
-                                   }
-                               }
-
-                               Spacer()
+                Spacer()
             }
             .padding()
         }
         .navigationTitle("Auction Details")
-    }
-}
-
-struct AuctionDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        let sampleItem = AuctionItem(id: "1", title: "Sample Item", description: "Sample Description", imageUrl: "https://example.com/sample.jpg", currentBid: "$100", bidEndDate: "2024-10-01T12:00:00Z", auctionType: .reverse)
-        AuctionDetailView(viewModel: AuctionDetailViewModel(auctionItem: sampleItem))
     }
 }

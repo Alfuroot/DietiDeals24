@@ -13,8 +13,8 @@ struct DashBoard: View {
                         .foregroundColor(.gray)
                 } else {
                     VStack(spacing: 20) {
-                        ForEach(viewModel.filteredItems) { item in
-                            AuctionItemCard(auctionItem: item)
+                        ForEach(viewModel.filteredItems, id: \.self) { item in
+                            AuctionItemCard(auction: item)
                         }
                     }
                     .padding()

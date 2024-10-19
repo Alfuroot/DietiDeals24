@@ -2,32 +2,35 @@ import Foundation
 import Combine
 
 class MySalesViewModel: ObservableObject {
-    @Published var sellingItems: [AuctionItem] = []
+    @Published var sellingAuctions: [Auction] = []
     @Published var showAlert: Bool = false
     @Published var isLoading: Bool = false
     @Published var error: String?
     
     private let dataLoader = DataLoader()
     
-    func checkIBAN() {
-        if User.shared.iban == nil {
-            showAlert = true
-        }
+    init() {
+        loadSellingAuctions()
     }
     
-    func loadSellingItems() {
+    func checkIBAN() {
+        // Implementation for IBAN checking goes here
+    }
+    
+    func loadSellingAuctions() {
+        isLoading = true // Set loading state to true
         Task {
-            isLoading = true
             do {
-                await dataLoader.loadRemoteData()
+                await dataLoader.loadRemoteData() // Asynchronously load remote data
                 DispatchQueue.main.async {
-                    self.sellingItems = self.dataLoader.sellingItems
-                    self.isLoading = false
+                    self.sellingAuctions = self.dataLoader.allAuctions // Update selling auctions on the main thread
+                    self.isLoading = false // Reset loading state
                 }
             } catch {
                 DispatchQueue.main.async {
-                    self.error = error.localizedDescription
-                    self.isLoading = false
+                    self.error = error.localizedDescription // Capture error message
+                    self.isLoading = false // Reset loading state
+                    self.showAlert = true // Show alert for the error
                 }
             }
         }

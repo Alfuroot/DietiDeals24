@@ -9,16 +9,16 @@ import Foundation
 import Combine
 
 class DataLoader: ObservableObject {
-    @Published var allItems: [AuctionItem] = []
-    @Published var buyingItems: [AuctionItem] = []
-    @Published var sellingItems: [AuctionItem] = []
+    @Published var allAuctions: [Auction] = []
+    @Published var activeAuctions: [Auction] = []
+    @Published var endedAuctions: [Auction] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
     
-    private let baseUrl = "https://example.com/api"
+    private let baseUrl = "https://example.com/api" // Your base URL here
     private let session = URLSession.shared
     private let timeout: TimeInterval = 10
-    private let authToken = "your_auth_token_here"
+    private let authToken = "your_auth_token_here" // Your auth token here
     
     init() {
         loadData()
@@ -34,7 +34,7 @@ class DataLoader: ObservableObject {
 #endif
     }
     
-    // MARK: - Load Auction Items (Local/Remote)
+    // MARK: - Load Auctions (Local/Remote)
     func loadLocalData() {
         guard let path = Bundle.main.path(forResource: "auction_items", ofType: "json") else {
             errorMessage = "Local data file not found"
@@ -43,12 +43,14 @@ class DataLoader: ObservableObject {
         
         do {
             let data = try Data(contentsOf: URL(fileURLWithPath: path))
-            let auctionItems = try JSONDecoder().decode([AuctionItem].self, from: data)
-            self.allItems = auctionItems
-            self.buyingItems = auctionItems.filter { $0.userBid != nil }
-            self.sellingItems = auctionItems.filter { $0.userBid == nil }
+            let auctions = try JSONDecoder().decode([Auction].self, from: data)
+            self.allAuctions = auctions
+            
+            self.activeAuctions = auctions.filter { $0.isAuctionActive() }
+            self.endedAuctions = auctions.filter { !$0.isAuctionActive() }
         } catch {
             errorMessage = "Error loading local data: \(error)"
+            print(errorMessage)
         }
     }
     
@@ -67,14 +69,16 @@ class DataLoader: ObservableObject {
                 throw URLError(.badServerResponse)
             }
             
-            let auctionItems = try JSONDecoder().decode([AuctionItem].self, from: data)
+            let auctions = try JSONDecoder().decode([Auction].self, from: data)
             DispatchQueue.main.async {
-                self.allItems = auctionItems
-                self.buyingItems = auctionItems.filter { $0.userBid != nil }
-                self.sellingItems = auctionItems.filter { $0.userBid == nil }
+                self.allAuctions = auctions
+                
+                self.activeAuctions = auctions.filter { $0.isAuctionActive() }
+                self.endedAuctions = auctions.filter { !$0.isAuctionActive() }
             }
         } catch {
             errorMessage = "Error fetching remote data: \(error.localizedDescription)"
+            print(error)
         }
     }
     
@@ -99,6 +103,9 @@ class DataLoader: ObservableObject {
         guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
             throw URLError(.badServerResponse)
         }
+        
+        // Optionally reload auctions after placing a bid
+        await loadRemoteData()
     }
     
     // MARK: - Buyout Auction
@@ -118,6 +125,9 @@ class DataLoader: ObservableObject {
         guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
             throw URLError(.badServerResponse)
         }
+        
+        // Optionally reload auctions after buyout
+        await loadRemoteData()
     }
     
     // MARK: - Load User Data (Local/Remote)
@@ -179,7 +189,7 @@ class DataLoader: ObservableObject {
     }
     
     // MARK: - Pagination Example
-    func loadMoreData(currentPage: Int) async throws -> [AuctionItem] {
+    func loadMoreData(currentPage: Int) async throws -> [Auction] {
         guard let url = URL(string: "\(baseUrl)/auctions?page=\(currentPage)") else {
             throw URLError(.badURL)
         }
@@ -194,6 +204,6 @@ class DataLoader: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        return try JSONDecoder().decode([AuctionItem].self, from: data)
+        return try JSONDecoder().decode([Auction].self, from: data)
     }
 }

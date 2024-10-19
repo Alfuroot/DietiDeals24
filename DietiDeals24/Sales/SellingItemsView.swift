@@ -1,18 +1,11 @@
-//
-//  SellingItemsView.swift
-//  DietiDeals24
-//
-//  Created by Giuseppe Carannante on 28/09/2024.
-//
-
 import SwiftUI
 
 struct SellingItemView: View {
-    var auctionItem: AuctionItem
+    var auction: Auction
     
     var body: some View {
         HStack {
-            if let imageUrl = auctionItem.imageUrl, let url = URL(string: imageUrl) {
+            if let imageUrl = auction.auctionItem.imageUrl, let url = URL(string: imageUrl) {
                 AsyncImage(url: url) { image in
                     image
                         .resizable()
@@ -33,7 +26,7 @@ struct SellingItemView: View {
             }
 
             VStack(alignment: .leading, spacing: 8) {
-                Text(auctionItem.title)
+                Text(auction.title)  // Use title from Auction
                     .font(.headline)
                     .lineLimit(1)
                 
@@ -41,13 +34,11 @@ struct SellingItemView: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
                 
-                if auctionItem.bidEndDate != nil {
-                    Text("Ends: \(auctionItem.formattedEndDate())")
+                Text("Ends: \(formatDate(auction.endDate))")  // Format the end date using a function
                         .font(.subheadline)
                         .foregroundColor(.gray)
-                }
 
-                Text("Current Highest Bid: \(auctionItem.currentBid ?? "")")
+                Text("Current Highest Bid: \(auction.currentPrice)")  // Display current bid or "N/A"
                     .font(.title3)
                     .fontWeight(.bold)
             }
@@ -59,5 +50,13 @@ struct SellingItemView: View {
         .cornerRadius(12)
         .shadow(radius: 3)
         .padding(.horizontal)
+    }
+    
+    // Helper function to format date
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
     }
 }

@@ -2,47 +2,57 @@ import Foundation
 import SwiftUI
 
 class BuyingItemViewModel: ObservableObject {
-    var auctionItem: AuctionItem
+    @Published var auction: Auction
+    @Published var userBid: Float?
 
-    init(auctionItem: AuctionItem) {
-        self.auctionItem = auctionItem
-    }
-
-    var isOutbid: Bool {
-        auctionItem.auctionStatus == "Outbid"
+    init(auction: Auction) {
+        self.auction = auction
+        self.userBid = nil
     }
 
     var itemTitle: String {
-        auctionItem.title
+        auction.title
     }
 
     var userBidText: String {
-        "Your Bid: \(auctionItem.userBid ?? "N/A")"
+        guard let bidValue = userBid else {
+            return "Your Bid: N/A"
+        }
+        return "Your Bid: \(bidValue)"
     }
 
     var bidEndDateText: String {
-        if auctionItem.bidEndDate != nil {
-            return "Ends: \(auctionItem.formattedEndDate())"
-        }
-        return ""
+        return "Ends: \(formattedDate(auction.endDate))"
     }
 
+    // Returns the current status of the auction
     var auctionStatusText: String {
-        "Status: \(auctionItem.auctionStatus ?? "N/A")"
+        return "Status: \(auction.auctionType.rawValue)"
     }
 
+    // Returns the highest bid text or a default message if not available
     var highestBidText: String {
-        "Highest Bid: \(auctionItem.currentBid ?? "")"
+        return "Highest Bid: \(auction.currentPrice)"
     }
 
+    // Determines the color of the auction status based on whether the user is leading
     var auctionStatusColor: Color {
-        auctionItem.auctionStatus == "Leading" ? .green : .red
+        true ? .red : .green
     }
 
+    // Converts the image URL string into a URL object
     var imageUrl: URL? {
-        if let urlString = auctionItem.imageUrl {
-            return URL(string: urlString)
+        guard let urlString = auction.auctionItem.imageUrl else {
+            return nil
         }
-        return nil
+        return URL(string: urlString)
+    }
+
+    // Helper function to format the date into a user-friendly string
+    private func formattedDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
     }
 }

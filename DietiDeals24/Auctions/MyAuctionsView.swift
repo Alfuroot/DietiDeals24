@@ -20,8 +20,8 @@ struct MyAuctionsView: View {
                         Text("Error: \(error)")
                             .foregroundColor(.red)
                     } else {
-                        ForEach(viewModel.sortedBuyingItems) { auctionItem in
-                            BuyingItemView(viewModel: BuyingItemViewModel(auctionItem: auctionItem))
+                        ForEach(viewModel.sortedAuctions, id: \.self) { auctions in
+                            BuyingItemView(viewModel: BuyingItemViewModel(auction: auctions))
                         }
                     }
                 }
