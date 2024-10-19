@@ -74,11 +74,62 @@ struct PersonalAreaView: View {
                         }
                         Button("Annulla", role: .cancel) {}
                     }
+
+                    Button(action: {
+                        viewModel.newBio = viewModel.user.bio ?? ""
+                        viewModel.showingEditBio.toggle()
+                    }) {
+                        Text("Bio: \(viewModel.user.bio)")
+                    }
+                    .alert("Modifica Bio", isPresented: $viewModel.showingEditBio) {
+                        TextField("Nuova bio", text: $viewModel.newBio)
+                        Button("Salva") {
+                            viewModel.updateBio()
+                        }
+                        Button("Annulla", role: .cancel) {}
+                    }
+                    
+                    Button(action: {
+                        viewModel.newIban = viewModel.user.iban ?? ""
+                        viewModel.showingEditIban.toggle()
+                    }) {
+                        Text("IBAN: \(viewModel.user.iban)")
+                    }
+                    .alert("Modifica IBAN", isPresented: $viewModel.showingEditIban) {
+                        TextField("Nuovo IBAN", text: $viewModel.newIban)
+                        Button("Salva") {
+                            viewModel.updateIban()
+                        }
+                        Button("Annulla", role: .cancel) {}
+                    }
+                    
+                    Button(action: {
+                        viewModel.newFacebookLink = viewModel.user.facebookLink ?? ""
+                        viewModel.newTwitterLink = viewModel.user.twitterLink ?? ""
+                        viewModel.newInstagramLink = viewModel.user.instagramLink ?? ""
+                        viewModel.newLinkedinLink = viewModel.user.linkedinLink ?? ""
+                        viewModel.showingEditSocialLinks.toggle()
+                    }) {
+                        Text("Modifica Social Links")
+                    }
+                    .alert("Modifica Social Links", isPresented: $viewModel.showingEditSocialLinks) {
+                        TextField("Facebook Link", text: $viewModel.newFacebookLink)
+                        TextField("Twitter Link", text: $viewModel.newTwitterLink)
+                        TextField("Instagram Link", text: $viewModel.newInstagramLink)
+                        TextField("LinkedIn Link", text: $viewModel.newLinkedinLink)
+                        Button("Salva") {
+                            viewModel.updateSocialLinks()
+                        }
+                        Button("Annulla", role: .cancel) {}
+                    }
                     
                     Button(action: {
                         viewModel.user.notificationsEnabled.toggle()
                     }) {
-                        Text("Notifiche: \(viewModel.user.notificationsEnabled ? "Abilitate" : "Disabilitate")")
+                        Text("Notifiche: \(viewModel.notificationStatus ? "Abilitate" : "Disabilitate")")
+                    }.onTapGesture {
+                        viewModel.notificationStatus.toggle()
+                        viewModel.updateNotification()
                     }
                 }
             }
