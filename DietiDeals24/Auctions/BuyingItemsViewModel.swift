@@ -4,10 +4,17 @@ import SwiftUI
 class BuyingItemViewModel: ObservableObject {
     @Published var auction: Auction
     @Published var userBid: Float?
+    @Published var bidStatus: String = "Checking..."
+    @Published var auctionStatusColor: Color = .gray
+
+    private let dataLoader = DataLoader()
 
     init(auction: Auction) {
         self.auction = auction
         self.userBid = nil
+        Task {
+            await checkBidStatus()
+        }
     }
 
     var itemTitle: String {
@@ -32,10 +39,6 @@ class BuyingItemViewModel: ObservableObject {
     var highestBidText: String {
         return "Highest Bid: \(auction.currentPrice)"
     }
-    
-    var auctionStatusColor: Color {
-        true ? .red : .green
-    }
 
     var imageUrl: URL? {
         guard let urlString = auction.auctionItem.imageUrl else {
@@ -49,5 +52,34 @@ class BuyingItemViewModel: ObservableObject {
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
         return formatter.string(from: date)
+    }
+
+    // MARK: - Check if user is leading or outbid
+    private func checkBidStatus() async {
+        do {
+            // Fetch all bids for the auction
+            let bids = try await dataLoader.fetchBidsForAuction(auctionId: auction.id)
+
+            // Sort the bids by timestamp (latest bid first)
+            let sortedBids = bids.sorted(by: { $0.timestamp > $1.timestamp })
+
+            // Check if the user is leading
+            if let latestBid = sortedBids.first, latestBid.bidderID == User.shared.id {
+                DispatchQueue.main.async {
+                    self.bidStatus = "You are leading"
+                    self.auctionStatusColor = .green
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.bidStatus = "You have been outbid"
+                    self.auctionStatusColor = .red
+                }
+            }
+        } catch {
+            DispatchQueue.main.async {
+                self.bidStatus = "Error checking bid status"
+                self.auctionStatusColor = .gray
+            }
+        }
     }
 }

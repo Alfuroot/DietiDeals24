@@ -49,6 +49,27 @@ class DataLoader: ObservableObject {
         }
     }
     
+    func fetchBidsForAuction(auctionId: String) async throws -> [Bid] {
+            guard let url = URL(string: "\(baseUrl)/auctions/\(auctionId)/bids") else {
+                throw URLError(.badURL)
+            }
+
+            var request = URLRequest(url: url)
+            request.timeoutInterval = timeout
+            request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+
+            // Fetch the data
+            let (data, response) = try await session.data(for: request)
+
+            // Check if the response is valid
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                throw URLError(.badServerResponse)
+            }
+
+            // Decode the bids from the response data
+            let bids = try JSONDecoder().decode([Bid].self, from: data)
+            return bids
+        }
     // MARK: - Load Remote Data
     func loadRemoteData() async {
         isLoading = true

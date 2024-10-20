@@ -5,7 +5,6 @@ struct BuyingItemView: View {
 
     var body: some View {
         HStack {
-            // Image handling
             if let url = viewModel.imageUrl {
                 AsyncImage(url: url) { image in
                     image
@@ -27,24 +26,24 @@ struct BuyingItemView: View {
             }
 
             VStack(alignment: .leading, spacing: 8) {
-                Text(viewModel.itemTitle) // Title of the auction item
+                Text(viewModel.itemTitle)
                     .font(.headline)
                     .lineLimit(1)
 
-                Text(viewModel.userBidText) // User's bid information
+                Text(viewModel.userBidText)
                     .font(.subheadline)
                     .foregroundColor(.gray)
 
-                Text(viewModel.bidEndDateText) // Bid end date
+                Text(viewModel.bidEndDateText)
                     .font(.subheadline)
                     .foregroundColor(.gray)
 
-                Text(viewModel.auctionStatusText) // Auction status
+                Text(viewModel.auctionStatusText)
                     .font(.title3)
                     .fontWeight(.bold)
-                    .foregroundColor(viewModel.auctionStatusColor) // Dynamic color based on status
+                    .foregroundColor(viewModel.auctionStatusColor)
 
-                Text(viewModel.highestBidText) // Highest bid information
+                Text(viewModel.highestBidText)
                     .font(.title3)
                     .fontWeight(.bold)
             }
@@ -56,9 +55,5 @@ struct BuyingItemView: View {
         .cornerRadius(12)
         .shadow(radius: 3)
         .padding(.horizontal)
-        .onTapGesture {
-            // Optional: Add navigation or interaction here
-            print("Tapped on auction item: \(viewModel.itemTitle)")
-        }
     }
 }
