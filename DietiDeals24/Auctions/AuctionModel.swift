@@ -78,6 +78,7 @@ class Auction: Codable, Hashable {
     var decrementAmount: Float?
     var decrementInterval: TimeInterval?
     var floorPrice: Float?
+    var sellerID: String // New sellerID property
 
     init(id: String = UUID().uuidString,
          title: String,
@@ -88,6 +89,7 @@ class Auction: Codable, Hashable {
          endDate: Date,
          auctionType: AuctionType,
          auctionItem: AuctionItem,
+         sellerID: String, // Add sellerID parameter to initializer
          buyoutPrice: Float? = nil,
          decrementAmount: Float? = nil,
          decrementInterval: TimeInterval? = nil,
@@ -102,35 +104,41 @@ class Auction: Codable, Hashable {
         self.endDate = endDate
         self.auctionType = auctionType
         self.auctionItem = auctionItem
+        self.sellerID = sellerID // Initialize sellerID
         self.buyoutPrice = buyoutPrice
         self.decrementAmount = decrementAmount
         self.decrementInterval = decrementInterval
         self.floorPrice = floorPrice
     }
 
-    required init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            
-            id = try container.decode(String.self, forKey: .id)
-            title = try container.decode(String.self, forKey: .title)
-            description = try container.decode(String.self, forKey: .description)
-            initialPrice = try container.decode(Float.self, forKey: .initialPrice)
-            currentPrice = try container.decode(Float.self, forKey: .currentPrice)
-            
-            let startDateString = try container.decode(String.self, forKey: .startDate)
-            let endDateString = try container.decode(String.self, forKey: .endDate)
-            
-            let dateFormatter = ISO8601DateFormatter()
-            startDate = dateFormatter.date(from: startDateString) ?? Date()
-            endDate = dateFormatter.date(from: endDateString) ?? Date()
+    enum CodingKeys: String, CodingKey {
+        case id, title, description, initialPrice, currentPrice, startDate, endDate, auctionType, auctionItem, buyoutPrice, decrementAmount, decrementInterval, floorPrice, sellerID // Add sellerID to CodingKeys
+    }
 
-            auctionType = try container.decode(AuctionType.self, forKey: .auctionType)
-            auctionItem = try container.decode(AuctionItem.self, forKey: .auctionItem)
-            buyoutPrice = try container.decodeIfPresent(Float.self, forKey: .buyoutPrice)
-            decrementAmount = try container.decodeIfPresent(Float.self, forKey: .decrementAmount)
-            decrementInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .decrementInterval)
-            floorPrice = try container.decodeIfPresent(Float.self, forKey: .floorPrice)
-        }
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try container.decode(String.self, forKey: .id)
+        title = try container.decode(String.self, forKey: .title)
+        description = try container.decode(String.self, forKey: .description)
+        initialPrice = try container.decode(Float.self, forKey: .initialPrice)
+        currentPrice = try container.decode(Float.self, forKey: .currentPrice)
+        
+        let startDateString = try container.decode(String.self, forKey: .startDate)
+        let endDateString = try container.decode(String.self, forKey: .endDate)
+        
+        let dateFormatter = ISO8601DateFormatter()
+        startDate = dateFormatter.date(from: startDateString) ?? Date()
+        endDate = dateFormatter.date(from: endDateString) ?? Date()
+
+        auctionType = try container.decode(AuctionType.self, forKey: .auctionType)
+        auctionItem = try container.decode(AuctionItem.self, forKey: .auctionItem)
+        buyoutPrice = try container.decodeIfPresent(Float.self, forKey: .buyoutPrice)
+        decrementAmount = try container.decodeIfPresent(Float.self, forKey: .decrementAmount)
+        decrementInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .decrementInterval)
+        floorPrice = try container.decodeIfPresent(Float.self, forKey: .floorPrice)
+        sellerID = try container.decode(String.self, forKey: .sellerID) // Decode sellerID
+    }
 
     func isAuctionActive() -> Bool {
         return Date() < endDate
@@ -158,6 +166,7 @@ class Auction: Codable, Hashable {
         hasher.combine(decrementAmount)
         hasher.combine(decrementInterval)
         hasher.combine(floorPrice)
+        hasher.combine(sellerID)
     }
 }
 

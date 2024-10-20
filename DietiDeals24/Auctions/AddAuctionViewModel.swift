@@ -14,6 +14,8 @@ class AddAuctionViewModel: ObservableObject {
     @Published var decrementInterval: String = ""
     @Published var floorPrice: String = ""
     
+    @ObservedObject var dataLoader = DataLoader() // Instantiate DataLoader to access sellerID
+    
     private func parsePrice(_ value: String) -> Float? {
         let sanitized = value.replacingOccurrences(of: "€", with: "").replacingOccurrences(of: ",", with: ".").trimmingCharacters(in: .whitespaces)
         return Float(sanitized)
@@ -44,6 +46,9 @@ class AddAuctionViewModel: ObservableObject {
             print("Invalid minimum price value.")
             return
         }
+        
+        // Retrieve sellerID from the dataLoader
+        let sellerID = User.shared.id // Assuming User.shared.id gives you the current user's ID
 
         let auctionItem = AuctionItem(
             title: auctionTitle,
@@ -72,10 +77,10 @@ class AddAuctionViewModel: ObservableObject {
                 endDate: auctionEndDate,
                 auctionType: auctionType,
                 auctionItem: auctionItem,
-                buyoutPrice: buyoutPriceValue,
+                sellerID: sellerID, buyoutPrice: buyoutPriceValue,
                 decrementAmount: decrementAmountValue,
                 decrementInterval: decrementIntervalValue * 60,
-                floorPrice: floorPriceValue
+                floorPrice: floorPriceValue // Set sellerID here
             )
         } else {
             auction = Auction(
@@ -87,40 +92,19 @@ class AddAuctionViewModel: ObservableObject {
                 startDate: Date(),
                 endDate: auctionEndDate,
                 auctionType: auctionType,
-                auctionItem: auctionItem
+                auctionItem: auctionItem,
+                sellerID: sellerID
             )
         }
         
-        saveAuction(auction: auction)
-    }
-    
-    private func saveAuction(auction: Auction) {
-        do {
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-            
-            let jsonData = try encoder.encode(auction)
-            let jsonString = String(data: jsonData, encoding: .utf8) ?? ""
-            print("Encoded JSON: \(jsonString)")
-            
-            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let fileURL = documentDirectory.appendingPathComponent("auctions.json")
-            
-            if FileManager.default.fileExists(atPath: fileURL.path) {
-                var existingData = try Data(contentsOf: fileURL)
-                
-                
-                existingData.append(jsonData)
-                existingData.append("\n]".data(using: .utf8)!) // Close the JSON array
-                try existingData.write(to: fileURL)
-            } else {
-                let jsonArray = "[\n" + jsonString + "\n]"
-                try jsonArray.write(to: fileURL, atomically: true, encoding: .utf8)
+        // Use DataLoader to save auction instead of writing to file
+        Task {
+            do {
+                try await dataLoader.createAuction(auction: auction) 
+                print("Auction added successfully!")
+            } catch {
+                print("Error saving auction: \(error.localizedDescription)")
             }
-            
-            print("Auction added to JSON file successfully!")
-        } catch {
-            print("Error encoding auction: \(error.localizedDescription)")
         }
     }
 }

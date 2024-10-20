@@ -21,16 +21,17 @@ class MySalesViewModel: ObservableObject {
         isLoading = true // Set loading state to true
         Task {
             do {
-                await dataLoader.loadRemoteData() // Asynchronously load remote data
+                await dataLoader.loadRemoteData()
+                await dataLoader.fetchSellerAuctions()
                 DispatchQueue.main.async {
-                    self.sellingAuctions = self.dataLoader.allAuctions // Update selling auctions on the main thread
-                    self.isLoading = false // Reset loading state
+                    self.sellingAuctions = self.dataLoader.sellerAuctions
+                    self.isLoading = false
                 }
             } catch {
                 DispatchQueue.main.async {
-                    self.error = error.localizedDescription // Capture error message
-                    self.isLoading = false // Reset loading state
-                    self.showAlert = true // Show alert for the error
+                    self.error = error.localizedDescription
+                    self.isLoading = false
+                    self.showAlert = true
                 }
             }
         }

@@ -63,7 +63,6 @@ struct AuctionDetailView: View {
                     }
                 } else {
                     Button(action: {
-                        let bidAmount = Float(viewModel.bidAmount) ?? 0.0
                         Task {
                             viewModel.placeBid()
                         }

@@ -1,10 +1,3 @@
-//
-//  VendorDashbordView.swift
-//  DietiDeals24
-//
-//  Created by Giuseppe Carannante on 07/05/24.
-//
-
 import SwiftUI
 
 struct MyAuctionsView: View {
@@ -19,9 +12,14 @@ struct MyAuctionsView: View {
                     } else if let error = viewModel.error {
                         Text("Error: \(error)")
                             .foregroundColor(.red)
+                    } else if viewModel.sortedAuctions.isEmpty {
+                        Text("You are not participating in any auctions.")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
                     } else {
-                        ForEach(viewModel.sortedAuctions, id: \.self) { auctions in
-                            BuyingItemView(viewModel: BuyingItemViewModel(auction: auctions))
+                        ForEach(viewModel.sortedAuctions, id: \.self) { auction in
+                            BuyingItemView(viewModel: BuyingItemViewModel(auction: auction))
                         }
                     }
                 }

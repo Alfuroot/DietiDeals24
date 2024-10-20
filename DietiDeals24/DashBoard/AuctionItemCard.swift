@@ -61,21 +61,3 @@ struct AuctionItemCard: View {
         return formatter.string(from: auction.endDate)
     }
 }
-
-struct AuctionItemCard_Previews: PreviewProvider {
-    static var previews: some View {
-        AuctionItemCard(
-            auction: Auction(
-                id: "1",
-                title: "Sample Item",
-                description: "A description of the auction item.",
-                initialPrice: 100,
-                currentPrice: 150,
-                startDate: Date(),
-                endDate: Calendar.current.date(byAdding: .day, value: 1, to: Date())!,
-                auctionType: .classic,
-                auctionItem: AuctionItem(title: "Sample Item", description: "A description of the auction item.", category: .tecnologia)
-            )
-        )
-    }
-}
