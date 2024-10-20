@@ -9,13 +9,20 @@ struct MySalesView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    if viewModel.sellingAuctions.isEmpty {
-                        Text("No items available")
-                            .foregroundColor(.gray)
-                    } else {
-                        ForEach(viewModel.sellingAuctions, id: \.self) { auctions in
-                            SellingItemView(auction: auctions)
+                    if viewModel.checkIBAN() {
+                        if viewModel.sellingAuctions.isEmpty {
+                            Text("No items available")
+                                .foregroundColor(.gray)
+                        } else {
+                            ForEach(viewModel.sellingAuctions, id: \.self) { auction in
+                                SellingItemView(auction: auction)
+                            }
                         }
+                    } else {
+                        Text("You must add your IBAN to access this section.")
+                            .foregroundColor(.red)
+                            .multilineTextAlignment(.center)
+                            .padding()
                     }
                 }
                 .padding()
@@ -36,9 +43,9 @@ struct MySalesView: View {
         }
         .alert(isPresented: $viewModel.showAlert) {
             Alert(
-                title: Text("Attenzione"),
-                message: Text("Aggiungi l’IBAN al tuo account per accedere a questa sezione"),
-                dismissButton: .default(Text("Aggiungi IBAN"), action: {
+                title: Text("Attention"),
+                message: Text("Please add your IBAN to access this section."),
+                dismissButton: .default(Text("Add IBAN"), action: {
                     showModal = true
                 })
             )
@@ -47,8 +54,11 @@ struct MySalesView: View {
             IBANModalView()
         }
         .onAppear {
-            viewModel.checkIBAN()
-            viewModel.loadSellingAuctions()
+            if viewModel.checkIBAN() {
+                viewModel.loadSellingAuctions()
+            } else {
+                
+            }
         }
     }
 }

@@ -57,13 +57,10 @@ class BuyingItemViewModel: ObservableObject {
     // MARK: - Check if user is leading or outbid
     private func checkBidStatus() async {
         do {
-            // Fetch all bids for the auction
             let bids = try await dataLoader.fetchBidsForAuction(auctionId: auction.id)
-
-            // Sort the bids by timestamp (latest bid first)
+            
             let sortedBids = bids.sorted(by: { $0.timestamp > $1.timestamp })
 
-            // Check if the user is leading
             if let latestBid = sortedBids.first, latestBid.bidderID == User.shared.id {
                 DispatchQueue.main.async {
                     self.bidStatus = "You are leading"

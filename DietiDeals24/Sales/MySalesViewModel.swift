@@ -13,9 +13,15 @@ class MySalesViewModel: ObservableObject {
         loadSellingAuctions()
     }
     
-    func checkIBAN() {
-        // Implementation for IBAN checking goes here
+    func checkIBAN() -> Bool {
+        if let iban = User.shared.iban, !iban.isEmpty {
+            return true
+        } else {
+            showAlert = true
+            return false
+        }
     }
+
     
     func loadSellingAuctions() {
         isLoading = true // Set loading state to true
