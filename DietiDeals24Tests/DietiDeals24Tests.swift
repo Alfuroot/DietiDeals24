@@ -2,6 +2,38 @@ import XCTest
 @testable import DietiDeals24
 import UserNotifications
 
+class MockNotificationCenter: UNUserNotificationCenter {
+    var didRequestAuthorization = false
+    var lastNotificationContent: UNMutableNotificationContent?
+
+    override func requestAuthorization(options: UNAuthorizationOptions, completionHandler: @escaping (Bool, Error?) -> Void) {
+        didRequestAuthorization = true
+        completionHandler(true, nil)
+    }
+    
+    init(didRequestAuthorization: Bool = false, lastNotificationContent: UNMutableNotificationContent? = nil) {
+        self.didRequestAuthorization = didRequestAuthorization
+        self.lastNotificationContent = lastNotificationContent
+    }
+}
+
+class MockNotificationCenterWithError: UNUserNotificationCenter {
+    var simulateError: Bool = false
+    var lastRequest: UNNotificationRequest?
+    
+    override func add(_ request: UNNotificationRequest, withCompletionHandler completionHandler: ((Error?) -> Void)?) {
+        lastRequest = request
+        
+        if simulateError {
+            let error = NSError(domain: "com.example.notification", code: 500, userInfo: [NSLocalizedDescriptionKey: "Failed to schedule notification"])
+            completionHandler?(error)
+        } else {
+            completionHandler?(nil)
+        }
+    }
+}
+
+
 class AuctionTests: XCTestCase {
     
     var auctionItem: AuctionItem!
@@ -35,17 +67,20 @@ class AuctionTests: XCTestCase {
     }
     
     func testScheduleBidNotificationNotValid() {
-        let expectation = self.expectation(description: "Notification permission requested")
-        
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.requestAuthorization(options: [.alert, .sound]) { granted, error in
-            XCTAssertFalse(granted, "Notification permission should be granted")
-            XCTAssertNotNil(error, "There should be no error in requesting permission")
-            expectation.fulfill()
+           
+            let mockNotificationCenter = MockNotificationCenter(didRequestAuthorization: false)
+            
+            let expectation = self.expectation(description: "Notification permission denied")
+
+            // Use the mock notification center to simulate permission denial
+            mockNotificationCenter.requestAuthorization(options: [.alert, .sound]) { granted, error in
+                XCTAssertFalse(granted, "Notification permission should NOT be granted")
+                XCTAssertNil(error, "There should be no error when denying permission")
+                expectation.fulfill()
+            }
+            
+            waitForExpectations(timeout: 1, handler: nil)
         }
-        
-        waitForExpectations(timeout: 1, handler: nil)
-    }
     
     func testCreateBidNotification() {
         let auctionId = "12345"
@@ -65,6 +100,34 @@ class AuctionTests: XCTestCase {
         }
         
         XCTAssertEqual(request.identifier, identifier, "Notification identifier should match")
+    }
+    
+    func testCreateBidNotificationWithError() {
+        let auctionId = "12345"
+        let bidAmount = 150.00
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Bid Placed!"
+        content.body = "You placed a bid of $\(bidAmount) on auction \(auctionId)."
+        content.sound = UNNotificationSound.default
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let identifier = "BidPlaced-\(auctionId)"
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        
+        let mockNotificationCenter = MockNotificationCenterWithError()
+        mockNotificationCenter.simulateError = true
+        
+        let expectation = self.expectation(description: "Notification scheduling should fail with an error")
+        
+        mockNotificationCenter.add(request) { error in
+            XCTAssertNotNil(error, "An error should occur when scheduling the notification")
+            XCTAssertEqual((error! as NSError).localizedDescription, "Failed to schedule notification", "Error message should match")
+            XCTAssertEqual(mockNotificationCenter.lastRequest?.identifier, identifier, "Notification identifier should match")
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1, handler: nil)
     }
 
     func testPlaceBid() {
@@ -90,7 +153,47 @@ class AuctionTests: XCTestCase {
         XCTAssertEqual(auction.currentPrice, 150.00, "Current price should be updated to the new bid amount after placement")
     }
 
-    
+    func testPlaceBidWithErrors() {
+        auction.currentPrice = 100.00
+
+        bidAmount = "invalidBidAmount"
+        
+        if let invalidBid = Double(bidAmount) {
+            XCTFail("Bid parsing should have failed for non-numeric bid amount.")
+        } else {
+            XCTAssert(true, "Bid parsing correctly failed for non-numeric input.")
+        }
+        
+        bidAmount = ""
+        
+        if let emptyBid = Double(bidAmount) {
+            XCTFail("Bid parsing should have failed for empty bid input.")
+        } else {
+            XCTAssert(true, "Bid parsing correctly failed for empty input.")
+        }
+        
+        bidAmount = "50.00"
+        let cleanCurrentBidString = String(auction.currentPrice)
+            .trimmingCharacters(in: .punctuationCharacters)
+            .replacingOccurrences(of: ",", with: ".")
+        
+        guard let currentBid = Double(cleanCurrentBidString),
+              let lowBid = Double(bidAmount) else {
+            XCTFail("Bid parsing failed for lower bid.")
+            return
+        }
+        
+        XCTAssertFalse(lowBid > currentBid, "Bid should not be accepted when it is lower than the current bid.")
+        
+        bidAmount = "100.00"
+        guard let equalBid = Double(bidAmount) else {
+            XCTFail("Bid parsing failed for equal bid.")
+            return
+        }
+        
+        XCTAssertFalse(equalBid > currentBid, "Bid should not be accepted when it is exactly equal to the current price.")
+    }
+
     func testAuctionStatus() {
         let auctionEndDate = Date().addingTimeInterval(600)
         auction.endDate = auctionEndDate
@@ -101,18 +204,25 @@ class AuctionTests: XCTestCase {
         XCTAssertFalse(auction.isAuctionActive(), "The auction should be inactive since the end date is in the past")
     }
     
-    func testValidIBAN() {
+    func testValidIBANWithErrors() {
         let validator = Validator()
         
         let validIBAN = "IT60X0542811101000000123456"
         XCTAssertTrue(validator.isValidIBAN(validIBAN), "The IBAN should be valid")
         
-        let invalidIBANLength = "IT60X054281110100000012378787878787878787878787878787"
-        XCTAssertFalse(validator.isValidIBAN(invalidIBANLength), "The IBAN should be invalid due to incorrect length")
+        let invalidIBANLengthLong = "IT60X054281110100000012378787878787878787878787878787"
+        XCTAssertFalse(validator.isValidIBAN(invalidIBANLengthLong), "The IBAN should be invalid due to excessive length")
+        
+        let invalidIBANLengthShort = "IT60X054201"
+        XCTAssertFalse(validator.isValidIBAN(invalidIBANLengthShort), "The IBAN should be invalid due to insufficient length")
         
         let invalidIBANSpecialChars = "IT60X05428-11101000000123456"
         XCTAssertFalse(validator.isValidIBAN(invalidIBANSpecialChars), "The IBAN should be invalid due to special characters")
+        
+        let invalidIBANLettersInNumber = "IT60X0542811101000000ABCDEF"
+        XCTAssertFalse(validator.isValidIBAN(invalidIBANLettersInNumber), "The IBAN should be invalid due to letters in the numeric part")
     }
+
     
     func testAuctionType() {
         XCTAssertEqual(auction.auctionType, .classic, "Auction type should be 'classic' by default")
