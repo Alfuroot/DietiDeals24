@@ -64,7 +64,9 @@ struct AuctionDetailView: View {
                 } else {
                     Button(action: {
                         let bidAmount = Float(viewModel.bidAmount) ?? 0.0
-                        viewModel.placeBid()
+                        Task {
+                            viewModel.placeBid()
+                        }
                     }) {
                         Text("Place Bid")
                             .fontWeight(.bold)
@@ -81,5 +83,10 @@ struct AuctionDetailView: View {
             .padding()
         }
         .navigationTitle("Auction Details")
+        .alert(item: $viewModel.alertMessage) { alertMessage in
+            Alert(title: Text("Error"),
+                  message: Text(alertMessage.message),
+                  dismissButton: .default(Text("OK")))
+        }
     }
 }
