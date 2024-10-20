@@ -3,10 +3,10 @@ import SwiftUI
 struct DashBoard: View {
     @StateObject private var viewModel = DashBoardViewModel()
     @State private var isFiltersPresented: Bool = false
-    @ObservedObject private var router = VendorRouter.shared  // Use the shared instance
+    @ObservedObject private var router = VendorRouter.shared
 
     var body: some View {
-        NavigationStack(path: $router.navPath) { // Bind to the router's navPath
+        NavigationStack(path: $router.navPath) {
             ScrollView {
                 if viewModel.filteredItems.isEmpty {
                     Text("No items available")

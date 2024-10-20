@@ -26,7 +26,7 @@ struct SellingItemView: View {
             }
 
             VStack(alignment: .leading, spacing: 8) {
-                Text(auction.title)  // Use title from Auction
+                Text(auction.title)
                     .font(.headline)
                     .lineLimit(1)
                 
@@ -34,11 +34,11 @@ struct SellingItemView: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
                 
-                Text("Ends: \(formatDate(auction.endDate))")  // Format the end date using a function
+                Text("Ends: \(formatDate(auction.endDate))")
                         .font(.subheadline)
                         .foregroundColor(.gray)
 
-                Text("Current Highest Bid: \(auction.currentPrice)")  // Display current bid or "N/A"
+                Text("Current Highest Bid: \(auction.currentPrice)")
                     .font(.title3)
                     .fontWeight(.bold)
             }
@@ -52,7 +52,6 @@ struct SellingItemView: View {
         .padding(.horizontal)
     }
     
-    // Helper function to format date
     private func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium

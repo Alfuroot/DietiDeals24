@@ -18,7 +18,6 @@
 		941E7EF12CBDA8AD00F260FC /* AddAuctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E7EF02CBDA8AD00F260FC /* AddAuctionViewModel.swift */; };
 		941E7EF32CBDAAA900F260FC /* AuctionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E7EF22CBDAAA900F260FC /* AuctionDetailViewModel.swift */; };
 		941E7EF52CBDAB2D00F260FC /* AlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941E7EF42CBDAB2D00F260FC /* AlertMessage.swift */; };
-		9424EAAC2C0CC16400429CDE /* RemoteUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAB2C0CC16400429CDE /* RemoteUser.swift */; };
 		9424EAAE2C10F31900429CDE /* DashBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9424EAAD2C10F31900429CDE /* DashBoardViewModel.swift */; };
 		942E68AA2BE9D493007D0046 /* MyAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68A92BE9D493007D0046 /* MyAuctionsView.swift */; };
 		942E68AC2BE9D7C0007D0046 /* AuctionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AB2BE9D7C0007D0046 /* AuctionDetailView.swift */; };
@@ -57,7 +56,6 @@
 		A4914A7F2BA8E1D9000C2532 /* PersonalAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */; };
 		A4E46BDC2BA74879007140E6 /* DashBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E46BDB2BA74879007140E6 /* DashBoard.swift */; };
 		A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CA2BA60E8200F013ED /* AuctionModel.swift */; };
-		A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,7 +87,6 @@
 		941E7EF02CBDA8AD00F260FC /* AddAuctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAuctionViewModel.swift; sourceTree = "<group>"; };
 		941E7EF22CBDAAA900F260FC /* AuctionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailViewModel.swift; sourceTree = "<group>"; };
 		941E7EF42CBDAB2D00F260FC /* AlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessage.swift; sourceTree = "<group>"; };
-		9424EAAB2C0CC16400429CDE /* RemoteUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteUser.swift; sourceTree = "<group>"; };
 		9424EAAD2C10F31900429CDE /* DashBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoardViewModel.swift; sourceTree = "<group>"; };
 		942E68A92BE9D493007D0046 /* MyAuctionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuctionsView.swift; sourceTree = "<group>"; };
 		942E68AB2BE9D7C0007D0046 /* AuctionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailView.swift; sourceTree = "<group>"; };
@@ -127,7 +124,6 @@
 		A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAreaView.swift; sourceTree = "<group>"; };
 		A4E46BDB2BA74879007140E6 /* DashBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoard.swift; sourceTree = "<group>"; };
 		A4F956CA2BA60E8200F013ED /* AuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionModel.swift; sourceTree = "<group>"; };
-		A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,8 +206,6 @@
 				A47DF6DA2BA24767000AFD15 /* User.swift */,
 				941E7EF42CBDAB2D00F260FC /* AlertMessage.swift */,
 				94EE60102CBAE0120029DB96 /* Validator.swift */,
-				9424EAAB2C0CC16400429CDE /* RemoteUser.swift */,
-				A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */,
 				944D6F1E2B13B300008C97F2 /* Assets.xcassets */,
 				944D6F202B13B300008C97F2 /* Preview Content */,
 			);
@@ -481,10 +475,8 @@
 				A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */,
 				94F6858F2CC3A37A00EA355B /* PersonalAreaViewModel.swift in Sources */,
 				94EE60052CA8623F0029DB96 /* SellingItemsView.swift in Sources */,
-				9424EAAC2C0CC16400429CDE /* RemoteUser.swift in Sources */,
 				944D6F472B13BA3E008C97F2 /* LoginViewModel.swift in Sources */,
 				942E68B02BE9DED5007D0046 /* AddAuctionView.swift in Sources */,
-				A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */,
 				944E161A2C359AD200C8E4E8 /* LoginRouter.swift in Sources */,
 				94EE60032CA862150029DB96 /* BuyingItemsView.swift in Sources */,
 				942E68AA2BE9D493007D0046 /* MyAuctionsView.swift in Sources */,

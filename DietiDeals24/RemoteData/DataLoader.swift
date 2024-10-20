@@ -23,7 +23,7 @@ class DataLoader: ObservableObject {
     // MARK: - Load Data (Local/Remote)
     func loadData() {
         Task {
-            await loadRemoteData() // Fetch from remote API in production
+            await loadRemoteData()
         }
     }
     
@@ -36,15 +36,12 @@ class DataLoader: ObservableObject {
             request.timeoutInterval = timeout
             request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
 
-            // Fetch the data
             let (data, response) = try await session.data(for: request)
 
-            // Check if the response is valid
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
                 throw URLError(.badServerResponse)
             }
 
-            // Decode the bids from the response data
             let bids = try JSONDecoder().decode([Bid].self, from: data)
             return bids
         }
@@ -133,7 +130,6 @@ class DataLoader: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        // Optionally reload auctions after buyout
         await loadRemoteData()
     }
     
@@ -154,7 +150,6 @@ class DataLoader: ObservableObject {
             throw URLError(.badServerResponse)
         }
         
-        // Optionally reload auctions after cancelation
         await loadRemoteData()
     }
     
@@ -250,12 +245,10 @@ class DataLoader: ObservableObject {
                 throw URLError(.badServerResponse)
             }
 
-            // Decode the response data into Bid objects
             let bids = try JSONDecoder().decode([Bid].self, from: data)
             return bids
         }
         
-        // Existing getAuctionById method reused here to fetch each auction by ID
         func getAuctionById(_ auctionId: String) async -> Auction? {
             guard let url = URL(string: "\(baseUrl)/auctions/\(auctionId)") else {
                 errorMessage = "Invalid URL"

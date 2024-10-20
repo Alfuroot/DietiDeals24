@@ -78,8 +78,8 @@ class Auction: Codable, Hashable {
     var decrementAmount: Float?
     var decrementInterval: TimeInterval?
     var floorPrice: Float?
-    var sellerID: String // New sellerID property
-
+    var sellerID: String
+    
     init(id: String = UUID().uuidString,
          title: String,
          description: String,
@@ -89,7 +89,7 @@ class Auction: Codable, Hashable {
          endDate: Date,
          auctionType: AuctionType,
          auctionItem: AuctionItem,
-         sellerID: String, // Add sellerID parameter to initializer
+         sellerID: String,
          buyoutPrice: Float? = nil,
          decrementAmount: Float? = nil,
          decrementInterval: TimeInterval? = nil,
@@ -104,7 +104,7 @@ class Auction: Codable, Hashable {
         self.endDate = endDate
         self.auctionType = auctionType
         self.auctionItem = auctionItem
-        self.sellerID = sellerID // Initialize sellerID
+        self.sellerID = sellerID
         self.buyoutPrice = buyoutPrice
         self.decrementAmount = decrementAmount
         self.decrementInterval = decrementInterval

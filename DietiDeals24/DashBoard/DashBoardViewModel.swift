@@ -31,10 +31,10 @@ class DashBoardViewModel: ObservableObject {
         
         Task {
             do {
-                await dataLoader.loadRemoteData()  // Fetch data from the DataLoader
-                updateAuctionItems()  // Update the auction items array
+                await dataLoader.loadRemoteData()
+                updateAuctionItems()
             } catch {
-                handleError(error)  // Handle errors if fetching fails
+                handleError(error)
             }
         }
     }
@@ -48,8 +48,8 @@ class DashBoardViewModel: ObservableObject {
 
     private func handleError(_ error: Error) {
         DispatchQueue.main.async {
-            self.error = error.localizedDescription  // Update error message
-            self.isLoading = false  // Set loading state to false
+            self.error = error.localizedDescription
+            self.isLoading = false
         }
     }
 }

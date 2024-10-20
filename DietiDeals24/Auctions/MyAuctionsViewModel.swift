@@ -15,9 +15,6 @@ class MyAuctionsViewModel: ObservableObject {
 
     func fetchAuctions() {
         isLoading = true
-//        dataLoader.loadRemoteData()
-//        self.auctions = dataLoader.myAuctions
-//        self.isLoading = false
         Task {
             do {
                 try await dataLoader.getMyAuctions()
