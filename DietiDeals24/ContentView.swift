@@ -4,7 +4,7 @@ struct ContentView: View {
     @State var loggedIn: Bool = false
 
     var body: some View {
-        if loggedIn {
+        if !loggedIn {
             TabView {
                 LoginView()
             }

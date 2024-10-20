@@ -72,26 +72,6 @@ struct LoginView: View {
                             }
                             Spacer()
                         }
-                        
-                        HStack(spacing: 16) {
-                            Spacer()
-                            Image("google_logo.png")
-                                .resizable()
-                                .frame(width: 35, height: 35)
-                                .padding()
-                            
-                            Image("github_logo.png")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                                .padding()
-                            
-                            Image("apple_logo.png")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                                .padding()
-                            
-                            Spacer()
-                        }
                     }
                     
                     Spacer()

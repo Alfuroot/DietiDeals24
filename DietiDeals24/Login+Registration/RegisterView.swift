@@ -20,6 +20,24 @@ struct RegisterView: View {
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.3)))
                         .keyboardType(.emailAddress)
 
+                    Text("Address:")
+                        .fontWeight(.bold)
+                    TextField("Enter your address", text: $viewModel.address)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.3)))
+
+                    Text("Bio:")
+                        .fontWeight(.bold)
+                    TextField("Tell us about yourself", text: $viewModel.bio)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.3)))
+
+                    Text("Codice Fiscale:")
+                        .fontWeight(.bold)
+                    TextField("Enter your codice fiscale", text: $viewModel.codicefisc)
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.gray.opacity(0.3)))
+
                     Text("Password:")
                         .fontWeight(.bold)
                     SecureField("Enter your password", text: $viewModel.password)

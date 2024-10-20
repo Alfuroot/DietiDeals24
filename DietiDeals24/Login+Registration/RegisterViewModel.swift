@@ -8,18 +8,23 @@ class RegisterViewModel: ObservableObject {
     @Published var isBuyer: Bool = false
     @Published var username: String = ""
     @Published var email: String = ""
+    @Published var address: String = ""
+    @Published var bio: String = ""
     @Published var password: String = ""
     @Published var passwordConfirm: String = ""
+    @Published var codicefisc: String = ""
     @Published var showRegistrationErrorAlert: Bool = false
     @Published var registrationError: String? = nil
     @Published var isUserRegistered: Bool = false
     
+    private var dataLoader = DataLoader()
+    
     var isRegistrationDisabled: Bool {
-        return username.isEmpty || email.isEmpty || password.isEmpty || passwordConfirm.isEmpty
+        return username.isEmpty || email.isEmpty || address.isEmpty || bio.isEmpty || password.isEmpty || passwordConfirm.isEmpty || codicefisc.isEmpty
     }
 
     var isRegistrationValid: Bool {
-        return !username.isEmpty && !email.isEmpty && !password.isEmpty && passwordConfirm == password
+        return !username.isEmpty && !email.isEmpty && !address.isEmpty && !bio.isEmpty && !password.isEmpty && passwordConfirm == password && !codicefisc.isEmpty
     }
 
     func toggleBuyer() {
@@ -53,7 +58,12 @@ class RegisterViewModel: ObservableObject {
     }
 
     private func saveUserDetails() {
-        
-        print("Saving user details for \(username) with email \(email)")
+        Task {
+            do {
+                try await dataLoader.saveUserData(user: User(username: self.username, password: self.password, codicefisc: self.codicefisc, email: self.email, address: self.address, notificationsEnabled: true))
+            } catch {
+                
+            }
+        }
     }
 }
