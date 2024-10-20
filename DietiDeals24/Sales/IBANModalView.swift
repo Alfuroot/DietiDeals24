@@ -23,7 +23,9 @@ struct IBANModalView: View {
             }
 
             Button(action: {
-                viewModel.confirmIBAN()
+                Task {
+                    await viewModel.confirmIBAN()
+                }
             }) {
                 Text("Conferma")
                     .font(.headline)

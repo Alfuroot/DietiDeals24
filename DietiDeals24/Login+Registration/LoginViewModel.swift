@@ -2,6 +2,7 @@ import Foundation
 import FirebaseAuth
 import Combine
 
+@MainActor
 class LoginViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var email: String = ""

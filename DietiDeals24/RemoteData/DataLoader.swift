@@ -10,7 +10,7 @@ class DataLoader: ObservableObject {
     @Published var myAuctions: [Auction] = []
     @Published var sellerAuctions: [Auction] = []
     
-    private let baseUrl = "https://example.com/api"
+    private let baseUrl = "https://33bc-2a0e-410-96da-0-d0dd-bd8c-51c6-84fc.ngrok-free.app"
     private let session = URLSession.shared
     private let timeout: TimeInterval = 10
     private let authToken = "your_auth_token_here"
@@ -22,30 +22,8 @@ class DataLoader: ObservableObject {
     
     // MARK: - Load Data (Local/Remote)
     func loadData() {
-#if DEBUG
-        loadLocalData() // Load data from local JSON in debug mode
-#else
         Task {
             await loadRemoteData() // Fetch from remote API in production
-        }
-#endif
-    }
-    
-    // MARK: - Load Local Data
-    func loadLocalData() {
-        guard let path = Bundle.main.path(forResource: "auction_items", ofType: "json") else {
-            errorMessage = "Local data file not found"
-            return
-        }
-        
-        do {
-            let data = try Data(contentsOf: URL(fileURLWithPath: path))
-            let auctions = try JSONDecoder().decode([Auction].self, from: data)
-            self.allAuctions = auctions
-            self.activeAuctions = auctions.filter { $0.isAuctionActive() }
-            self.endedAuctions = auctions.filter { !$0.isAuctionActive() }
-        } catch {
-            errorMessage = "Error loading local data: \(error)"
         }
     }
     
@@ -78,7 +56,6 @@ class DataLoader: ObservableObject {
         let url = URL(string: "\(baseUrl)/auctions")!
         var request = URLRequest(url: url)
         request.timeoutInterval = timeout
-        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         
         do {
             let (data, response) = try await session.data(for: request)
@@ -202,11 +179,7 @@ class DataLoader: ObservableObject {
     
     // MARK: - Load User Data (Local/Remote)
     func loadUserData() async throws -> User {
-#if DEBUG
-        return try loadUserDataFromLocalFile()
-#else
         return try await loadUserDataFromAPI()
-#endif
     }
     
     private func loadUserDataFromLocalFile() throws -> User {
@@ -244,21 +217,16 @@ class DataLoader: ObservableObject {
             defer { isLoading = false }
 
             do {
-                // Step 1: Fetch all bids made by the current user
                 let myBids = try await fetchUserBids()
 
-                // Step 2: Extract unique auction IDs from the bids
                 let auctionIds = Set(myBids.map { $0.auctionID })
 
-                // Step 3: Fetch the auctions based on auction IDs
                 var auctions: [Auction] = []
                 for auctionId in auctionIds {
-                    if let auction = try await getAuctionById(auctionId) {
+                    if let auction = await getAuctionById(auctionId) {
                         auctions.append(auction)
                     }
                 }
-
-                // Step 4: Update the published property with the fetched auctions
                 DispatchQueue.main.async {
                     self.myAuctions = auctions
                 }

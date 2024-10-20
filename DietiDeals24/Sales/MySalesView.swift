@@ -57,7 +57,7 @@ struct MySalesView: View {
             if viewModel.checkIBAN() {
                 viewModel.loadSellingAuctions()
             } else {
-                
+                viewModel.showAlert.toggle()
             }
         }
     }

@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 
+@MainActor
 class MySalesViewModel: ObservableObject {
     @Published var sellingAuctions: [Auction] = []
     @Published var showAlert: Bool = false
@@ -24,7 +25,7 @@ class MySalesViewModel: ObservableObject {
 
     
     func loadSellingAuctions() {
-        isLoading = true // Set loading state to true
+        isLoading = true
         Task {
             do {
                 await dataLoader.loadRemoteData()

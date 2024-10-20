@@ -31,7 +31,7 @@ class DashBoardViewModel: ObservableObject {
         
         Task {
             do {
-                dataLoader.loadLocalData()  // Fetch data from the DataLoader
+                await dataLoader.loadRemoteData()  // Fetch data from the DataLoader
                 updateAuctionItems()  // Update the auction items array
             } catch {
                 handleError(error)  // Handle errors if fetching fails

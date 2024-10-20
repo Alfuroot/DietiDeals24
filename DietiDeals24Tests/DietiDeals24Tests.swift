@@ -10,20 +10,17 @@ class AuctionTests: XCTestCase {
     var bidAmount: String!
 
     override func setUpWithError() throws {
-        // Initialize test variables
         auctionItem = AuctionItem(id: "1111111", title: "TestTitle", description: "TestDescription", imageUrl: nil, category: .tecnologia)
-        auction = Auction(title: "Test Auction", description: "Auction for testing", initialPrice: 100.0, currentPrice: 100.0, startDate: Date(), endDate: Date().addingTimeInterval(600), auctionType: .classic, auctionItem: auctionItem, buyoutPrice: 200.0)
-        bidAmount = "150.00" // New bid for testing
+        auction = Auction(title: "Test Auction", description: "Auction for testing", initialPrice: 100.0, currentPrice: 100.0, startDate: Date(), endDate: Date().addingTimeInterval(600), auctionType: .classic, auctionItem: auctionItem, sellerID: "1111111", buyoutPrice: 200.0)
+        bidAmount = "150.00"
     }
 
     override func tearDownWithError() throws {
-        // Reset state
         auctionItem = nil
         auction = nil
         alertMessage = nil
     }
 
-    // Test scheduling of bid notification permission request
     func testScheduleBidNotification() {
         let expectation = self.expectation(description: "Notification permission requested")
         
@@ -37,7 +34,19 @@ class AuctionTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
     }
     
-    // Test creation of a bid notification
+    func testScheduleBidNotificationNotValid() {
+        let expectation = self.expectation(description: "Notification permission requested")
+        
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.requestAuthorization(options: [.alert, .sound]) { granted, error in
+            XCTAssertFalse(granted, "Notification permission should be granted")
+            XCTAssertNotNil(error, "There should be no error in requesting permission")
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
     func testCreateBidNotification() {
         let auctionId = "12345"
         let bidAmount = 150.00
@@ -58,12 +67,10 @@ class AuctionTests: XCTestCase {
         XCTAssertEqual(request.identifier, identifier, "Notification identifier should match")
     }
 
-    // Test placing a bid that is higher than the current bid
     func testPlaceBid() {
         auction.currentPrice = 100.00
         bidAmount = "150.00"
         
-        // Clean and parse current bid
         let currencySymbols = CharacterSet(charactersIn: "€$").union(.punctuationCharacters)
         let cleanCurrentBidString = String(auction.currentPrice)
             .trimmingCharacters(in: currencySymbols)
@@ -75,46 +82,42 @@ class AuctionTests: XCTestCase {
             return
         }
         
+        XCTAssertEqual(auction.currentPrice, 100.00, "Current price should be initially set to 100.00")
+        
         XCTAssertTrue(newBid > currentBid, "New bid should be higher than the current bid")
+        XCTAssertEqual(newBid, 150.00, "The new bid amount should be 150.00 after conversion")
+        auction.currentPrice = Float(newBid)
+        XCTAssertEqual(auction.currentPrice, 150.00, "Current price should be updated to the new bid amount after placement")
     }
+
     
-    // Test auction status - isAuctionActive
     func testAuctionStatus() {
-        // Set up the auction with an end date in the future
         let auctionEndDate = Date().addingTimeInterval(600)
         auction.endDate = auctionEndDate
         
         XCTAssertTrue(auction.isAuctionActive(), "The auction should be active since the end date is in the future")
         
-        // Simulate an auction that has ended
         auction.endDate = Date().addingTimeInterval(-100)
         XCTAssertFalse(auction.isAuctionActive(), "The auction should be inactive since the end date is in the past")
     }
     
-    // Test IBAN validation logic for different cases
     func testValidIBAN() {
         let validator = Validator()
         
-        // Valid IBAN (Italy example)
         let validIBAN = "IT60X0542811101000000123456"
         XCTAssertTrue(validator.isValidIBAN(validIBAN), "The IBAN should be valid")
         
-        // Invalid IBAN (wrong length)
         let invalidIBANLength = "IT60X054281110100000012378787878787878787878787878787"
         XCTAssertFalse(validator.isValidIBAN(invalidIBANLength), "The IBAN should be invalid due to incorrect length")
         
-        // Invalid IBAN (contains special characters)
         let invalidIBANSpecialChars = "IT60X05428-11101000000123456"
         XCTAssertFalse(validator.isValidIBAN(invalidIBANSpecialChars), "The IBAN should be invalid due to special characters")
     }
     
-    // Test auction types (classic, reverse)
     func testAuctionType() {
-        // Test classic auction
         XCTAssertEqual(auction.auctionType, .classic, "Auction type should be 'classic' by default")
         
-        // Test reverse auction setup
-        let reverseAuction = Auction(title: "Reverse Auction", description: "Reverse auction test", initialPrice: 1000.0, currentPrice: 1000.0, startDate: Date(), endDate: Date().addingTimeInterval(3600), auctionType: .reverse, auctionItem: auctionItem, decrementAmount: 10.0, decrementInterval: 60.0, floorPrice: 800.0)
+        let reverseAuction = Auction(title: "Reverse Auction", description: "Reverse auction test", initialPrice: 1000.0, currentPrice: 1000.0, startDate: Date(), endDate: Date().addingTimeInterval(3600), auctionType: .reverse, auctionItem: auctionItem, sellerID: "111111", decrementAmount: 10.0, decrementInterval: 60.0, floorPrice: 800.0)
         
         XCTAssertEqual(reverseAuction.auctionType, .reverse, "Auction type should be 'reverse'")
         XCTAssertNotNil(reverseAuction.decrementAmount, "Decrement amount should not be nil for reverse auction")

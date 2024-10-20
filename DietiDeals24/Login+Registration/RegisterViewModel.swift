@@ -2,6 +2,7 @@ import Foundation
 import FirebaseAuth
 import Combine
 
+@MainActor
 class RegisterViewModel: ObservableObject {
     @Published var isVendor: Bool = false
     @Published var isBuyer: Bool = false

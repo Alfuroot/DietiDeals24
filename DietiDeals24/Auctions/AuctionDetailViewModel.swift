@@ -1,6 +1,7 @@
 import SwiftUI
 import UserNotifications
 
+@MainActor
 class AuctionDetailViewModel: ObservableObject {
     @Published var auction: Auction
     @Published var bidAmount: String = ""
@@ -47,15 +48,12 @@ class AuctionDetailViewModel: ObservableObject {
                 return
             }
             
-            // Create a Bid object to pass to the data loader
-            let bid = Bid(auctionID: auction.id, bidderID: User.shared.id, amount: Float(newBidAmount)) // Adjust Bid properties accordingly
-            
-            // Call the dataLoader's async placeBid function
+            let bid = Bid(auctionID: auction.id, bidderID: User.shared.id, amount: Float(newBidAmount))
             do {
                 try await dataLoader.placeBid(auctionId: auction.id, bid: bid)
                 showAlert(message: "Your bid of $\(String(format: "%.2f", newBidAmount)) has been placed!")
                 self.bidAmount = ""
-                self.auction.currentPrice = Float(newBidAmount) // Update the auction's current price
+                self.auction.currentPrice = Float(newBidAmount)
             } catch {
                 showAlert(message: "Failed to place bid: \(error.localizedDescription)")
             }
@@ -118,7 +116,7 @@ class AuctionDetailViewModel: ObservableObject {
         }
     }
     
-    private func scheduleBidNotification(for auctionId: String, bidAmount: Double) async {
+    func scheduleBidNotification(for auctionId: String, bidAmount: Double) async {
         do {
             let granted = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound])
             if granted {

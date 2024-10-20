@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 class AddAuctionViewModel: ObservableObject {
     @Published var auctionTitle: String = ""
     @Published var auctionItemType: AuctionItemType = .tecnologia
@@ -13,8 +14,9 @@ class AddAuctionViewModel: ObservableObject {
     @Published var decrementAmount: String = ""
     @Published var decrementInterval: String = ""
     @Published var floorPrice: String = ""
+    @Published var errorMessage: String = ""
     
-    @ObservedObject var dataLoader = DataLoader() // Instantiate DataLoader to access sellerID
+    var dataLoader = DataLoader()
     
     private func parsePrice(_ value: String) -> Float? {
         let sanitized = value.replacingOccurrences(of: "€", with: "").replacingOccurrences(of: ",", with: ".").trimmingCharacters(in: .whitespaces)
@@ -32,6 +34,10 @@ class AddAuctionViewModel: ObservableObject {
                 print("Buyout price, decrement amount, decrement interval, and floor price are required for reverse auctions.")
                 return false
             }
+        } else {
+            guard !auctionMinPrice.isEmpty else {
+                return false
+            }
         }
 
         return true
@@ -39,6 +45,7 @@ class AddAuctionViewModel: ObservableObject {
     
     func addAuction() {
         guard validateFields() else {
+            errorMessage = "Fill all fields to proceed"
             return
         }
         
@@ -47,8 +54,7 @@ class AddAuctionViewModel: ObservableObject {
             return
         }
         
-        // Retrieve sellerID from the dataLoader
-        let sellerID = User.shared.id // Assuming User.shared.id gives you the current user's ID
+        let sellerID = User.shared.id
 
         let auctionItem = AuctionItem(
             title: auctionTitle,
@@ -80,7 +86,7 @@ class AddAuctionViewModel: ObservableObject {
                 sellerID: sellerID, buyoutPrice: buyoutPriceValue,
                 decrementAmount: decrementAmountValue,
                 decrementInterval: decrementIntervalValue * 60,
-                floorPrice: floorPriceValue // Set sellerID here
+                floorPrice: floorPriceValue
             )
         } else {
             auction = Auction(
@@ -96,8 +102,6 @@ class AddAuctionViewModel: ObservableObject {
                 sellerID: sellerID
             )
         }
-        
-        // Use DataLoader to save auction instead of writing to file
         Task {
             do {
                 try await dataLoader.createAuction(auction: auction) 

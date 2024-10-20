@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 class BuyingItemViewModel: ObservableObject {
     @Published var auction: Auction
     @Published var userBid: Float?

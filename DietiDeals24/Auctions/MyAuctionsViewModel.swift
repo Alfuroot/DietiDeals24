@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 
+@MainActor
 class MyAuctionsViewModel: ObservableObject {
     @Published var auctions: [Auction] = []
     @Published var isLoading = false
@@ -14,12 +15,9 @@ class MyAuctionsViewModel: ObservableObject {
 
     func fetchAuctions() {
         isLoading = true
-        
-        #if DEBUG
-        dataLoader.loadLocalData()
-        self.auctions = dataLoader.myAuctions
-        self.isLoading = false
-        #else
+//        dataLoader.loadRemoteData()
+//        self.auctions = dataLoader.myAuctions
+//        self.isLoading = false
         Task {
             do {
                 try await dataLoader.getMyAuctions()
@@ -32,7 +30,6 @@ class MyAuctionsViewModel: ObservableObject {
                 handleError(error)
             }
         }
-        #endif
     }
 
     private func handleError(_ error: Error) {
