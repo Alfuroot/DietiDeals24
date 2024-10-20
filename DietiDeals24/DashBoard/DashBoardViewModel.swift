@@ -2,12 +2,14 @@ import Foundation
 import Combine
 
 class DashBoardViewModel: ObservableObject {
+    @Published var selectedAuction: Auction?
     @Published var auctions: [Auction] = []
     @Published var isLoading = false
     @Published var error: String?
     @Published var availableCategories: [AuctionItemType] = []
     @Published var search: String = ""
     @Published var selectedCategories: [AuctionItemType] = []
+    internal var router = DashboardRouter.shared
 
     private let dataLoader = DataLoader()
     

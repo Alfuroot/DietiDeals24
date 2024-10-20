@@ -52,11 +52,9 @@
 		94EE60192CBAE4380029DB96 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 94EE60182CBAE4380029DB96 /* FirebaseCore */; };
 		94EE601B2CBAE4380029DB96 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 94EE601A2CBAE4380029DB96 /* FirebaseFirestore */; };
 		94F6858F2CC3A37A00EA355B /* PersonalAreaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F6858E2CC3A37A00EA355B /* PersonalAreaViewModel.swift */; };
+		94F685912CC54CF000EA355B /* DashboardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F685902CC54CF000EA355B /* DashboardRouter.swift */; };
 		A47DF6DB2BA24767000AFD15 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47DF6DA2BA24767000AFD15 /* User.swift */; };
 		A4914A7F2BA8E1D9000C2532 /* PersonalAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */; };
-		A4A873872C10FBE700691606 /* RemoteAuctionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A873862C10FBE700691606 /* RemoteAuctionItem.swift */; };
-		A4A873892C110AFE00691606 /* RemoteReverseAuction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A873882C110AFE00691606 /* RemoteReverseAuction.swift */; };
-		A4A8738B2C110CD200691606 /* RemoteFixedTimeAuction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A8738A2C110CD200691606 /* RemoteFixedTimeAuction.swift */; };
 		A4E46BDC2BA74879007140E6 /* DashBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E46BDB2BA74879007140E6 /* DashBoard.swift */; };
 		A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CA2BA60E8200F013ED /* AuctionModel.swift */; };
 		A4F956CD2BA60FAA00F013ED /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */; };
@@ -124,11 +122,9 @@
 		94EE600D2CB720310029DB96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		94EE60102CBAE0120029DB96 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		94F6858E2CC3A37A00EA355B /* PersonalAreaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAreaViewModel.swift; sourceTree = "<group>"; };
+		94F685902CC54CF000EA355B /* DashboardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardRouter.swift; sourceTree = "<group>"; };
 		A47DF6DA2BA24767000AFD15 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A4914A7E2BA8E1D9000C2532 /* PersonalAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAreaView.swift; sourceTree = "<group>"; };
-		A4A873862C10FBE700691606 /* RemoteAuctionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuctionItem.swift; sourceTree = "<group>"; };
-		A4A873882C110AFE00691606 /* RemoteReverseAuction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteReverseAuction.swift; sourceTree = "<group>"; };
-		A4A8738A2C110CD200691606 /* RemoteFixedTimeAuction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFixedTimeAuction.swift; sourceTree = "<group>"; };
 		A4E46BDB2BA74879007140E6 /* DashBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBoard.swift; sourceTree = "<group>"; };
 		A4F956CA2BA60E8200F013ED /* AuctionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionModel.swift; sourceTree = "<group>"; };
 		A4F956CC2BA60FAA00F013ED /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
@@ -168,6 +164,7 @@
 			children = (
 				9406E4ED2C3560AE00B8DB77 /* RouterProtocol.swift */,
 				9406E4EF2C3560B600B8DB77 /* VendorRouter.swift */,
+				94F685902CC54CF000EA355B /* DashboardRouter.swift */,
 				944E16192C359AD200C8E4E8 /* LoginRouter.swift */,
 			);
 			path = Router;
@@ -298,9 +295,6 @@
 		94EE5FFA2CA84CCA0029DB96 /* RemoteData */ = {
 			isa = PBXGroup;
 			children = (
-				A4A873862C10FBE700691606 /* RemoteAuctionItem.swift */,
-				A4A873882C110AFE00691606 /* RemoteReverseAuction.swift */,
-				A4A8738A2C110CD200691606 /* RemoteFixedTimeAuction.swift */,
 				94EE5FFB2CA84EE60029DB96 /* DataLoader.swift */,
 				94EE5FFF2CA852830029DB96 /* Debug */,
 			);
@@ -483,7 +477,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4A873872C10FBE700691606 /* RemoteAuctionItem.swift in Sources */,
 				941E7EEB2CBDA6A800F260FC /* IBANViewModel.swift in Sources */,
 				A4F956CB2BA60E8200F013ED /* AuctionModel.swift in Sources */,
 				94F6858F2CC3A37A00EA355B /* PersonalAreaViewModel.swift in Sources */,
@@ -503,9 +496,8 @@
 				941E7EEF2CBDA86300F260FC /* BuyingItemsViewModel.swift in Sources */,
 				941E7EE52CBD98BE00F260FC /* AppDelegate.swift in Sources */,
 				9406E4F02C3560B600B8DB77 /* VendorRouter.swift in Sources */,
-				A4A8738B2C110CD200691606 /* RemoteFixedTimeAuction.swift in Sources */,
 				A4E46BDC2BA74879007140E6 /* DashBoard.swift in Sources */,
-				A4A873892C110AFE00691606 /* RemoteReverseAuction.swift in Sources */,
+				94F685912CC54CF000EA355B /* DashboardRouter.swift in Sources */,
 				944D6F452B13B3A3008C97F2 /* LoginView.swift in Sources */,
 				94EE5FF32C79E9C80029DB96 /* MySalesView.swift in Sources */,
 				941E7EF52CBDAB2D00F260FC /* AlertMessage.swift in Sources */,

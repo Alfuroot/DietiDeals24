@@ -6,7 +6,6 @@ struct AuctionDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                // Display auction item image
                 if let imageUrl = viewModel.auction.auctionItem.imageUrl, let url = URL(string: imageUrl) {
                     AsyncImage(url: url) { phase in
                         switch phase {
@@ -52,7 +51,7 @@ struct AuctionDetailView: View {
                 // Conditional button display based on auction type
                 if viewModel.isReverseAuction() {
                     Button(action: {
-                        viewModel.buyout() // Function to handle buyout
+                        viewModel.buyout()
                     }) {
                         Text("Buyout for \(viewModel.auction.buyoutPrice ?? 0.0, specifier: "%.2f")")
                             .fontWeight(.bold)
@@ -65,8 +64,7 @@ struct AuctionDetailView: View {
                 } else {
                     Button(action: {
                         let bidAmount = Float(viewModel.bidAmount) ?? 0.0
-                        let bid = Bid(bidderID: "currentUserID", amount: bidAmount) // Replace with actual user ID
-                        viewModel.placeBid() // Pass the bid object to the function
+                        viewModel.placeBid()
                     }) {
                         Text("Place Bid")
                             .fontWeight(.bold)

@@ -9,11 +9,11 @@
 import Foundation
 import SwiftUI
 
-final class VendorRouter: RouterProtocol {
-    static let shared = VendorRouter()
+final class DashboardRouter: RouterProtocol {
+    static let shared = DashboardRouter()
     
     public enum Destination: Hashable, Codable {
-        case catalogDetail
+        case itemDetail
     }
     
     @Published var navPath = NavigationPath()

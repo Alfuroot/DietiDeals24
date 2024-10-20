@@ -162,21 +162,24 @@ class Auction: Codable, Hashable {
 }
 
 class Bid: Codable, Hashable {
+    var auctionID: String
     var bidderID: String
     var amount: Float
     var timestamp: Date
 
-    init(bidderID: String, amount: Float, timestamp: Date = Date()) {
+    init(auctionID: String, bidderID: String, amount: Float, timestamp: Date = Date()) {
+        self.auctionID = auctionID
         self.bidderID = bidderID
         self.amount = amount
         self.timestamp = timestamp
     }
 
     static func == (lhs: Bid, rhs: Bid) -> Bool {
-        return lhs.bidderID == rhs.bidderID && lhs.amount == rhs.amount && lhs.timestamp == rhs.timestamp
+        return lhs.auctionID == rhs.auctionID && lhs.bidderID == rhs.bidderID && lhs.amount == rhs.amount && lhs.timestamp == rhs.timestamp
     }
     
     func hash(into hasher: inout Hasher) {
+        hasher.combine(auctionID)
         hasher.combine(bidderID)
         hasher.combine(amount)
         hasher.combine(timestamp)
