@@ -124,17 +124,22 @@ struct PersonalAreaView: View {
                     }
                     
                     Button(action: {
-                        viewModel.user.notificationsEnabled.toggle()
+                        if viewModel.user.notificationsEnabled == 1 {
+                            viewModel.user.notificationsEnabled = 0
+                            viewModel.notificationStatus = 0
+                        } else {
+                            viewModel.user.notificationsEnabled = 1
+                            viewModel.notificationStatus = 1
+                        }
                     }) {
-                        Text("Notifiche: \(viewModel.notificationStatus ? "Abilitate" : "Disabilitate")")
+                        Text("Notifiche: \(viewModel.notificationStatus > 0 ? "Abilitate" : "Disabilitate")")
                     }.onTapGesture {
-                        viewModel.notificationStatus.toggle()
                         viewModel.updateNotification()
                     }
                 }
             }
             .onAppear {
-                viewModel.loadUserData()
+                
             }
         }
     }

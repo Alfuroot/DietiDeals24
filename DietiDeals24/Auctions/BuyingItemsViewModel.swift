@@ -42,7 +42,7 @@ class BuyingItemViewModel: ObservableObject {
     }
 
     var imageUrl: URL? {
-        guard let urlString = auction.auctionItem.imageUrl else {
+        guard let urlString = auction.auctionItem?.imageUrl else {
             return nil
         }
         return URL(string: urlString)

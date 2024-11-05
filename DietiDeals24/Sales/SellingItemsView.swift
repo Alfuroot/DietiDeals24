@@ -5,7 +5,7 @@ struct SellingItemView: View {
     
     var body: some View {
         HStack {
-            if let imageUrl = auction.auctionItem.imageUrl, let url = URL(string: imageUrl) {
+            if let imageUrl = auction.auctionItem?.imageUrl, let url = URL(string: imageUrl) {
                 AsyncImage(url: url) { image in
                     image
                         .resizable()

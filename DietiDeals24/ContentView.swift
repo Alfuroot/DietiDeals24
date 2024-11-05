@@ -6,7 +6,7 @@ struct ContentView: View {
     var body: some View {
         if !loggedIn {
             TabView {
-                LoginView()
+                LoginView(loggedIn: $loggedIn)
             }
         } else {
             TabView {

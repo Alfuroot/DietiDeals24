@@ -12,6 +12,8 @@ class LoginViewModel: ObservableObject {
     @Published var loginError: String? = nil
     @Published var isUserLoggedIn: Bool = false
     
+    private let dataLoader = DataLoader()
+
     var isLoginDisabled: Bool {
         return email.isEmpty || password.isEmpty
     }
@@ -20,33 +22,13 @@ class LoginViewModel: ObservableObject {
         return !username.isEmpty && !email.isEmpty && !password.isEmpty && passwordConfirm == password
     }
     
-    func login() {
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
-            if let error = error {
-                self?.loginError = error.localizedDescription
-                print("Login error: \(self?.loginError ?? "Unknown error")")
-                return
-            }
-            
-            self?.isUserLoggedIn = true
-            print("User signed in: \(String(describing: result?.user.email))")
-        }
-    }
-    
-    func registerUser() {
-        guard isRegistrationValid else {
-            showRegistrationErrorAlert = true
-            return
-        }
-
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
-            if let error = error {
-                self?.loginError = error.localizedDescription
-                self?.showRegistrationErrorAlert = true
-                return
-            }
-            
-            print("User registered: \(String(describing: result?.user.email))")
+    func login() async {
+        do {
+            let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
+            isUserLoggedIn = true
+            User.shared = try await dataLoader.loadUserData(byEmail: email)
+        } catch let error {
+            loginError = error.localizedDescription
         }
     }
 }

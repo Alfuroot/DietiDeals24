@@ -10,7 +10,7 @@ class DataLoader: ObservableObject {
     @Published var myAuctions: [Auction] = []
     @Published var sellerAuctions: [Auction] = []
     
-    private let baseUrl = "https://33bc-2a0e-410-96da-0-d0dd-bd8c-51c6-84fc.ngrok-free.app"
+    private let baseUrl = "http://localhost:5000/api"
     private let session = URLSession.shared
     private let timeout: TimeInterval = 10
     private let authToken = "your_auth_token_here"
@@ -25,6 +25,27 @@ class DataLoader: ObservableObject {
         Task {
             await loadRemoteData()
         }
+    }
+    
+    func fetchAuctionsWithItems() async throws {
+        guard let url = URL(string: "\(baseUrl)/auctions-with-items") else {
+            throw URLError(.badURL)
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        let auctions = try decoder.decode([Auction].self, from: data)
+        
+        self.allAuctions = auctions
     }
     
     func fetchBidsForAuction(auctionId: String) async throws -> [Bid] {
@@ -46,6 +67,7 @@ class DataLoader: ObservableObject {
             return bids
         }
     // MARK: - Load Remote Data
+    @MainActor
     func loadRemoteData() async {
         isLoading = true
         defer { isLoading = false }
@@ -59,7 +81,6 @@ class DataLoader: ObservableObject {
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
                 throw URLError(.badServerResponse)
             }
-            
             let auctions = try JSONDecoder().decode([Auction].self, from: data)
             DispatchQueue.main.async {
                 self.allAuctions = auctions
@@ -72,20 +93,15 @@ class DataLoader: ObservableObject {
     }
     
     func fetchSellerAuctions() async {
-            isLoading = true
-            defer { isLoading = false }
-            
-            do {
-                await loadRemoteData()
-                
-                let currentUserId = User.shared.id
-                DispatchQueue.main.async {
-                    self.sellerAuctions = self.allAuctions.filter { $0.sellerID == currentUserId }
-                }
-            } catch {
-                errorMessage = "Error fetching seller auctions: \(error.localizedDescription)"
-            }
+        isLoading = true
+        defer { isLoading = false }
+        await loadRemoteData()
+        
+        let currentUserId = User.shared.id
+        DispatchQueue.main.async {
+            self.sellerAuctions = self.allAuctions.filter { $0.sellerID == currentUserId }
         }
+    }
 
     // MARK: - Place Bid
     func placeBid(auctionId: String, bid: Bid) async throws {
@@ -173,22 +189,9 @@ class DataLoader: ObservableObject {
     }
     
     // MARK: - Load User Data (Local/Remote)
-    func loadUserData() async throws -> User {
-        return try await loadUserDataFromAPI()
-    }
-    
-    private func loadUserDataFromLocalFile() throws -> User {
-        guard let url = Bundle.main.url(forResource: "user", withExtension: "json") else {
-            throw URLError(.fileDoesNotExist)
-        }
-        
-        let data = try Data(contentsOf: url)
-        let user = try JSONDecoder().decode(User.self, from: data)
-        return user
-    }
-    
-    private func loadUserDataFromAPI() async throws -> User {
-        guard let url = URL(string: "\(baseUrl)/user") else {
+    func loadUserData(byEmail email: String) async throws -> User {
+        guard let encodedEmail = email.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+              let url = URL(string: "\(baseUrl)/user/email/\(encodedEmail)") else {
             throw URLError(.badURL)
         }
         
@@ -280,8 +283,6 @@ class DataLoader: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.timeoutInterval = timeout
-        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         
         let data = try JSONEncoder().encode(user)
         let (_, response) = try await session.upload(for: request, from: data)
@@ -299,17 +300,27 @@ class DataLoader: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.timeoutInterval = timeout
-        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         
         let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601  // Ensure proper date format for your API
+        encoder.dateEncodingStrategy = .iso8601
         request.httpBody = try encoder.encode(auction)
+        
+        let requestBody = try encoder.encode(auction)
         
         let (data, response) = try await session.data(for: request)
         
-        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+        guard let httpResponse = response as? HTTPURLResponse else {
             throw URLError(.badServerResponse)
+        }
+        
+        guard (200...299).contains(httpResponse.statusCode) else {
+            if let responseData = String(data: data, encoding: .utf8) {
+                    print("Response Data: \(responseData)")
+                }
+                
+                let errorResponse = try? JSONDecoder().decode([String: String].self, from: data)
+                let errorMessage = errorResponse?["details"] ?? "An error occurred"
+                throw URLError(.badServerResponse, userInfo: [NSURLErrorFailingURLStringErrorKey: errorMessage])
         }
     }
 }

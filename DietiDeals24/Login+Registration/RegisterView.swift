@@ -2,9 +2,9 @@ import SwiftUI
 
 struct RegisterView: View {
     @StateObject private var viewModel = RegisterViewModel()
+    @ObservedObject var router: LoginRouter
     
     var body: some View {
-        NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Username:")
@@ -53,7 +53,9 @@ struct RegisterView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            viewModel.registerUser()
+                            Task {
+                                await viewModel.registerUser()
+                            }
                         }) {
                             Text("Register")
                                 .padding()
@@ -72,14 +74,16 @@ struct RegisterView: View {
                     }
                 }
                 .padding()
-                .navigationTitle("Register")
+                .navigationTitle("Registrazione")
+                .alert(isPresented: $viewModel.showRegistrationSuccessAlert) {
+                    Alert(
+                        title: Text("Congratulazioni!"),
+                        message: Text("Registrazione avvenuta con successo."),
+                        dismissButton: .default(Text("Ok"), action: {
+                            router.navigateBack()
+                        })
+                    )
+                }
             }
         }
-    }
-}
-
-struct RegisterView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegisterView()
-    }
 }

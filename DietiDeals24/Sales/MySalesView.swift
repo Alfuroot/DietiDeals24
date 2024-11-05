@@ -9,20 +9,13 @@ struct MySalesView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    if viewModel.checkIBAN() {
-                        if viewModel.sellingAuctions.isEmpty {
-                            Text("No items available")
-                                .foregroundColor(.gray)
-                        } else {
-                            ForEach(viewModel.sellingAuctions, id: \.self) { auction in
-                                SellingItemView(auction: auction)
-                            }
-                        }
+                    if viewModel.sellingAuctions.isEmpty {
+                        Text("No items available")
+                            .foregroundColor(.gray)
                     } else {
-                        Text("You must add your IBAN to access this section.")
-                            .foregroundColor(.red)
-                            .multilineTextAlignment(.center)
-                            .padding()
+                        ForEach(viewModel.sellingAuctions, id: \.self) { auction in
+                            SellingItemView(auction: auction)
+                        }
                     }
                 }
                 .padding()

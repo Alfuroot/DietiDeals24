@@ -6,7 +6,7 @@ struct AuctionDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                if let imageUrl = viewModel.auction.auctionItem.imageUrl, let url = URL(string: imageUrl) {
+                if let imageUrl = viewModel.auction.auctionItem?.imageUrl, let url = URL(string: imageUrl) {
                     AsyncImage(url: url) { phase in
                         switch phase {
                         case .success(let image):

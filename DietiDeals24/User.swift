@@ -1,7 +1,7 @@
 import Foundation
 
 class User: Codable {
-    static let shared = User()
+    static var shared = User()
 
     var id: String
     var username: String
@@ -15,7 +15,7 @@ class User: Codable {
     var twitterLink: String?
     var instagramLink: String?
     var linkedinLink: String?
-    var notificationsEnabled: Bool
+    var notificationsEnabled: Int
     
     private init() {
         self.id = UUID().uuidString
@@ -30,10 +30,10 @@ class User: Codable {
         self.twitterLink = nil
         self.instagramLink = nil
         self.linkedinLink = nil
-        self.notificationsEnabled = false
+        self.notificationsEnabled = 0
     }
     
-    init(username: String, password: String, codicefisc: String, email: String, address: String, bio: String? = nil, iban: String? = nil, facebookLink: String? = nil, twitterLink: String? = nil, instagramLink: String? = nil, linkedinLink: String? = nil, notificationsEnabled: Bool) {
+    init(username: String, password: String, codicefisc: String, email: String, address: String, bio: String? = nil, iban: String? = nil, facebookLink: String? = nil, twitterLink: String? = nil, instagramLink: String? = nil, linkedinLink: String? = nil, notificationsEnabled: Int) {
         self.id = UUID().uuidString
         self.username = username
         self.password = password
@@ -63,7 +63,7 @@ class User: Codable {
         self.twitterLink = try container.decodeIfPresent(String.self, forKey: .twitterLink)
         self.instagramLink = try container.decodeIfPresent(String.self, forKey: .instagramLink)
         self.linkedinLink = try container.decodeIfPresent(String.self, forKey: .linkedinLink)
-        self.notificationsEnabled = try container.decode(Bool.self, forKey: .notificationsEnabled)
+        self.notificationsEnabled = try container.decode(Int.self, forKey: .notificationsEnabled)
     }
 
     func setPassword(_ newPassword: String) {

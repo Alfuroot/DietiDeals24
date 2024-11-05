@@ -21,20 +21,7 @@ class PersonalAreaViewModel: ObservableObject {
     @Published var showingEditBio = false
     @Published var showingEditIban = false
     @Published var showingEditSocialLinks = false
-    @Published var notificationStatus = false
-    
-    func loadUserData() {
-        Task {
-            do {
-                let dataLoader = DataLoader()
-                let loadedUser = try await dataLoader.loadUserData()
-                user = loadedUser
-                notificationStatus = User.shared.notificationsEnabled
-            } catch {
-                print("Failed to load user data: \(error.localizedDescription)")
-            }
-        }
-    }
+    @Published var notificationStatus = 0
     
     func updateUsername() {
         user.username = newUsername

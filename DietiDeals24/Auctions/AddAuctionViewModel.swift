@@ -57,8 +57,10 @@ class AddAuctionViewModel: ObservableObject {
         let sellerID = User.shared.id
 
         let auctionItem = AuctionItem(
+            id: UUID().uuidString,
             title: auctionTitle,
             description: auctionDescription,
+            imageUrl: "",
             category: auctionItemType
         )
         
@@ -79,13 +81,14 @@ class AddAuctionViewModel: ObservableObject {
                 description: auctionDescription,
                 initialPrice: buyoutPriceValue,
                 currentPrice: buyoutPriceValue,
-                startDate: Date(),
+                startDate: Date.now,
                 endDate: auctionEndDate,
                 auctionType: auctionType,
                 auctionItem: auctionItem,
-                sellerID: sellerID, buyoutPrice: buyoutPriceValue,
+                sellerID: sellerID,
+                buyoutPrice: buyoutPriceValue,
                 decrementAmount: decrementAmountValue,
-                decrementInterval: decrementIntervalValue * 60,
+                decrementInterval: decrementIntervalValue,
                 floorPrice: floorPriceValue
             )
         } else {
@@ -104,7 +107,7 @@ class AddAuctionViewModel: ObservableObject {
         }
         Task {
             do {
-                try await dataLoader.createAuction(auction: auction) 
+                try await dataLoader.createAuction(auction: auction)
                 print("Auction added successfully!")
             } catch {
                 print("Error saving auction: \(error.localizedDescription)")

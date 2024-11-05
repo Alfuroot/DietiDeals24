@@ -6,7 +6,7 @@ struct AuctionItemCard: View {
 
     var body: some View {
             HStack {
-                if let imageUrl = auction.auctionItem.imageUrl, let url = URL(string: imageUrl) {
+                if let imageUrl = auction.auctionItem?.imageUrl, let url = URL(string: imageUrl) {
                     AsyncImage(url: url) { image in
                         image
                             .resizable()
@@ -27,11 +27,11 @@ struct AuctionItemCard: View {
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(auction.auctionItem.title)
+                    Text(auction.auctionItem?.title ?? "Not found")
                         .font(.headline)
                         .lineLimit(1)
                     
-                    Text(auction.auctionItem.description)
+                    Text(auction.auctionItem?.description ?? "Not found")
                         .font(.subheadline)
                         .foregroundColor(.gray)
                         .lineLimit(2)

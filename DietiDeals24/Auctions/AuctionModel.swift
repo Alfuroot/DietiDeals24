@@ -15,7 +15,7 @@ enum AuctionItemType: String, CaseIterable, Codable, Hashable, Comparable {
     case tecnologia = "Tecnologia"
     case casa = "Casa"
     case moda = "Moda"
-    case auto = "Automobili"
+    case auto = "Auto"
     case moto = "Moto"
     case libri = "Libri"
     case giochi = "Giochi"
@@ -50,7 +50,6 @@ class AuctionItem: Codable, Identifiable, Hashable {
         self.category = category
     }
 
-    // Conformance to Hashable
     static func == (lhs: AuctionItem, rhs: AuctionItem) -> Bool {
         return lhs.id == rhs.id
     }
@@ -59,12 +58,28 @@ class AuctionItem: Codable, Identifiable, Hashable {
         hasher.combine(id)
         hasher.combine(title)
         hasher.combine(description)
-        hasher.combine(imageUrl)
+        hasher.combine(imageUrl ?? "")
         hasher.combine(category)
     }
+
+    required init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            
+            id = try container.decode(String.self, forKey: .id)
+            title = try container.decode(String.self, forKey: .title)
+            description = try container.decode(String.self, forKey: .description)
+            imageUrl = try container.decodeIfPresent(String.self, forKey: .imageUrl)
+            
+            let categoryString = try container.decode(String.self, forKey: .category)
+            guard let categoryValue = AuctionItemType(rawValue: categoryString.capitalized) else {
+                throw DecodingError.dataCorruptedError(forKey: .category, in: container, debugDescription: "Invalid category value.")
+            }
+            
+            category = categoryValue
+        }
 }
 
-class Auction: Codable, Hashable {
+class Auction: Codable, Identifiable, Hashable {
     var id: String
     var title: String
     var description: String
@@ -73,7 +88,7 @@ class Auction: Codable, Hashable {
     var startDate: Date
     var endDate: Date
     var auctionType: AuctionType
-    var auctionItem: AuctionItem
+    var auctionItem: AuctionItem?
     var buyoutPrice: Float?
     var decrementAmount: Float?
     var decrementInterval: TimeInterval?
@@ -88,13 +103,12 @@ class Auction: Codable, Hashable {
          startDate: Date,
          endDate: Date,
          auctionType: AuctionType,
-         auctionItem: AuctionItem,
+         auctionItem: AuctionItem? = nil,
          sellerID: String,
          buyoutPrice: Float? = nil,
          decrementAmount: Float? = nil,
          decrementInterval: TimeInterval? = nil,
          floorPrice: Float? = nil) {
-
         self.id = id
         self.title = title
         self.description = description
@@ -112,32 +126,29 @@ class Auction: Codable, Hashable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case id, title, description, initialPrice, currentPrice, startDate, endDate, auctionType, auctionItem, buyoutPrice, decrementAmount, decrementInterval, floorPrice, sellerID // Add sellerID to CodingKeys
+        case id, title, description, initialPrice, currentPrice, startDate, endDate, auctionType, auctionItem, buyoutPrice, decrementAmount, decrementInterval, floorPrice, sellerID
     }
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
+
         id = try container.decode(String.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title)
         description = try container.decode(String.self, forKey: .description)
         initialPrice = try container.decode(Float.self, forKey: .initialPrice)
         currentPrice = try container.decode(Float.self, forKey: .currentPrice)
-        
-        let startDateString = try container.decode(String.self, forKey: .startDate)
-        let endDateString = try container.decode(String.self, forKey: .endDate)
-        
+
         let dateFormatter = ISO8601DateFormatter()
-        startDate = dateFormatter.date(from: startDateString) ?? Date()
-        endDate = dateFormatter.date(from: endDateString) ?? Date()
+        startDate = Date()
+        endDate = Date()
 
         auctionType = try container.decode(AuctionType.self, forKey: .auctionType)
-        auctionItem = try container.decode(AuctionItem.self, forKey: .auctionItem)
+        auctionItem = try container.decodeIfPresent(AuctionItem.self, forKey: .auctionItem)
         buyoutPrice = try container.decodeIfPresent(Float.self, forKey: .buyoutPrice)
         decrementAmount = try container.decodeIfPresent(Float.self, forKey: .decrementAmount)
         decrementInterval = try container.decodeIfPresent(TimeInterval.self, forKey: .decrementInterval)
         floorPrice = try container.decodeIfPresent(Float.self, forKey: .floorPrice)
-        sellerID = try container.decode(String.self, forKey: .sellerID) // Decode sellerID
+        sellerID = try container.decode(String.self, forKey: .sellerID)
     }
 
     func isAuctionActive() -> Bool {
@@ -154,19 +165,6 @@ class Auction: Codable, Hashable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-        hasher.combine(title)
-        hasher.combine(description)
-        hasher.combine(initialPrice)
-        hasher.combine(currentPrice)
-        hasher.combine(startDate)
-        hasher.combine(endDate)
-        hasher.combine(auctionType)
-        hasher.combine(auctionItem)
-        hasher.combine(buyoutPrice)
-        hasher.combine(decrementAmount)
-        hasher.combine(decrementInterval)
-        hasher.combine(floorPrice)
-        hasher.combine(sellerID)
     }
 }
 

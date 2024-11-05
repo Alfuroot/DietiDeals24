@@ -3,4 +3,80 @@
    uuid = "D6163004-388F-422C-9682-F6BA7BFA2CBB"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "09464A80-92D1-4E0D-B183-219725A8AE9A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DietiDeals24/Login+Registration/LoginViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "login()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "09464A80-92D1-4E0D-B183-219725A8AE9A - 9ceec36438c8d667"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for DietiDeals24.LoginViewModel.login() async -&gt; ()"
+                  moduleName = "DietiDeals24"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/giuseppecarannante/Documents/GitHub/DietiDeals24/DietiDeals24/Login+Registration/LoginViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+               <Location
+                  uuid = "09464A80-92D1-4E0D-B183-219725A8AE9A - f40fe2b5a084bd72"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) await resume partial function for DietiDeals24.LoginViewModel.login() async -&gt; ()"
+                  moduleName = "DietiDeals24"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/giuseppecarannante/Documents/GitHub/DietiDeals24/DietiDeals24/Login+Registration/LoginViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+               <Location
+                  uuid = "09464A80-92D1-4E0D-B183-219725A8AE9A - 5503d89782c7861"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for DietiDeals24.LoginViewModel.login() async -&gt; ()"
+                  moduleName = "DietiDeals24"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/giuseppecarannante/Documents/GitHub/DietiDeals24/DietiDeals24/Login+Registration/LoginViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+               <Location
+                  uuid = "09464A80-92D1-4E0D-B183-219725A8AE9A - efd92fdfb9318263"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for DietiDeals24.LoginViewModel.login() async -&gt; ()"
+                  moduleName = "DietiDeals24"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/giuseppecarannante/Documents/GitHub/DietiDeals24/DietiDeals24/Login+Registration/LoginViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

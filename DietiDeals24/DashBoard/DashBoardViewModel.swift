@@ -12,13 +12,18 @@ class DashBoardViewModel: ObservableObject {
     internal var router = DashboardRouter.shared
 
     private let dataLoader = DataLoader()
-    
-    // Computed property to filter auction items based on search and selected categories
+
     var filteredItems: [Auction] {
         auctions.filter { auction in
-            (search.isEmpty || auction.title.localizedCaseInsensitiveContains(search) ||
-             auction.description.localizedCaseInsensitiveContains(search)) &&
-            (selectedCategories.isEmpty || selectedCategories.contains(auction.auctionItem.category))
+            if let auctionItem = auction.auctionItem {
+                (search.isEmpty || auction.title.localizedCaseInsensitiveContains(search) ||
+                 auction.description.localizedCaseInsensitiveContains(search)) &&
+                (selectedCategories.isEmpty || selectedCategories.contains(auctionItem.category))
+            } else {
+                (search.isEmpty || auction.title.localizedCaseInsensitiveContains(search) ||
+                 auction.description.localizedCaseInsensitiveContains(search)) &&
+                (selectedCategories.isEmpty)
+            }
         }
     }
     
@@ -31,10 +36,11 @@ class DashBoardViewModel: ObservableObject {
         
         Task {
             do {
-                await dataLoader.loadRemoteData()
+                try await dataLoader.fetchAuctionsWithItems()
                 updateAuctionItems()
-            } catch {
-                handleError(error)
+            }
+            catch {
+                print(error)
             }
         }
     }

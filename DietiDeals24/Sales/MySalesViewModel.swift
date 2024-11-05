@@ -10,10 +10,6 @@ class MySalesViewModel: ObservableObject {
     
     private let dataLoader = DataLoader()
     
-    init() {
-        loadSellingAuctions()
-    }
-    
     func checkIBAN() -> Bool {
         if let iban = User.shared.iban, !iban.isEmpty {
             return true
@@ -22,25 +18,16 @@ class MySalesViewModel: ObservableObject {
             return false
         }
     }
-
     
+    
+    @MainActor
     func loadSellingAuctions() {
         isLoading = true
         Task {
-            do {
-                await dataLoader.loadRemoteData()
-                await dataLoader.fetchSellerAuctions()
-                DispatchQueue.main.async {
-                    self.sellingAuctions = self.dataLoader.sellerAuctions
-                    self.isLoading = false
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    self.error = error.localizedDescription
-                    self.isLoading = false
-                    self.showAlert = true
-                }
-            }
+            await dataLoader.loadRemoteData()
+            await dataLoader.fetchSellerAuctions()
+            self.sellingAuctions = self.dataLoader.sellerAuctions
+            self.isLoading = false
         }
     }
 }

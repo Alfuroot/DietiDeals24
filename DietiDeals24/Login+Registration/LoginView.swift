@@ -9,7 +9,8 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
-    @ObservedObject var router = LoginRouter()
+    @StateObject var router = LoginRouter()
+    @Binding var loggedIn: Bool
     
     var body: some View {
         NavigationStack(path: $router.navPath) {
@@ -44,7 +45,10 @@ struct LoginView: View {
                             Spacer()
                             VStack() {
                                 Button(action: {
-                                    viewModel.login()
+                                    Task {
+                                        await viewModel.login()
+                                        loggedIn = viewModel.isUserLoggedIn
+                                    }
                                 }) {
                                     Text("Login")
                                         .padding()
@@ -81,18 +85,12 @@ struct LoginView: View {
                 .navigationDestination(for: LoginRouter.Destination.self) { destination in
                     switch destination {
                     case .register:
-                        RegisterView()
+                        RegisterView(router: router)
                     case .login:
-                        LoginView()
+                        LoginView(loggedIn: $loggedIn)
                     }
                 }
             }
         }.environmentObject(router)
-    }
-}
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
     }
 }
