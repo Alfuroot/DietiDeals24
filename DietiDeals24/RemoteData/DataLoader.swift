@@ -249,6 +249,26 @@ class DataLoader: ObservableObject {
         return user
     }
     
+    func loadUserData(byID userID: String) async throws -> User {
+        guard let encodedUserID = userID.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+              let url = URL(string: "\(baseUrl)/user/id/\(encodedUserID)") else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.timeoutInterval = timeout
+        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+        
+        let user = try JSONDecoder().decode(User.self, from: data)
+        return user
+    }
+
     // MARK: - Get Auction by ID
     func getMyActiveAuctions() async {
         isLoading = true

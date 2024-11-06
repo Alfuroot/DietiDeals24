@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AuctionDetailView: View {
     @StateObject var viewModel: AuctionDetailViewModel
+    @State private var isShowingSellerInfo = false
 
     var body: some View {
         ScrollView {
@@ -91,6 +92,26 @@ struct AuctionDetailView: View {
             Alert(title: Text("Error"),
                   message: Text(alertMessage.message),
                   dismissButton: .default(Text("OK")))
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    isShowingSellerInfo.toggle()
+                }) {
+                    Label("Seller Info", systemImage: "person.circle")
+                }
+            }
+        }
+        .sheet(isPresented: $isShowingSellerInfo) {
+            if let seller = viewModel.seller {
+                    SellerDetailView(seller: seller)
+            } else {
+                Text("Seller information not available.")
+                    .padding()
+            }
+        }
+        .task {
+            await viewModel.getSeller()
         }
     }
 }

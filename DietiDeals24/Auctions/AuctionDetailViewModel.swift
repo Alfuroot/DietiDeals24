@@ -6,6 +6,7 @@ class AuctionDetailViewModel: ObservableObject {
     @Published var auction: Auction
     @Published var bidAmount: String = ""
     @Published var alertMessage: AlertMessage?
+    @Published var seller: User?
     private var dataLoader = DataLoader()
     
     var isAuctionActive: Bool {
@@ -155,6 +156,14 @@ class AuctionDetailViewModel: ObservableObject {
             } else {
                 print("Notification scheduled for auction \(auctionId) with bid amount \(bidAmount).")
             }
+        }
+    }
+    
+    func getSeller() async {
+        do {
+           seller = try await dataLoader.loadUserData(byID: auction.sellerID)
+        } catch {
+            print(error)
         }
     }
 }

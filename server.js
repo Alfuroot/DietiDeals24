@@ -259,18 +259,23 @@ app.get('/api/bids', async (req, res) => {
   }
 });
 
-app.post('/api/auctions/:auctionId/buyout', async (req, res) => {
-    const { auctionId } = req.params;
-    const now = new Date();
+// New endpoint to retrieve user data by userID
+app.get('/api/user/id/:userID', async (req, res) => {
+    const { userID } = req.params;
 
     try {
-        // Update the auction's endDate to now in the database
-        await sql.query`UPDATE Auctions SET endDate = ${now} WHERE id = ${auctionId}`;
-        
-        res.status(200).json({ message: "Auction successfully bought out and closed." });
+        // Query to fetch user data by userID
+        const result = await sql.query`SELECT * FROM Users WHERE id = ${userID}`;
+
+        // Check if user data is found
+        if (result.recordset.length > 0) {
+            res.json(result.recordset[0]); // Send user data as JSON
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
     } catch (error) {
-        console.error("Error during auction buyout:", error);
-        res.status(500).json({ error: "Error completing buyout" });
+        console.error("Error fetching user data:", error.message);
+        res.status(500).json({ error: 'Error fetching user', details: error.message });
     }
 });
 
