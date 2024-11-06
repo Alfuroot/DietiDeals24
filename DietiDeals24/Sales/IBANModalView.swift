@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct IBANModalView: View {
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = IBANModalViewModel()
 
     var body: some View {
@@ -25,6 +26,7 @@ struct IBANModalView: View {
             Button(action: {
                 Task {
                     await viewModel.confirmIBAN()
+                    dismiss()
                 }
             }) {
                 Text("Conferma")

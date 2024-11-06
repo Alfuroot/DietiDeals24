@@ -34,7 +34,7 @@ class BuyingItemViewModel: ObservableObject {
     }
 
     var auctionStatusText: String {
-        return "Status: \(auction.auctionType.rawValue)"
+        return "Status: \(bidStatus)"
     }
 
     var highestBidText: String {
@@ -57,27 +57,32 @@ class BuyingItemViewModel: ObservableObject {
 
     // MARK: - Check if user is leading or outbid
     private func checkBidStatus() async {
-        do {
-            let bids = try await dataLoader.fetchBidsForAuction(auctionId: auction.id)
-            
-            let sortedBids = bids.sorted(by: { $0.timestamp > $1.timestamp })
+            do {
+                let bids = try await dataLoader.fetchBidsForAuction(auctionId: auction.id)
+                let sortedBids = bids.sorted(by: { $0.timestamp > $1.timestamp })
 
-            if let latestBid = sortedBids.first, latestBid.bidderID == User.shared.id {
-                DispatchQueue.main.async {
-                    self.bidStatus = "You are leading"
-                    self.auctionStatusColor = .green
+                if let latestBid = sortedBids.first {
+                    DispatchQueue.main.async {
+                        if latestBid.bidderID == User.shared.id {
+                            self.bidStatus = "You are leading"
+                            self.auctionStatusColor = .green
+                            self.userBid = latestBid.amount
+                        } else {
+                            self.bidStatus = "You have been outbid"
+                            self.auctionStatusColor = .red
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.bidStatus = "No bids placed"
+                        self.auctionStatusColor = .gray
+                    }
                 }
-            } else {
+            } catch {
                 DispatchQueue.main.async {
-                    self.bidStatus = "You have been outbid"
-                    self.auctionStatusColor = .red
+                    self.bidStatus = "Error checking bid status"
+                    self.auctionStatusColor = .gray
                 }
-            }
-        } catch {
-            DispatchQueue.main.async {
-                self.bidStatus = "Error checking bid status"
-                self.auctionStatusColor = .gray
             }
         }
-    }
 }

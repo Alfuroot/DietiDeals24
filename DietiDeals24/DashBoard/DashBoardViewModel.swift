@@ -33,7 +33,6 @@ class DashBoardViewModel: ObservableObject {
     
     func fetchAuctionItems() {
         isLoading = true
-        
         Task {
             do {
                 try await dataLoader.fetchAuctionsWithItems()

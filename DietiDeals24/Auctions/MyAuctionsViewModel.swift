@@ -16,15 +16,11 @@ class MyAuctionsViewModel: ObservableObject {
     func fetchAuctions() {
         isLoading = true
         Task {
-            do {
-                try await dataLoader.getMyAuctions()
-                
-                await MainActor.run {
-                    self.auctions = self.dataLoader.myAuctions
-                    self.isLoading = false
-                }
-            } catch {
-                handleError(error)
+            await dataLoader.getMyActiveAuctions()
+            
+            await MainActor.run {
+                self.auctions = self.dataLoader.myAuctions
+                self.isLoading = false
             }
         }
     }

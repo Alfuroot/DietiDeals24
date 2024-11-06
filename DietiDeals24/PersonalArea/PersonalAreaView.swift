@@ -2,15 +2,15 @@ import SwiftUI
 
 struct PersonalAreaView: View {
     @StateObject private var viewModel = PersonalAreaViewModel()
-    
+
     var body: some View {
         NavigationStack {
             VStack {
-                Image(systemName: "circle.fill")
+                Image(systemName: "person.crop.circle")
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width * 0.4, height: UIScreen.main.bounds.height * 0.2)
                     .clipShape(Circle())
-                
+
                 List {
                     Button(action: {
                         viewModel.newUsername = viewModel.user.username
@@ -21,7 +21,9 @@ struct PersonalAreaView: View {
                     .alert("Modifica Nome Utente", isPresented: $viewModel.showingEditUsername) {
                         TextField("Nuovo nome utente", text: $viewModel.newUsername)
                         Button("Salva") {
-                            viewModel.updateUsername()
+                            Task {
+                                await viewModel.updateUsername()
+                            }
                         }
                         Button("Annulla", role: .cancel) {}
                     }
@@ -41,11 +43,13 @@ struct PersonalAreaView: View {
                                 .foregroundStyle(Color.red)
                         }
                         Button("Salva") {
-                            viewModel.updatePassword()
+                            Task {
+                                await viewModel.updatePassword()
+                            }
                         }
                         Button("Annulla", role: .cancel) {}
                     }
-                    
+
                     Button(action: {
                         viewModel.newEmail = viewModel.user.email
                         viewModel.showingEditEmail.toggle()
@@ -56,11 +60,13 @@ struct PersonalAreaView: View {
                         TextField("Nuova email", text: $viewModel.newEmail)
                             .keyboardType(.emailAddress)
                         Button("Salva") {
-                            viewModel.updateEmail()
+                            Task {
+                                await viewModel.updateEmail()
+                            }
                         }
                         Button("Annulla", role: .cancel) {}
                     }
-                    
+
                     Button(action: {
                         viewModel.newAddress = viewModel.user.address
                         viewModel.showingEditAddress.toggle()
@@ -70,7 +76,9 @@ struct PersonalAreaView: View {
                     .alert("Modifica Indirizzo", isPresented: $viewModel.showingEditAddress) {
                         TextField("Nuovo indirizzo", text: $viewModel.newAddress)
                         Button("Salva") {
-                            viewModel.updateAddress()
+                            Task {
+                                await viewModel.updateAddress()
+                            }
                         }
                         Button("Annulla", role: .cancel) {}
                     }
@@ -79,30 +87,34 @@ struct PersonalAreaView: View {
                         viewModel.newBio = viewModel.user.bio ?? ""
                         viewModel.showingEditBio.toggle()
                     }) {
-                        Text("Bio: \(viewModel.user.bio)")
+                        Text("Bio: \(viewModel.user.bio ?? "Not available")")
                     }
                     .alert("Modifica Bio", isPresented: $viewModel.showingEditBio) {
                         TextField("Nuova bio", text: $viewModel.newBio)
                         Button("Salva") {
-                            viewModel.updateBio()
+                            Task {
+                                await viewModel.updateBio()
+                            }
                         }
                         Button("Annulla", role: .cancel) {}
                     }
-                    
+
                     Button(action: {
                         viewModel.newIban = viewModel.user.iban ?? ""
                         viewModel.showingEditIban.toggle()
                     }) {
-                        Text("IBAN: \(viewModel.user.iban)")
+                        Text("IBAN: \(viewModel.user.iban ?? "Not available")")
                     }
                     .alert("Modifica IBAN", isPresented: $viewModel.showingEditIban) {
                         TextField("Nuovo IBAN", text: $viewModel.newIban)
                         Button("Salva") {
-                            viewModel.updateIban()
+                            Task {
+                                await viewModel.updateIban()
+                            }
                         }
                         Button("Annulla", role: .cancel) {}
                     }
-                    
+
                     Button(action: {
                         viewModel.newFacebookLink = viewModel.user.facebookLink ?? ""
                         viewModel.newTwitterLink = viewModel.user.twitterLink ?? ""
@@ -118,11 +130,13 @@ struct PersonalAreaView: View {
                         TextField("Instagram Link", text: $viewModel.newInstagramLink)
                         TextField("LinkedIn Link", text: $viewModel.newLinkedinLink)
                         Button("Salva") {
-                            viewModel.updateSocialLinks()
+                            Task {
+                                await viewModel.updateSocialLinks()
+                            }
                         }
                         Button("Annulla", role: .cancel) {}
                     }
-                    
+
                     Button(action: {
                         if viewModel.user.notificationsEnabled == 1 {
                             viewModel.user.notificationsEnabled = 0
@@ -131,15 +145,16 @@ struct PersonalAreaView: View {
                             viewModel.user.notificationsEnabled = 1
                             viewModel.notificationStatus = 1
                         }
+                        Task {
+                            await viewModel.updateNotification()
+                        }
                     }) {
                         Text("Notifiche: \(viewModel.notificationStatus > 0 ? "Abilitate" : "Disabilitate")")
-                    }.onTapGesture {
-                        viewModel.updateNotification()
                     }
                 }
             }
             .onAppear {
-                
+                viewModel.populateFields()
             }
         }
     }

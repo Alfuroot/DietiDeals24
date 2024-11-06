@@ -60,7 +60,7 @@ class AddAuctionViewModel: ObservableObject {
             id: UUID().uuidString,
             title: auctionTitle,
             description: auctionDescription,
-            imageUrl: "",
+            imageUrl: "https://picsum.photos/200/200",
             category: auctionItemType
         )
         
@@ -98,7 +98,7 @@ class AddAuctionViewModel: ObservableObject {
                 description: auctionDescription,
                 initialPrice: currentBidValue,
                 currentPrice: currentBidValue,
-                startDate: Date(),
+                startDate: Date.now,
                 endDate: auctionEndDate,
                 auctionType: auctionType,
                 auctionItem: auctionItem,

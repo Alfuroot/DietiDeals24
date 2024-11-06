@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 class PersonalAreaViewModel: ObservableObject {
     @Published var user: User = User.shared
     @Published var newUsername: String = ""
@@ -22,43 +23,111 @@ class PersonalAreaViewModel: ObservableObject {
     @Published var showingEditIban = false
     @Published var showingEditSocialLinks = false
     @Published var notificationStatus = 0
-    
-    func updateUsername() {
+
+    private let dataLoader = DataLoader()
+
+    func populateFields() {
+        newUsername = user.username
+        newEmail = user.email
+        newAddress = user.address
+        newBio = user.bio ?? ""
+        newIban = user.iban ?? ""
+        newFacebookLink = user.facebookLink ?? ""
+        newTwitterLink = user.twitterLink ?? ""
+        newInstagramLink = user.instagramLink ?? ""
+        newLinkedinLink = user.linkedinLink ?? ""
+    }
+
+    func updateUsername() async {
         user.username = newUsername
+        let updatedFields: [String: Any] = ["username": newUsername]
+        do {
+            try await dataLoader.updateUserData(userId: user.id, updatedFields: updatedFields)
+        } catch {
+            print("Failed to update username: \(error.localizedDescription)")
+        }
     }
     
-    func updatePassword() {
+    func updatePassword() async {
         if confirmPassword == newPassword {
             user.setPassword(newPassword)
+            let updatedFields: [String: Any] = ["password": newPassword]
+            do {
+                try await dataLoader.updateUserData(userId: user.id, updatedFields: updatedFields)
+            } catch {
+                print("Failed to update password: \(error.localizedDescription)")
+            }
         } else {
             passwordErrorMessage = "Le due password non corrispondono."
         }
     }
     
-    func updateEmail() {
+    func updateEmail() async {
         user.email = newEmail
+        let updatedFields: [String: Any] = ["email": newEmail]
+        do {
+            try await dataLoader.updateUserData(userId: user.id, updatedFields: updatedFields)
+        } catch {
+            print("Failed to update email: \(error.localizedDescription)")
+        }
     }
     
-    func updateAddress() {
+    func updateAddress() async {
         user.address = newAddress
+        let updatedFields: [String: Any] = ["address": newAddress]
+        do {
+            try await dataLoader.updateUserData(userId: user.id, updatedFields: updatedFields)
+        } catch {
+            print("Failed to update address: \(error.localizedDescription)")
+        }
     }
     
-    func updateBio() {
+    func updateBio() async {
         user.bio = newBio
+        let updatedFields: [String: Any] = ["bio": newBio]
+        do {
+            try await dataLoader.updateUserData(userId: user.id, updatedFields: updatedFields)
+        } catch {
+            print("Failed to update bio: \(error.localizedDescription)")
+        }
     }
     
-    func updateIban() {
+    func updateIban() async {
         user.iban = newIban
+        let updatedFields: [String: Any] = ["iban": newIban]
+        do {
+            try await dataLoader.updateUserData(userId: user.id, updatedFields: updatedFields)
+        } catch {
+            print("Failed to update IBAN: \(error.localizedDescription)")
+        }
     }
     
-    func updateSocialLinks() {
+    func updateSocialLinks() async {
         user.facebookLink = newFacebookLink
         user.twitterLink = newTwitterLink
         user.instagramLink = newInstagramLink
         user.linkedinLink = newLinkedinLink
+
+        let updatedFields: [String: Any] = [
+            "facebookLink": newFacebookLink,
+            "twitterLink": newTwitterLink,
+            "instagramLink": newInstagramLink,
+            "linkedinLink": newLinkedinLink
+        ]
+        do {
+            try await dataLoader.updateUserData(userId: user.id, updatedFields: updatedFields)
+        } catch {
+            print("Failed to update social links: \(error.localizedDescription)")
+        }
     }
     
-    func updateNotification() {
-        User.shared.notificationsEnabled = notificationStatus
+    func updateNotification() async {
+        user.notificationsEnabled = notificationStatus
+        let updatedFields: [String: Any] = ["notificationsEnabled": notificationStatus]
+        do {
+            try await dataLoader.updateUserData(userId: user.id, updatedFields: updatedFields)
+        } catch {
+            print("Failed to update notification status: \(error.localizedDescription)")
+        }
     }
 }

@@ -21,8 +21,11 @@ class IBANModalViewModel: ObservableObject {
     func confirmIBAN() async {
         do {
             if isIBANValid() {
+                let updatedFields: [String: Any] = [
+                        "iban": iban
+                    ]
+                try await dataLoader.updateUserData(userId: User.shared.id, updatedFields: updatedFields)
                 User.shared.iban = iban
-                try await dataLoader.saveUserData(user: User.shared)
             }
         } catch {
             errorMessage = error.localizedDescription

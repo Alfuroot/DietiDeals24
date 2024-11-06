@@ -6,24 +6,39 @@ struct SellingItemView: View {
     var body: some View {
         HStack {
             if let imageUrl = auction.auctionItem?.imageUrl, let url = URL(string: imageUrl) {
-                AsyncImage(url: url) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 50, height: 50)
-                        .background(Color.gray.opacity(0.3))
-                        .cornerRadius(8)
-                } placeholder: {
-                    ProgressView()
-                        .frame(width: 50, height: 50)
+                AsyncImage(url: url) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                            .background(Color.gray.opacity(0.3))
+                            .cornerRadius(8)
+                    case .failure(_):
+                        Image(systemName: "exclamationmark.triangle")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                            .background(Color.gray.opacity(0.3))
+                            .cornerRadius(8)
+                    case .empty:
+                        ProgressView()
+                            .frame(width: 50, height: 50)
+                    @unknown default:
+                        ProgressView()
+                            .frame(width: 50, height: 50)
+                    }
                 }
             } else {
                 Image(systemName: "camera")
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 50, height: 50)
                     .background(Color.gray.opacity(0.3))
                     .cornerRadius(8)
             }
+
 
             VStack(alignment: .leading, spacing: 8) {
                 Text(auction.title)
@@ -38,7 +53,7 @@ struct SellingItemView: View {
                         .font(.subheadline)
                         .foregroundColor(.gray)
 
-                Text("Current Highest Bid: \(auction.currentPrice)")
+                Text("Current Highest Bid: "+String(format: "%.2f", auction.currentPrice)+" €")
                     .font(.title3)
                     .fontWeight(.bold)
             }

@@ -8,12 +8,15 @@ class AuctionDetailViewModel: ObservableObject {
     @Published var alertMessage: AlertMessage?
     private var dataLoader = DataLoader()
     
+    var isAuctionActive: Bool {
+            return Date() < auction.endDate
+        }
     init(auction: Auction) {
         self.auction = auction
     }
     
     var formattedCurrentBid: String {
-        "\(auction.currentPrice)"
+        String(format: "%.2f", auction.currentPrice)
     }
     
     var formattedBidEndDate: String {
@@ -48,7 +51,7 @@ class AuctionDetailViewModel: ObservableObject {
                 return
             }
             
-            let bid = Bid(auctionID: auction.id, bidderID: User.shared.id, amount: Float(newBidAmount))
+            let bid = Bid(auctionID: auction.id, bidderID: User.shared.id, amount: Float(newBidAmount), timestamp: Date())
             do {
                 try await dataLoader.placeBid(auctionId: auction.id, bid: bid)
                 showAlert(message: "Your bid of $\(String(format: "%.2f", newBidAmount)) has been placed!")
@@ -64,25 +67,30 @@ class AuctionDetailViewModel: ObservableObject {
         alertMessage = AlertMessage(message: message)
     }
     
-    func buyout() {
+    func buyout() async {
         guard let buyoutPrice = auction.buyoutPrice else {
             showAlert(message: "This auction does not have a buyout price.")
             return
         }
-        if userCanAfford(buyoutPrice: Double(buyoutPrice)) {
-            executeBuyout(auctionId: auction.id, buyoutPrice: Double(buyoutPrice))
-            showAlert(message: "You have purchased the auction item for $\(String(format: "%.2f", buyoutPrice)).")
+        if userCanAfford(buyoutPrice: Double(auction.calculatedReversePrice)) {
+            do {
+                       try await dataLoader.buyoutAuction(auctionId: auction.id)
+                       showAlert(message: "You have purchased the auction item for $\(String(format: "%.2f", auction.calculatedReversePrice)).")
+                        await dataLoader.loadRemoteData()
+                       
+                   } catch {
+                       showAlert(message: "An error occurred while attempting to buy out the auction: \(error.localizedDescription)")
+                   }
         } else {
             showAlert(message: "You cannot afford this buyout price.")
         }
     }
     
     private func userCanAfford(buyoutPrice: Double) -> Bool {
-        return true // Change this to your actual balance check
+        return true
     }
     
     private func executeBuyout(auctionId: String, buyoutPrice: Double) {
-        // You can also make this asynchronous if needed
         scheduleBuyoutNotification(for: auctionId, buyoutPrice: buyoutPrice)
     }
     

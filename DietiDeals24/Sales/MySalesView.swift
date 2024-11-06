@@ -28,6 +28,7 @@ struct MySalesView: View {
                     }) {
                         Image(systemName: "plus")
                     }
+                    .disabled(User.shared.iban == nil)
                 }
             }
             .sheet(isPresented: $showAddAuctionView) {
@@ -50,9 +51,12 @@ struct MySalesView: View {
             if viewModel.checkIBAN() {
                 viewModel.loadSellingAuctions()
             } else {
-                viewModel.showAlert.toggle()
+                viewModel.showAlert = true
             }
         }
+        .refreshable(action: {
+            viewModel.loadSellingAuctions()
+        })
     }
 }
 

@@ -26,54 +26,59 @@ struct AuctionDetailView: View {
                     .frame(height: 250)
                 }
 
-                // Display auction title
                 Text(viewModel.auction.title)
                     .font(.largeTitle)
                     .fontWeight(.bold)
 
-                // Display auction description
                 Text(viewModel.auction.description)
                     .font(.body)
 
-                // Display current bid and end date
-                Text("Current Bid: \(viewModel.formattedCurrentBid)")
-                    .font(.headline)
+                if viewModel.isReverseAuction() {
+                    Text("Current Price: \(viewModel.auction.calculatedReversePrice, specifier: "%.2f")")
+                        .font(.headline)
+                } else {
+                    Text("Current Bid: \(viewModel.formattedCurrentBid)")
+                        .font(.headline)
+                }
 
                 Text("Bid End Date: \(viewModel.formattedBidEndDate)")
                     .font(.headline)
                     .foregroundColor(.gray)
-
-                // Input field for bid amount
-                TextField("Enter your bid amount", text: $viewModel.bidAmount)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.decimalPad)
-
-                // Conditional button display based on auction type
-                if viewModel.isReverseAuction() {
-                    Button(action: {
-                        viewModel.buyout()
-                    }) {
-                        Text("Buyout for \(viewModel.auction.buyoutPrice ?? 0.0, specifier: "%.2f")")
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.green)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                if viewModel.isAuctionActive {
+                    if !viewModel.isReverseAuction() {
+                        TextField("Enter your bid amount", text: $viewModel.bidAmount)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .keyboardType(.decimalPad)
                     }
-                } else {
-                    Button(action: {
-                        Task {
-                            viewModel.placeBid()
+                    
+                    if viewModel.isReverseAuction() {
+                        Button(action: {
+                            Task {
+                                await viewModel.buyout()
+                            }
+                        }) {
+                            Text("Buyout for \(viewModel.auction.calculatedReversePrice, specifier: "%.2f")")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                         }
-                    }) {
-                        Text("Place Bid")
-                            .fontWeight(.bold)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                    } else {
+                        Button(action: {
+                            Task {
+                                viewModel.placeBid()
+                            }
+                        }) {
+                            Text("Place Bid")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
                     }
                 }
 

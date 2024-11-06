@@ -24,9 +24,9 @@ class LoginViewModel: ObservableObject {
     
     func login() async {
         do {
-            let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
-            isUserLoggedIn = true
+            let _ = try await Auth.auth().signIn(withEmail: email, password: password)
             User.shared = try await dataLoader.loadUserData(byEmail: email)
+            isUserLoggedIn = true
         } catch let error {
             loginError = error.localizedDescription
         }

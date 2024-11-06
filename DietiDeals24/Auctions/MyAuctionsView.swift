@@ -26,6 +26,9 @@ struct MyAuctionsView: View {
                 .padding()
             }
             .navigationTitle("My Purchases")
+            .task {
+                viewModel.fetchAuctions()
+            }
         }
     }
 }

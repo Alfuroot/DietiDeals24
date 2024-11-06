@@ -46,12 +46,10 @@ class Validator {
     }
 
     private func mod97(_ numericIBAN: String) -> Int {
-        var remainder = ""
+        var remainder = 0
         for character in numericIBAN {
-            remainder.append(character)
-            let number = Int(remainder)!
-            remainder = String(number % 97)
+            remainder = (remainder * 10 + character.wholeNumberValue!) % 97
         }
-        return Int(remainder)!
+        return remainder
     }
 }

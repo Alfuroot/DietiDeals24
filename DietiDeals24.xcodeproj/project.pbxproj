@@ -22,6 +22,8 @@
 		942E68AA2BE9D493007D0046 /* MyAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68A92BE9D493007D0046 /* MyAuctionsView.swift */; };
 		942E68AC2BE9D7C0007D0046 /* AuctionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AB2BE9D7C0007D0046 /* AuctionDetailView.swift */; };
 		942E68B02BE9DED5007D0046 /* AddAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942E68AF2BE9DED5007D0046 /* AddAuctionView.swift */; };
+		9431EADC2CDB5D69009337BA /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 9431EADB2CDB5D69009337BA /* GoogleSignIn */; };
+		9431EADE2CDB5D69009337BA /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9431EADD2CDB5D69009337BA /* GoogleSignInSwift */; };
 		944D6F1B2B13B2FD008C97F2 /* DietiDeals24App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F1A2B13B2FD008C97F2 /* DietiDeals24App.swift */; };
 		944D6F1D2B13B2FD008C97F2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944D6F1C2B13B2FD008C97F2 /* ContentView.swift */; };
 		944D6F1F2B13B300008C97F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 944D6F1E2B13B300008C97F2 /* Assets.xcassets */; };
@@ -131,8 +133,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9431EADC2CDB5D69009337BA /* GoogleSignIn in Frameworks */,
 				94EE60152CBAE4380029DB96 /* FirebaseAnalytics in Frameworks */,
 				94EE601B2CBAE4380029DB96 /* FirebaseFirestore in Frameworks */,
+				9431EADE2CDB5D69009337BA /* GoogleSignInSwift in Frameworks */,
 				94EE60192CBAE4380029DB96 /* FirebaseCore in Frameworks */,
 				94EE60172CBAE4380029DB96 /* FirebaseAuth in Frameworks */,
 			);
@@ -350,6 +354,8 @@
 				94EE60162CBAE4380029DB96 /* FirebaseAuth */,
 				94EE60182CBAE4380029DB96 /* FirebaseCore */,
 				94EE601A2CBAE4380029DB96 /* FirebaseFirestore */,
+				9431EADB2CDB5D69009337BA /* GoogleSignIn */,
+				9431EADD2CDB5D69009337BA /* GoogleSignInSwift */,
 			);
 			productName = DietiDeals24;
 			productReference = 944D6F172B13B2FD008C97F2 /* DietiDeals24.app */;
@@ -425,6 +431,7 @@
 			mainGroup = 944D6F0E2B13B2FD008C97F2;
 			packageReferences = (
 				94EE60132CBAE4380029DB96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				9431EADA2CDB5D68009337BA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 944D6F182B13B2FD008C97F2 /* Products */;
 			projectDirPath = "";
@@ -845,6 +852,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9431EADA2CDB5D68009337BA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 		94EE60132CBAE4380029DB96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -856,6 +871,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9431EADB2CDB5D69009337BA /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9431EADA2CDB5D68009337BA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		9431EADD2CDB5D69009337BA /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9431EADA2CDB5D68009337BA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
 		94EE60142CBAE4380029DB96 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 94EE60132CBAE4380029DB96 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

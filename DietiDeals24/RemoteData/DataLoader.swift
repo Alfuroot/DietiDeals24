@@ -49,23 +49,38 @@ class DataLoader: ObservableObject {
     }
     
     func fetchBidsForAuction(auctionId: String) async throws -> [Bid] {
-            guard let url = URL(string: "\(baseUrl)/auctions/\(auctionId)/bids") else {
-                throw URLError(.badURL)
-            }
+        guard let url = URL(string: "\(baseUrl)/auctions/\(auctionId)/bids") else {
+            throw URLError(.badURL)
+        }
 
-            var request = URLRequest(url: url)
-            request.timeoutInterval = timeout
-            request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
 
+        do {
             let (data, response) = try await session.data(for: request)
 
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw URLError(.badServerResponse)
+            }
+
+            guard (200...299).contains(httpResponse.statusCode) else {
+                print("HTTP Status Code: \(httpResponse.statusCode)")
+                if let responseBody = String(data: data, encoding: .utf8) {
+                    print("Response Body: \(responseBody)")
+                }
                 throw URLError(.badServerResponse)
             }
 
             let bids = try JSONDecoder().decode([Bid].self, from: data)
             return bids
+        } catch {
+            print("Failed to fetch bids for auction: \(error.localizedDescription)")
+            throw error
         }
+    }
+
+    
     // MARK: - Load Remote Data
     @MainActor
     func loadRemoteData() async {
@@ -95,7 +110,6 @@ class DataLoader: ObservableObject {
     func fetchSellerAuctions() async {
         isLoading = true
         defer { isLoading = false }
-        await loadRemoteData()
         
         let currentUserId = User.shared.id
         DispatchQueue.main.async {
@@ -112,20 +126,48 @@ class DataLoader: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.timeoutInterval = timeout
-        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         request.httpBody = try encoder.encode(bid)
         
-        let (_, response) = try await session.data(for: request)
+        let (data, response) = try await session.data(for: request)
         
-        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
+        if let httpResponse = response as? HTTPURLResponse {
+            print("HTTP Status Code: \(httpResponse.statusCode)")
+            if !(200...299).contains(httpResponse.statusCode) {
+                if let responseData = String(data: data, encoding: .utf8) {
+                    print("Response Data: \(responseData)")
+                }
+                throw URLError(.badServerResponse)
+            }
         }
+        try await updateAuctionCurrentPrice(auctionId: auctionId, newPrice: bid.amount)
         
         await loadRemoteData()
+    }
+    
+    func updateAuctionCurrentPrice(auctionId: String, newPrice: Float) async throws {
+        guard let url = URL(string: "\(baseUrl)/auctions/\(auctionId)") else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let updatePayload = ["currentPrice": newPrice]
+        let encoder = JSONEncoder()
+        request.httpBody = try encoder.encode(updatePayload)
+
+        let (_, response) = try await session.data(for: request)
+        
+        if let httpResponse = response as? HTTPURLResponse {
+            print("HTTP Status Code for update: \(httpResponse.statusCode)")
+            if !(200...299).contains(httpResponse.statusCode) {
+                throw URLError(.badServerResponse)
+            }
+        }
     }
     
     // MARK: - Buyout Auction
@@ -137,8 +179,6 @@ class DataLoader: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.timeoutInterval = timeout
-        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
         
         let (_, response) = try await session.data(for: request)
         
@@ -210,47 +250,71 @@ class DataLoader: ObservableObject {
     }
     
     // MARK: - Get Auction by ID
-    func getMyAuctions() async {
-            isLoading = true
-            defer { isLoading = false }
+    func getMyActiveAuctions() async {
+        isLoading = true
+        defer { isLoading = false }
 
-            do {
-                let myBids = try await fetchUserBids()
+        do {
+            let myBids = try await fetchUserBids()
 
-                let auctionIds = Set(myBids.map { $0.auctionID })
+            let auctionIds = Set(myBids.filter { !$0.isActive }.map { $0.auctionID })
 
-                var auctions: [Auction] = []
-                for auctionId in auctionIds {
-                    if let auction = await getAuctionById(auctionId) {
-                        auctions.append(auction)
-                    }
+            var activeAuctions: [Auction] = []
+            for auctionId in auctionIds {
+                if let auction = await getAuctionById(auctionId), auction.isActive {
+                    activeAuctions.append(auction)
                 }
-                DispatchQueue.main.async {
-                    self.myAuctions = auctions
-                }
-            } catch {
-                errorMessage = "Error fetching your auctions: \(error)"
+            }
+            
+            DispatchQueue.main.async {
+                self.myAuctions = activeAuctions
+            }
+        } catch {
+            DispatchQueue.main.async {
+                self.errorMessage = "Error fetching your active auctions: \(error)"
             }
         }
+    }
+
     
     private func fetchUserBids() async throws -> [Bid] {
-        guard let url = URL(string: "\(baseUrl)/bids?userId=\(User.shared.id)") else {
-                throw URLError(.badURL)
+        guard let userIdEncoded = User.shared.id.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let url = URL(string: "\(baseUrl)/bids?userId=\(userIdEncoded)") else {
+            throw URLError(.badURL)
+        }
+
+        print("Fetching URL: \(url)")
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            let (data, response) = try await session.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw URLError(.badServerResponse)
             }
 
-            var request = URLRequest(url: url)
-            request.timeoutInterval = timeout
-            request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
-            
-            let (data, response) = try await session.data(for: request)
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            if !(200...299).contains(httpResponse.statusCode) {
+                print("HTTP Request failed with status code: \(httpResponse.statusCode)")
                 throw URLError(.badServerResponse)
             }
 
             let bids = try JSONDecoder().decode([Bid].self, from: data)
             return bids
+
+        } catch let decodingError as DecodingError {
+            print("Failed to decode response: \(decodingError.localizedDescription)")
+            throw decodingError
+        } catch {
+            print("Failed to fetch bids with error: \(error.localizedDescription)")
+            throw error
         }
+    }
+
+
+
         
         func getAuctionById(_ auctionId: String) async -> Auction? {
             guard let url = URL(string: "\(baseUrl)/auctions/\(auctionId)") else {
@@ -292,6 +356,32 @@ class DataLoader: ObservableObject {
         }
     }
     
+    func updateUserData(userId: String, updatedFields: [String: Any]) async throws {
+        guard let url = URL(string: "\(baseUrl)/user/\(userId)") else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let data = try JSONSerialization.data(withJSONObject: updatedFields, options: [])
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print("Request Body JSON: \(jsonString)")
+        }
+        
+        let (_, response) = try await session.upload(for: request, from: data)
+        
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            if let httpResponse = response as? HTTPURLResponse {
+                print("HTTP Status Code: \(httpResponse.statusCode)")
+            }
+            throw URLError(.badServerResponse)
+        }
+    }
+
+
+    
     func createAuction(auction: Auction) async throws {
         guard let url = URL(string: "\(baseUrl)/auctions") else {
             throw URLError(.badURL)
@@ -306,7 +396,9 @@ class DataLoader: ObservableObject {
         request.httpBody = try encoder.encode(auction)
         
         let requestBody = try encoder.encode(auction)
-        
+        if let jsonData = try? encoder.encode(auction), let jsonString = String(data: jsonData, encoding: .utf8) {
+            print("Request JSON:", jsonString)
+        }
         let (data, response) = try await session.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
